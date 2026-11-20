@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PENS Family Guide film</title>
+<meta name="description" content="A one-minute look at the PENS Family Guide: PENS answering families right in ChatGPT and Claude, in English and Spanish.">
+<meta property="og:title" content="PENS Family Guide film">
+<meta property="og:description" content="Families used to find PENS on Google. Next, they'll ask an AI.">
+<meta property="og:image" content="https://pens-family-guide.vercel.app/assets/film/poster.jpg">
+<meta property="og:type" content="video.other">
+<meta property="og:video" content="https://pens-family-guide.vercel.app/assets/film/film-16x9.mp4">
+<link rel="icon" href="/assets/pens-blocks-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: warm, calm, clinic-proud; one film, nothing in the way.
+   IDEA: a waiting-room screen: the film on a soft teal wall.
+   PICTURE: the film itself, full width at the top.
+   COLOUR and TYPE: PENS teal wall, cream card, sunshine accent; Fredoka titles, Nunito text.
+   LAYOUT: logo + title, film, format toggle, two lines, link. Stacks naturally on phones. */
+:root{color-scheme:light dark;--bg:light-dark(#0F6E74,#0B3F43);--card:light-dark(#FFF8EC,#13262A);--ink:light-dark(#1D2B36,#F1EEE6);--muted:light-dark(#4A5A64,#B6C3C6);--sun:#F6B93B}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Nunito,system-ui,sans-serif;overflow-x:clip;min-height:100vh}
+.wrap{max-width:1040px;margin:0 auto;padding:clamp(18px,4vw,48px) max(4vw,14px)}
+.card{background:var(--card);border-radius:22px;padding:clamp(16px,3vw,28px);box-shadow:0 18px 50px rgba(0,0,0,.22)}
+header{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+header img{width:56px;height:56px}
+h1{font:600 clamp(26px,4vw,38px)/1.05 Fredoka,system-ui,sans-serif;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:2px 0 0;font-size:15px}
+.stage{display:flex;justify-content:center;background:#000;border-radius:16px;overflow:hidden}
+video{display:block;width:100%;max-height:78vh;background:#000}
+.stage.port video{width:auto;max-width:100%;height:78vh}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px}
+.seg{display:inline-flex;border:2px solid #0F6E74;border-radius:999px;overflow:hidden}
+.seg button{font:600 15px Nunito,sans-serif;min-height:44px;padding:0 18px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button[aria-pressed=true]{background:#0F6E74;color:#fff}
+button:focus-visible,a:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+a.go{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--sun);color:#1D2B36;font-weight:600;text-decoration:none}
+p.note{margin:14px 0 0;max-width:70ch}
+.small{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+  <header>
+    <img src="/assets/pens-blocks-192.png" alt="PENS blocks logo">
+    <div><h1>PENS Family Guide</h1><p class="sub">Pediatric Epilepsy &amp; Neurology Specialists · South Tampa · about 70 seconds</p></div>
+  </header>
+  <div class="stage" id="stage">
+    <video id="v" controls playsinline preload="metadata" poster="/assets/film/poster.jpg" src="/assets/film/film-16x9.mp4">
+    </video>
+  </div>
+  <div class="row">
+    <div class="seg" role="group" aria-label="Video format">
+      <button type="button" data-f="16x9" aria-pressed="true">Landscape</button>
+      <button type="button" data-f="9x16" aria-pressed="false">Phone</button>
+    </div>
+    <a class="go" href="https://pens-family-guide.vercel.app">Try the Family Guide</a>
+  </div>
+  <p class="note">Families used to find PENS on Google. Next, they'll ask an AI. The Family Guide lets PENS answer right in ChatGPT and Claude, in English and Spanish: hours, visit prep, a kids' EEG walkthrough, seizure first aid and the team.</p>
+  <p class="small">English captions are in the film; Spanish subtitles are in the player's CC menu. General information, not medical advice. In an emergency, call 911.</p>
+</div></div>
+<script>
+{
+  const v = document.getElementById('v'), stage = document.getElementById('stage');
+  const ES_VTT = "WEBVTT\n\n00:02.850 --> 00:04.900\nLes presentamos la Gu\u00eda Familiar de PENS.\n\n00:06.469 --> 00:08.399\nLos padres ya no solo buscan en internet.\n\n00:08.609 --> 00:10.379\nLe preguntan a un asistente de IA.\n\n00:10.669 --> 00:12.545\nY cuando preguntan qui\u00e9n puede ayudar a su\n\n00:12.565 --> 00:14.441\nhijo cerca de Tampa, PENS puede responder,\n\n00:14.461 --> 00:15.659\nah\u00ed mismo en el chat.\n\n00:19.122 --> 00:20.858\nLas familias eligen sus preguntas,\n\n00:20.878 --> 00:23.452\ntocan Mostrar mi tarjeta y pasan el tel\u00e9fono.\n\n00:23.662 --> 00:26.112\nEspa\u00f1ol primero, ingl\u00e9s debajo.\n\n00:27.695 --> 00:29.025\nLos ni\u00f1os conocen a Pip,\n\n00:29.045 --> 00:30.825\nque los acompa\u00f1a durante un EEG,\n\n00:30.845 --> 00:32.445\nuna calcoman\u00eda a la vez.\n\n00:34.618 --> 00:37.398\nLos primeros auxilios para una convulsi\u00f3n son sencillos:\n\n00:37.418 --> 00:39.868\nqu\u00e9dese, seguro, de lado, con un cron\u00f3metro.\n\n00:41.562 --> 00:43.427\nY las familias pueden conocer al\n\n00:43.447 --> 00:45.052\nequipo antes de llegar.\n\n00:46.157 --> 00:47.612\nFunciona en ChatGPT,\n\n00:47.632 --> 00:50.120\nen Claude y en cualquier tel\u00e9fono,\n\n00:50.140 --> 00:52.087\nen ingl\u00e9s y en espa\u00f1ol.\n\n00:53.687 --> 00:55.897\nAntes, las familias los encontraban en Google.\n\n00:56.307 --> 00:58.417\nAhora le preguntar\u00e1n a una IA.\n\n00:58.707 --> 01:01.137\nPENS puede ser la pr\u00e1ctica que recomiende.\n\n01:03.008 --> 01:04.338\nGu\u00eda Familiar de PENS.\n\n01:04.468 --> 01:05.558\nEscanee para probarla.\n";
+  const tr = document.createElement('track');
+  tr.kind = 'subtitles'; tr.srclang = 'es'; tr.label = 'Español';
+  tr.src = URL.createObjectURL(new Blob([ES_VTT], { type: 'text/vtt' }));
+  v.appendChild(tr);
+  const btns = document.querySelectorAll('.seg button');
+  btns.forEach(b => b.addEventListener('click', () => {
+    const f = b.dataset.f, t = v.currentTime, playing = !v.paused;
+    btns.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    stage.classList.toggle('port', f === '9x16');
+    v.src = '/assets/film/film-' + f + '.mp4';
+    v.addEventListener('loadedmetadata', () => { v.currentTime = t; if (playing) v.play().catch(() => {}); }, { once: true });
+  }));
+}
+</script>
+</body>
+</html>

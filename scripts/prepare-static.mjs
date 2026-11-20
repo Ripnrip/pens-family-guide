@@ -21,6 +21,11 @@ if (existsSync(path.join(site, "assets"))) cpSync(path.join(site, "assets"), pat
 
 const publicAssets = path.join(root, "public", "assets");
 if (existsSync(publicAssets)) cpSync(publicAssets, path.join(out, "assets"), { recursive: true, force: true });
+if (existsSync(path.join(site, "film", "index.html"))) {
+  mkdirSync(path.join(out, "film"), { recursive: true });
+  cpSync(path.join(site, "film", "index.html"), path.join(out, "film", "index.html"));
+  console.log("static-build: /film page included");
+}
 if (existsSync(path.join(site, "index.html"))) {
   cpSync(path.join(site, "index.html"), path.join(out, "index.html"));
   console.log("static-build: splash site included");
