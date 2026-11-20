@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PENS, now in ChatGPT and Claude · Pediatric Epilepsy &amp; Neurology Specialists</title>
+<meta name="description" content="Families can now get answers from PENS, Pediatric Epilepsy & Neurology Specialists in South Tampa, right inside ChatGPT and Claude. In English and Spanish.">
+<meta name="theme-color" content="#0F6E74">
+<link rel="icon" href="assets/pens-logo.svg" type="image/svg+xml">
+<link rel="icon" href="assets/pens-logo-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="assets/pens-logo-512.png">
+<!-- TODO: set the production origin so social cards resolve to absolute URLs. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PENS · Pediatric Epilepsy & Neurology Specialists">
+<meta property="og:title" content="PENS, now in ChatGPT and Claude">
+<meta property="og:description" content="Ask Tampa Bay's pediatric neurology specialists in plain words and get clear answers and next steps, in English and Spanish.">
+<meta property="og:image" content="assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PENS logo and Pip the helper with the headline: PENS, now in ChatGPT and Claude">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="es_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PENS, now in ChatGPT and Claude">
+<meta name="twitter:description" content="Ask Tampa Bay's pediatric neurology specialists in plain words and get clear answers and next steps, in English and Spanish.">
+<meta name="twitter:image" content="assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+:root{
+  --teal:#0F6E74; --teal-d:#0B5459; --sun:#F6B93B; --coral:#F2765A; --brick:#B83A26;
+  --sky:#E8F4F6; --ink:#1D2B36; --ink-2:#44535E; --page:#F4F6F7; --white:#fff; --line:#D5E2E6;
+  --r-lg:24px; --r-md:16px; --r-sm:10px;
+  --head:"Fredoka", ui-rounded, "SF Pro Rounded", "Arial Rounded MT Bold", system-ui, sans-serif;
+  --body:"Nunito", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --shadow:0 1px 2px rgba(29,43,54,.06), 0 6px 18px rgba(29,43,54,.07);
+  --shadow-lift:0 2px 4px rgba(29,43,54,.07), 0 16px 32px rgba(29,43,54,.12);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--body);font-size:17px;line-height:1.6;color:var(--ink);background:var(--page);overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+h1,h2,h3,h4{font-family:var(--head);font-weight:600;line-height:1.15;margin:0 0 .5em;color:var(--ink);letter-spacing:-.005em}
+h1{font-weight:700;font-size:clamp(2.2rem,1.4rem + 3.6vw,3.9rem)}
+h2{font-size:clamp(1.75rem,1.3rem + 1.8vw,2.6rem)}
+h3{font-size:1.28rem}
+p{margin:0 0 1em}
+a{color:var(--teal);text-underline-offset:3px;text-decoration-thickness:2px}
+a:hover{color:var(--teal-d)}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;box-shadow:0 0 0 6px var(--sun);border-radius:6px}
+.wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:12px;top:-100px;z-index:100;background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-weight:800;text-decoration:none}
+.skip:focus{top:12px;color:#fff}
+section{scroll-margin-top:80px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--head);font-weight:600;font-size:.95rem;color:var(--teal);letter-spacing:.02em;margin-bottom:14px}
+.eyebrow::before{content:"";width:22px;height:4px;border-radius:4px;background:var(--sun)}
+.lede{font-size:1.15rem;color:var(--ink-2);max-width:62ch}
+.section{padding:88px 0}
+.section-head{max-width:760px;margin-bottom:40px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:12px 24px;border-radius:999px;font-family:var(--head);font-weight:600;font-size:1.08rem;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease}
+.btn svg{width:22px;height:22px;flex:none}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-primary:hover{background:var(--teal-d);color:#fff;transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn-accent{background:var(--sun);color:var(--ink)}
+.btn-accent:hover{color:var(--ink);transform:translateY(-2px);box-shadow:var(--shadow);background:#F8C55C}
+.btn-ghost{background:#fff;color:var(--teal);border-color:var(--teal)}
+.btn-ghost:hover{background:var(--sky);color:var(--teal-d)}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line)}
+.header-row{display:flex;align-items:center;gap:16px;min-height:72px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);min-height:44px}
+.brand img{width:44px;height:44px;border-radius:10px}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-name{font-family:var(--head);font-weight:700;font-size:1.35rem;color:var(--ink)}
+.brand-full{font-size:.78rem;color:var(--ink-2);font-weight:700}
+.pill{display:inline-flex;align-items:center;font-family:var(--head);font-weight:600;font-size:.8rem;padding:4px 12px;border-radius:999px;background:var(--sky);color:var(--teal);border:1.5px solid var(--teal);white-space:nowrap}
+.main-nav{margin-left:auto;display:flex;gap:2px}
+.pip{overflow:visible}
+.main-nav a{white-space:nowrap;display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:10px;font-weight:700;color:var(--ink);text-decoration:none;font-size:.97rem}
+.main-nav a:hover{background:var(--sky);color:var(--teal-d)}
+.lang{display:inline-flex;padding:3px;border-radius:999px;background:var(--sky);border:1.5px solid var(--line)}
+.lang button{min-width:48px;min-height:44px;border:0;border-radius:999px;background:transparent;font-family:var(--head);font-weight:600;font-size:1rem;color:var(--teal);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--teal);color:#fff}
+.header-cta{display:none}
+@media (max-width:1300px){.header-row .brand-full{display:none}}
+@media (max-width:1100px){.main-nav{display:none}.lang{margin-left:auto}}
+@media (max-width:560px){.brand-full{display:none}.header-row{gap:10px}.brand img{width:40px;height:40px}}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;padding:64px 0 120px}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1 .hl{color:var(--teal)}
+.hero .lede{font-size:clamp(1.08rem,1rem + .4vw,1.25rem)}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin:28px 0 22px}
+.trust{display:flex;flex-wrap:wrap;gap:8px 18px;padding:0;margin:0;list-style:none;color:var(--ink-2);font-weight:700;font-size:.95rem}
+.trust li{display:flex;align-items:center;gap:8px}
+.trust svg{width:20px;height:20px;color:var(--teal)}
+.hero-eeg{position:absolute;left:0;right:0;bottom:22px;height:120px;z-index:0;pointer-events:none}
+.hero-eeg svg{width:100%;height:120px}
+.eeg-base{stroke:var(--teal);opacity:.28}
+.eeg-pulse{stroke:var(--sun);opacity:0}
+.js .hero-eeg .eeg-base{stroke-dasharray:1;stroke-dashoffset:0;animation:draw 2.6s cubic-bezier(.6,.1,.3,1) .2s both}
+.js .hero-eeg .eeg-pulse{opacity:1;stroke-dasharray:.06 .94;stroke-dashoffset:1;animation:pulse-run 5.5s linear 2.8s infinite}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes pulse-run{from{stroke-dashoffset:1.06}to{stroke-dashoffset:0}}
+
+.stage{position:relative;padding:56px 0 0}
+.stage-blob{position:absolute;inset:18px -10px -20px 30px;background:var(--sky);border-radius:40px;z-index:0}
+.pip-hero{position:absolute;right:-6px;top:-22px;width:150px;z-index:3}
+.chat{position:relative;z-index:2;background:#fff;border-radius:var(--r-lg);box-shadow:var(--shadow-lift);border:1px solid var(--line);overflow:hidden;max-width:520px}
+.chat-top{display:flex;align-items:center;gap:10px;padding:12px 120px 12px 16px;border-bottom:1px solid var(--line);background:#FBFCFC}
+.chat-top img{width:26px;height:26px;border-radius:7px}
+.chat-top strong{font-family:var(--head);font-weight:600}
+.chat-top .muted{font-size:.82rem;color:var(--ink-2);font-weight:700}
+.chat-body{padding:18px 16px 8px;min-height:330px;display:flex;flex-direction:column;gap:12px}
+.bubble-user{align-self:flex-end;max-width:85%;background:var(--teal);color:#fff;padding:10px 16px;border-radius:18px 18px 4px 18px;font-weight:700;min-height:44px}
+.caret{display:inline-block;width:2px;height:1.05em;background:#fff;margin-left:2px;vertical-align:-2px;animation:blinkc 1s steps(1) infinite}
+@keyframes blinkc{50%{opacity:0}}
+.typing{display:inline-flex;gap:5px;padding:12px 16px;background:var(--sky);border-radius:18px 18px 18px 4px;align-self:flex-start}
+.typing i{width:8px;height:8px;border-radius:50%;background:var(--teal);opacity:.4;animation:dot 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{40%{opacity:1;transform:translateY(-3px)}}
+.answer{align-self:flex-start;width:100%;border:1.5px solid var(--line);border-radius:18px;padding:14px 16px;background:#fff;animation:pop .5s cubic-bezier(.2,.8,.3,1.2) both}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}}
+.answer-from{display:flex;align-items:center;gap:8px;font-size:.8rem;font-weight:800;color:var(--teal);margin-bottom:6px}
+.answer-from img{width:20px;height:20px;border-radius:5px}
+.answer h4{font-size:1.12rem;margin:0 0 4px}
+.answer p{font-size:.95rem;color:var(--ink-2);margin:0 0 10px}
+.answer ul{list-style:none;padding:0;margin:0 0 10px;display:grid;gap:6px;font-size:.93rem}
+.answer li{display:flex;gap:8px;align-items:flex-start}
+.answer li svg{width:18px;height:18px;flex:none;margin-top:3px;color:var(--teal)}
+.next{display:block;background:var(--sky);border-radius:12px;padding:8px 12px;font-size:.9rem;font-weight:700;color:var(--ink);margin-bottom:10px}
+.next b{color:var(--teal)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;min-height:34px;padding:4px 12px;border-radius:999px;border:1.5px solid var(--teal);color:var(--teal);font-weight:800;font-size:.85rem;background:#fff}
+.chip.solid{background:var(--teal);color:#fff}
+.chip.urgent{border-color:var(--brick);color:var(--brick)}
+.chat-input{display:flex;align-items:center;gap:10px;margin:8px 16px 16px;padding:10px 14px;border:1.5px solid var(--line);border-radius:999px;color:var(--ink-2);font-size:.92rem}
+.chat-input span{flex:1}
+.chat-input i{width:30px;height:30px;border-radius:50%;background:var(--teal);display:grid;place-items:center}
+.chat-input i svg{width:16px;height:16px;color:#fff}
+.motion-toggle{position:absolute;z-index:4;left:0;bottom:-58px;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-family:var(--body);font-weight:800;font-size:.88rem;color:var(--ink);cursor:pointer}
+.motion-toggle[hidden]{display:none}
+.motion-toggle:hover{border-color:var(--teal)}
+.motion-toggle svg{width:16px;height:16px;color:var(--teal)}
+
+/* Pip */
+.pip .body-g{animation:bob 3.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center bottom}
+.pip .eyes{animation:blink 5s infinite;transform-box:fill-box;transform-origin:center}
+.pip .ant{animation:sway 3.6s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes blink{0%,44%,48%,100%{transform:scaleY(1)}46%{transform:scaleY(.1)}}
+@keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(6deg)}}
+
+/* Reveal */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--d,0) * 90ms)}
+.js .reveal.in{opacity:1;transform:none}
+
+/* Feature cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{display:flex;flex-direction:column;background:#fff;border-radius:var(--r-lg);border:1px solid var(--line);box-shadow:var(--shadow);padding:16px 16px 22px;transition:transform .25s ease,box-shadow .25s ease}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lift)}
+.js .card.reveal.in:hover{transform:translateY(-6px)}
+.illo{height:156px;border-radius:var(--r-md);background:var(--sky);margin-bottom:18px;display:grid;place-items:center;overflow:hidden;position:relative}
+.illo svg{width:100%;height:100%}
+.card h3{margin:0 6px 6px}
+.card p{margin:0 6px 14px;color:var(--ink-2)}
+.card .try{margin:auto 6px 0;padding:10px 12px;border-radius:12px;background:var(--page);font-size:.92rem;color:var(--ink);border-left:4px solid var(--sun)}
+.try b{display:block;font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--teal)}
+/* illo: find care */
+.pin{animation:pin-drop 2.8s cubic-bezier(.3,.6,.4,1) infinite;transform-box:fill-box;transform-origin:center bottom}
+.ripple{animation:ripple 2.8s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pin-drop{0%{transform:translateY(-34px);opacity:0}18%{opacity:1}34%{transform:translateY(0)}42%{transform:translateY(-6px)}50%,100%{transform:translateY(0)}}
+@keyframes ripple{0%,34%{transform:scale(.3);opacity:0}40%{opacity:.9}100%{transform:scale(1.5);opacity:0}}
+/* illo: checklist */
+.mini-check{list-style:none;margin:0;padding:14px 16px;background:#fff;border-radius:14px;width:82%;display:grid;gap:9px;box-shadow:var(--shadow)}
+.mini-check li{display:flex;align-items:center;gap:10px;font-weight:800;font-size:.88rem;color:var(--ink)}
+.box{width:22px;height:22px;flex:none;border-radius:7px;border:2px solid var(--teal);display:grid;place-items:center;background:var(--teal)}
+.box svg{width:14px;height:14px}
+.box path{stroke:#fff;stroke-dasharray:1;stroke-dashoffset:0}
+.in .mini-check .box{animation:boxfill 6s infinite}
+.in .mini-check .box path{animation:tick 6s infinite}
+.in .mini-check li:nth-child(2) .box,.in .mini-check li:nth-child(2) .box path{animation-delay:.6s}
+.in .mini-check li:nth-child(3) .box,.in .mini-check li:nth-child(3) .box path{animation-delay:1.2s}
+@keyframes boxfill{0%,10%{background:#fff}16%,88%{background:var(--teal)}96%,100%{background:#fff}}
+@keyframes tick{0%,12%{stroke-dashoffset:1}22%,88%{stroke-dashoffset:0}96%,100%{stroke-dashoffset:1}}
+/* illo: Pip EEG */
+.twinkle{animation:twinkle 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.twinkle.t2{animation-delay:.8s}.twinkle.t3{animation-delay:1.6s}
+@keyframes twinkle{0%,100%{transform:scale(.6);opacity:.5}50%{transform:scale(1.1);opacity:1}}
+.mini-wave{stroke-dasharray:1;stroke-dashoffset:0}
+.in .mini-wave{animation:wave-draw 3.2s ease-in-out infinite}
+@keyframes wave-draw{0%{stroke-dashoffset:1}60%,100%{stroke-dashoffset:0}}
+/* illo: first aid */
+.fa{display:grid;gap:12px;justify-items:center}
+.fa-steps{display:flex;gap:6px;align-items:center;font-family:var(--head);font-weight:600}
+.fa-steps span{min-height:32px;padding:3px 11px;border-radius:999px;border:2px solid var(--teal);color:#fff;background:var(--teal);font-size:.9rem;transition:background .3s,color .3s}
+.fa-steps span.off{background:#fff;color:var(--teal)}
+.fa-steps em{font-style:normal;color:var(--teal);font-weight:700}
+.fa-timer{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:6px 14px;box-shadow:var(--shadow);border:2px solid transparent;transition:border-color .3s}
+.fa-timer svg{width:24px;height:24px;color:var(--brick)}
+.fa-time{font-family:var(--head);font-weight:700;font-size:1.7rem;font-variant-numeric:tabular-nums;color:var(--brick);min-width:3.2ch}
+.fa-call{font-weight:800;font-size:.85rem;color:#fff;background:var(--brick);border-radius:999px;padding:3px 10px}
+.fa-timer.running{border-color:transparent}
+.fa-timer.running .fa-time{color:var(--teal)}.fa-timer.running svg{color:var(--teal)}
+.fa-timer.running .fa-call{visibility:hidden}
+.fa-timer.alert{border-color:var(--brick)}
+/* illo: circle */
+.orbit-line{stroke-dasharray:1;stroke-dashoffset:0}
+.in .orbit-line{animation:wave-draw 4s ease-in-out infinite}
+.sat{animation:satpulse 4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.sat.s2{animation-delay:.5s}.sat.s3{animation-delay:1s}.sat.s4{animation-delay:1.5s}.sat.s5{animation-delay:2s}
+@keyframes satpulse{0%,30%,100%{transform:scale(1)}15%{transform:scale(1.18)}}
+.ring{animation:spin 30s linear infinite;transform-box:fill-box;transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* illo: quiz */
+.mini-quiz{width:86%;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:var(--shadow)}
+.mini-quiz p{margin:0 0 8px;font-weight:800;font-size:.85rem;color:var(--ink);line-height:1.3}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1.5px solid var(--line);border-radius:10px;padding:4px 10px;font-size:.8rem;font-weight:700;margin-top:5px;color:var(--ink-2)}
+.opt svg{width:16px;height:16px;color:var(--teal);opacity:0}
+.opt.right{border-color:var(--teal);background:var(--sky);color:var(--ink)}
+.opt.right svg{opacity:1}
+.in .opt.right{animation:pick 5s infinite}
+.in .opt.right svg{animation:pickic 5s infinite}
+@keyframes pick{0%,30%{border-color:var(--line);background:#fff}40%,92%{border-color:var(--teal);background:var(--sky)}100%{border-color:var(--line);background:#fff}}
+@keyframes pickic{0%,36%{opacity:0;transform:scale(.4)}46%,92%{opacity:1;transform:scale(1)}100%{opacity:0}}
+
+/* Tampa Bay */
+.band{background:var(--sky)}
+.local-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.local{display:flex;gap:18px;background:#fff;border-radius:var(--r-lg);padding:24px;border:1px solid var(--line)}
+.local .ic{flex:none;width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:var(--sky)}
+.local .ic svg{width:32px;height:32px}
+.local h3{margin-bottom:6px}
+.local p{color:var(--ink-2);margin:0 0 .6em}
+.local p:last-child{margin:0}
+.fine{font-size:.88rem;color:var(--ink-2)}
+
+/* How it works */
+.flow{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;list-style:none;padding:0;margin:0;counter-reset:s}
+.flow-track{position:absolute;left:16%;right:16%;top:78px;height:4px;z-index:0}
+.flow-track svg{width:100%;height:12px;overflow:visible}
+.track-line{stroke:var(--teal);stroke-dasharray:1;stroke-dashoffset:0;opacity:.35}
+.in .track-line{animation:draw 1.8s ease .3s both}
+.track-dot{animation:travel 4.5s ease-in-out 2s infinite;opacity:0}
+@keyframes travel{0%{transform:translateX(0);opacity:0}8%{opacity:1}92%{opacity:1}100%{transform:translateX(var(--tw,600px));opacity:0}}
+.step{position:relative;z-index:1;text-align:center;background:transparent}
+.step-vis{width:156px;height:156px;margin:0 auto 18px;border-radius:50%;background:#fff;border:2px solid var(--line);display:grid;place-items:center;box-shadow:var(--shadow);position:relative}
+.step-num{position:absolute;top:2px;left:2px;width:40px;height:40px;border-radius:50%;background:var(--sun);color:var(--ink);font-family:var(--head);font-weight:700;display:grid;place-items:center;font-size:1.15rem}
+.step h3{margin-bottom:6px}
+.step p{color:var(--ink-2);max-width:32ch;margin:0 auto}
+.switch{width:74px;height:40px;border-radius:999px;background:var(--teal);position:relative}
+.switch::after{content:"";position:absolute;top:5px;left:39px;width:30px;height:30px;border-radius:50%;background:#fff}
+.in .switch{animation:sw-bg 4s infinite}
+.in .switch::after{animation:sw-knob 4s infinite}
+@keyframes sw-bg{0%,25%{background:#AFC3C8}35%,100%{background:var(--teal)}}
+@keyframes sw-knob{0%,25%{left:5px}35%,100%{left:39px}}
+.say{background:var(--sky);border-radius:18px 18px 18px 4px;padding:12px 16px;display:flex;gap:6px}
+.say i{width:10px;height:10px;border-radius:50%;background:var(--teal);animation:dot 1.1s infinite}
+.say i:nth-child(2){animation-delay:.15s}.say i:nth-child(3){animation-delay:.3s}
+.mini-card{width:94px;background:#fff;border:2px solid var(--teal);border-radius:12px;padding:9px;display:grid;gap:6px}
+.mini-card b{height:8px;border-radius:4px;background:var(--teal);width:70%}
+.mini-card s{height:6px;border-radius:3px;background:var(--line);text-decoration:none}
+.mini-card u{height:14px;border-radius:7px;background:var(--sun);width:60%}
+.in .mini-card{animation:rise 4s ease-in-out infinite}
+@keyframes rise{0%{transform:translateY(16px);opacity:0}20%,85%{transform:none;opacity:1}100%{opacity:0}}
+
+/* Safety */
+.safe-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.safe{background:#fff;border-radius:var(--r-lg);padding:24px;border:1px solid var(--line)}
+.safe .ic{width:52px;height:52px;border-radius:14px;background:var(--sky);display:grid;place-items:center;margin-bottom:14px}
+.safe .ic svg{width:28px;height:28px}
+.safe h3{font-size:1.15rem}
+.safe p{color:var(--ink-2);margin:0;font-size:.97rem}
+.safe.urgent{border:2px solid var(--brick)}
+.safe.urgent .ic{background:#FBE9E5}
+.safe.urgent h3{color:var(--brick)}
+.emergency{margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding:18px 22px;border-radius:var(--r-md);background:#fff;border:2px solid var(--brick)}
+.emergency strong{font-family:var(--head);font-weight:600;font-size:1.2rem;color:var(--brick)}
+.emergency span{color:var(--ink)}
+
+/* Pros */
+.pro-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.pro{background:#fff;border-radius:var(--r-lg);padding:28px;border:1px solid var(--line);box-shadow:var(--shadow)}
+.pro .tag{display:inline-block;font-family:var(--head);font-weight:600;font-size:.85rem;color:var(--ink);background:var(--sun);border-radius:999px;padding:3px 12px;margin-bottom:12px}
+.pro ul{padding-left:1.2em;margin:0 0 1em;color:var(--ink-2)}
+.pro li{margin-bottom:4px}
+.pro .note{font-size:.93rem;background:var(--sky);border-radius:12px;padding:10px 14px;color:var(--ink)}
+
+/* Get started */
+.start-grid{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:22px;align-items:stretch}
+.install{background:#fff;border-radius:var(--r-lg);padding:26px;border:1px solid var(--line);display:flex;flex-direction:column}
+.install ol{padding-left:1.3em;color:var(--ink-2);margin:0 0 18px}
+.install li{margin-bottom:6px}
+.install .btn{margin-top:auto;width:100%}
+.install .soon{font-size:.85rem;color:var(--ink-2);margin:10px 0 0;text-align:center}
+.contact{background:var(--teal);color:#fff;border-radius:var(--r-lg);padding:28px;position:relative;overflow:hidden}
+.contact h3{color:#fff}
+.contact a{color:#fff}
+.contact a:hover{color:#FFE3A6}
+.contact :focus-visible{outline-color:#fff;box-shadow:0 0 0 6px var(--ink)}
+.contact dl{margin:0;display:grid;gap:14px}
+.contact dt{font-family:var(--head);font-weight:600;color:#FFE3A6;font-size:.95rem}
+.contact dd{margin:0;font-weight:700}
+.contact .phone{font-family:var(--head);font-weight:700;font-size:1.6rem;text-decoration:none;display:inline-flex;min-height:44px;align-items:center}
+.contact .linkish{display:inline-flex;min-height:44px;align-items:center}
+.hours{border-collapse:collapse;font-weight:700}
+.hours td{padding:2px 16px 2px 0;vertical-align:top}
+.contact-pip{position:absolute;right:-18px;bottom:-26px;width:110px;opacity:1}
+
+/* Footer */
+.site-footer{background:var(--ink);color:#E6ECEF;padding:48px 0 36px;margin-top:0}
+.foot{display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:flex-start}
+.foot .brand{color:#fff}
+.foot .brand-name{color:#fff}.foot .brand-full{color:#C9D4DA}
+.foot nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:4px 8px;padding:0;margin:0}
+.foot nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 10px;color:#fff;font-weight:700;border-radius:8px}
+.foot nav a:hover{background:rgba(255,255,255,.1);color:#fff}
+.site-footer :focus-visible{outline-color:#fff;box-shadow:0 0 0 6px var(--teal)}
+.foot-bottom{margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,.18);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.92rem;color:#C9D4DA}
+.foot-bottom strong{color:#fff}
+
+/* Responsive */
+@media (max-width:1060px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .stage{max-width:560px;margin:0 auto;width:100%}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .safe-grid{grid-template-columns:repeat(2,1fr)}
+  .start-grid{grid-template-columns:1fr 1fr}
+  .start-grid .contact{grid-column:1 / -1}
+}
+@media (max-width:760px){
+  body{font-size:16px}
+  .section{padding:64px 0}
+  .hero{padding:36px 0 110px}
+  .cards,.local-grid,.safe-grid,.pro-grid,.start-grid{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr;gap:36px}
+  .flow-track{display:none}
+  .local{flex-direction:column;gap:12px}
+  .pip-hero{width:108px;right:-4px;top:-8px}
+  .stage{padding-top:44px}
+  .stage-blob{inset:14px -8px -16px 16px}
+  .cta-row .btn{flex:1 1 220px}
+  .chat-body{min-height:350px}
+}
+@media (max-width:400px){
+  .wrap{padding:0 16px}
+  .pill{font-size:.72rem;padding:3px 9px}
+  .brand-name{font-size:1.2rem}
+  .lang button{min-width:44px}
+}
+
+/* Reduced motion + paused: final states, no movement */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .reveal{opacity:1;transform:none}
+  .js .hero-eeg .eeg-pulse,.track-dot,.caret{display:none}
+  .card:hover,.btn:hover{transform:none}
+}
+html.paused *,html.paused *::before,html.paused *::after{animation-play-state:paused!important}
+html.paused .caret{display:none}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to main content</a>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="#top" aria-label="PENS home" data-i18n-aria="aHome">
+      <img src="assets/pens-logo.svg" alt="" width="44" height="44">
+      <span class="brand-text"><span class="brand-name">PENS</span><span class="brand-full">Pediatric Epilepsy &amp; Neurology Specialists</span></span>
+    </a>
+    <span class="pill" data-i18n="preview">Preview</span>
+    <nav class="main-nav" aria-label="Sections" data-i18n-aria="aNav">
+      <a href="#features" data-i18n="navFeatures">What you can ask</a>
+      <a href="#how" data-i18n="navHow">How it works</a>
+      <a href="#safety" data-i18n="navSafety">Safety</a>
+      <a href="#pros" data-i18n="navPros">Pediatricians &amp; schools</a>
+      <a href="#get-started" data-i18n="navStart">Get started</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language" data-i18n-aria="aLang">
+      <button type="button" data-lang="en" aria-pressed="true" lang="en"><span aria-hidden="true">EN</span><span class="sr-only">English</span></button>
+      <button type="button" data-lang="es" aria-pressed="false" lang="es"><span aria-hidden="true">ES</span><span class="sr-only">Español</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+<!-- 1. HERO -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow" data-i18n="heroEyebrow">Tampa Bay pediatric neurology</p>
+      <h1 id="hero-title" data-i18n="heroTitle">PENS, now in <span class="hl">ChatGPT</span> and <span class="hl">Claude</span></h1>
+      <p class="lede" data-i18n="heroSub">Ask Pediatric Epilepsy &amp; Neurology Specialists your questions in plain words. Get clear, kid-friendly answers, visit checklists and next steps, right inside the AI apps your family already uses.</p>
+      <div class="cta-row">
+        <!-- TODO: replace #get-started with the live ChatGPT app link -->
+        <a class="btn btn-primary" href="#get-started" data-i18n="ctaChatGPT"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>Open in ChatGPT</a>
+        <!-- TODO: replace #get-started with the live Claude connector link -->
+        <a class="btn btn-accent" href="#get-started" data-i18n="ctaClaude"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Add to Claude</a>
+      </div>
+      <ul class="trust">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i18n="trust1">English y Español</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i18n="trust2">No patient information needed</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i18n="trust3">From your South Tampa clinic</span></li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-blob" aria-hidden="true"></div>
+      <svg class="pip pip-hero" viewBox="0 0 200 220" aria-hidden="true">
+        <g class="body-g">
+          <g class="ant"><path d="M100 66 C92 54 110 46 102 34 C96 25 108 18 112 12" fill="none" stroke="#0F6E74" stroke-width="6" stroke-linecap="round"/><circle cx="113" cy="11" r="9" fill="#F2765A"/></g>
+          <circle cx="100" cy="140" r="74" fill="#F6B93B"/>
+          <g class="eyes"><ellipse cx="74" cy="128" rx="13" ry="16" fill="#1D2B36"/><ellipse cx="126" cy="128" rx="13" ry="16" fill="#1D2B36"/><circle cx="78" cy="122" r="4.5" fill="#fff"/><circle cx="130" cy="122" r="4.5" fill="#fff"/></g>
+          <ellipse cx="54" cy="156" rx="12" ry="8" fill="#F2765A" opacity=".6"/><ellipse cx="146" cy="156" rx="12" ry="8" fill="#F2765A" opacity=".6"/>
+          <path d="M84 160 Q100 176 116 160" fill="none" stroke="#1D2B36" stroke-width="5" stroke-linecap="round"/>
+        </g>
+      </svg>
+      <figure class="chat" aria-labelledby="chat-cap" style="margin:0">
+        <figcaption id="chat-cap" class="sr-only" data-i18n="chatCap">Example: a parent asks "Does PENS see kids with ADHD?" and PENS answers with a short card: yes, PENS sees children with attention concerns and offers computerized ADHD testing, with a next step to request an appointment.</figcaption>
+        <div class="chat-top" aria-hidden="true">
+          <img src="assets/pens-logo.svg" alt="">
+          <div><strong>PENS</strong><div class="muted" data-i18n="chatSub">Answers for Tampa Bay families</div></div>
+        </div>
+        <div class="chat-body" id="chat-body" aria-hidden="true"></div>
+        <div class="chat-input" aria-hidden="true"><span data-i18n="chatPh">Ask PENS anything…</span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></i></div>
+      </figure>
+      <button type="button" class="motion-toggle" id="motion-toggle" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect class="ico-pause" x="6" y="5" width="4" height="14" rx="1.5"/><rect class="ico-pause" x="14" y="5" width="4" height="14" rx="1.5"/></svg>
+        <span data-i18n="pauseAnim">Pause animations</span>
+      </button>
+    </div>
+  </div>
+  <div class="hero-eeg" aria-hidden="true">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="xMidYMid slice">
+      <path class="eeg-base" pathLength="1" d="M0 70 H210 L226 70 L238 52 L250 84 L262 70 H430 L448 70 L462 26 L480 108 L498 34 L514 92 L528 70 H700 L716 60 L730 82 L744 70 H930 L946 70 L960 30 L978 104 L994 40 L1010 86 L1024 70 H1200 L1214 58 L1228 80 L1240 70 H1440" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path class="eeg-pulse" pathLength="1" d="M0 70 H210 L226 70 L238 52 L250 84 L262 70 H430 L448 70 L462 26 L480 108 L498 34 L514 92 L528 70 H700 L716 60 L730 82 L744 70 H930 L946 70 L960 30 L978 104 L994 40 L1010 86 L1024 70 H1200 L1214 58 L1228 80 L1240 70 H1440" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- 2. FEATURES -->
+<section class="section" id="features" aria-labelledby="features-title" style="padding-top:56px">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow" data-i18n="featEyebrow">Ask PENS anything</p>
+      <h2 id="features-title" data-i18n="featTitle">Real help for real-life questions</h2>
+      <p class="lede" data-i18n="featSub">Each answer comes back as a simple card with next steps, so you know what to do and when to call.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal" style="--d:0">
+        <div class="illo" aria-hidden="true">
+          <svg viewBox="0 0 280 156">
+            <g stroke="#fff" stroke-width="10" stroke-linecap="round"><path d="M-10 52 H300"/><path d="M-10 118 H300"/><path d="M78 -10 V170"/><path d="M196 -10 V170"/></g>
+            <rect x="96" y="66" width="82" height="40" rx="8" fill="#fff"/>
+            <rect x="106" y="76" width="44" height="7" rx="3.5" fill="#0F6E74" opacity=".55"/><rect x="106" y="90" width="58" height="6" rx="3" fill="#D5E2E6"/>
+            <ellipse class="ripple" cx="214" cy="104" rx="26" ry="10" fill="none" stroke="#F6B93B" stroke-width="4"/>
+            <g class="pin"><path d="M214 104 C196 80 190 70 190 58 a24 24 0 0 1 48 0 C238 70 232 80 214 104z" fill="#0F6E74"/><circle cx="214" cy="58" r="9" fill="#F6B93B"/></g>
+          </svg>
+        </div>
+        <h3 data-i18n="f1t">Find care</h3>
+        <p data-i18n="f1d">Describe what's going on, like headaches, staring spells, sleep or attention, and see which PENS services may fit and how to request a visit.</p>
+        <p class="try"><b data-i18n="tryLabel">Try asking</b><span data-i18n="f1q">"My daughter gets bad headaches. Can PENS help?"</span></p>
+      </article>
+
+      <article class="card reveal" style="--d:1">
+        <div class="illo" aria-hidden="true">
+          <ul class="mini-check">
+            <li><span class="box"><svg viewBox="0 0 16 16"><path pathLength="1" d="M3 8.5l3.2 3.2L13 5" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span data-i18n="c1">Sleep plan from PENS</span></li>
+            <li><span class="box"><svg viewBox="0 0 16 16"><path pathLength="1" d="M3 8.5l3.2 3.2L13 5" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span data-i18n="c2">Clean, dry hair</span></li>
+            <li><span class="box"><svg viewBox="0 0 16 16"><path pathLength="1" d="M3 8.5l3.2 3.2L13 5" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span data-i18n="c3">Comfy clothes and a sleep buddy</span></li>
+          </ul>
+        </div>
+        <h3 data-i18n="f2t">Visit prep</h3>
+        <p data-i18n="f2d">Step-by-step checklists for visits and EEGs, including the sleep-deprived EEG, so nothing gets missed on the big day.</p>
+        <p class="try"><b data-i18n="tryLabel">Try asking</b><span data-i18n="f2q">"How do we get ready for a sleep-deprived EEG?"</span></p>
+      </article>
+
+      <article class="card reveal" style="--d:2">
+        <div class="illo" aria-hidden="true">
+          <svg viewBox="0 0 280 156">
+            <path class="mini-wave" pathLength="1" d="M14 128 H70 L80 112 L92 142 L104 118 L114 128 H166 L176 116 L188 140 L198 128 H266" fill="none" stroke="#0F6E74" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/>
+            <g class="pip" transform="translate(95 4) scale(.5)">
+              <g class="body-g">
+                <g class="ant"><path d="M100 66 C92 54 110 46 102 34 C96 25 108 18 112 12" fill="none" stroke="#0F6E74" stroke-width="6" stroke-linecap="round"/><circle cx="113" cy="11" r="9" fill="#F2765A"/></g>
+                <circle cx="100" cy="140" r="74" fill="#F6B93B"/>
+                <g fill="#0F6E74"><circle cx="60" cy="92" r="7"/><circle cx="84" cy="76" r="7"/><circle cx="116" cy="76" r="7"/><circle cx="140" cy="92" r="7"/></g>
+                <g class="eyes"><ellipse cx="74" cy="132" rx="13" ry="16" fill="#1D2B36"/><ellipse cx="126" cy="132" rx="13" ry="16" fill="#1D2B36"/><circle cx="78" cy="126" r="4.5" fill="#fff"/><circle cx="130" cy="126" r="4.5" fill="#fff"/></g>
+                <ellipse cx="54" cy="160" rx="12" ry="8" fill="#F2765A" opacity=".6"/><ellipse cx="146" cy="160" rx="12" ry="8" fill="#F2765A" opacity=".6"/>
+                <path d="M84 164 Q100 180 116 164" fill="none" stroke="#1D2B36" stroke-width="5" stroke-linecap="round"/>
+              </g>
+            </g>
+            <g fill="#F6B93B">
+              <path class="twinkle" d="M52 40 l5 11 11 5 -11 5 -5 11 -5 -11 -11 -5 11 -5z"/>
+              <path class="twinkle t2" d="M228 30 l4 9 9 4 -9 4 -4 9 -4 -9 -9 -4 9 -4z"/>
+              <path class="twinkle t3" d="M220 84 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3z"/>
+            </g>
+          </svg>
+        </div>
+        <h3 data-i18n="f3t">My EEG Day with Pip</h3>
+        <p data-i18n="f3d">A gentle, playful game where Pip shows kids what happens on EEG day: the sticker hat, the quiet time and the big finish.</p>
+        <p class="try"><b data-i18n="tryLabel">Try asking</b><span data-i18n="f3q">"Show my son what an EEG is like."</span></p>
+      </article>
+
+      <article class="card reveal" style="--d:0">
+        <div class="illo" aria-hidden="true">
+          <div class="fa">
+            <div class="fa-steps"><span data-i18n="fa1">Stay</span><em>·</em><span data-i18n="fa2">Safe</span><em>·</em><span data-i18n="fa3">Side</span></div>
+            <div class="fa-timer alert" id="fa-timer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg><span class="fa-time" id="fa-time">5:00</span><span class="fa-call" data-i18n="call911">Call 911</span></div>
+          </div>
+        </div>
+        <h3 data-i18n="f4t">Seizure first aid</h3>
+        <p data-i18n="f4d">Stay, safe, side: calm, clear steps any caregiver can follow, with a timer. If a seizure lasts 5 minutes or longer, call 911.</p>
+        <p class="try"><b data-i18n="tryLabel">Try asking</b><span data-i18n="f4q">"What do I do if my child has a seizure?"</span></p>
+      </article>
+
+      <article class="card reveal" style="--d:1">
+        <div class="illo" aria-hidden="true">
+          <svg viewBox="0 0 280 156">
+            <circle class="ring" cx="140" cy="78" r="58" fill="none" stroke="#0F6E74" stroke-width="2.5" stroke-dasharray="4 8" opacity=".45"/>
+            <g stroke="#0F6E74" stroke-width="2.5" opacity=".5" fill="none">
+              <path class="orbit-line" pathLength="1" d="M140 78 L140 20"/><path class="orbit-line" pathLength="1" d="M140 78 L195 60"/><path class="orbit-line" pathLength="1" d="M140 78 L174 125"/><path class="orbit-line" pathLength="1" d="M140 78 L106 125"/><path class="orbit-line" pathLength="1" d="M140 78 L85 60"/>
+            </g>
+            <circle class="sat" cx="140" cy="20" r="13" fill="#F6B93B"/>
+            <circle class="sat s2" cx="195" cy="60" r="13" fill="#fff" stroke="#0F6E74" stroke-width="3"/>
+            <circle class="sat s3" cx="174" cy="125" r="13" fill="#F2765A"/>
+            <circle class="sat s4" cx="106" cy="125" r="13" fill="#fff" stroke="#0F6E74" stroke-width="3"/>
+            <circle class="sat s5" cx="85" cy="60" r="13" fill="#F6B93B"/>
+            <circle cx="140" cy="78" r="26" fill="#0F6E74"/>
+            <path d="M131 66 h13 l6 6 v18 h-19z" fill="#fff"/><path d="M135 78 h11 M135 84 h8" stroke="#0F6E74" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 data-i18n="f5t">Seizure-Ready Circle</h3>
+        <p data-i18n="f5d">Build your child's circle of support at school and beyond, and learn what Florida's school seizure action plan rules mean for your family.</p>
+        <p class="try"><b data-i18n="tryLabel">Try asking</b><span data-i18n="f5q">"How do I get a seizure action plan for school?"</span></p>
+      </article>
+
+      <article class="card reveal" style="--d:2">
+        <div class="illo" aria-hidden="true">
+          <div class="mini-quiz">
+            <p data-i18n="qz">During a seizure, you should…</p>
+            <div class="opt"><span data-i18n="qa">Hold them still</span><svg viewBox="0 0 24 24"></svg></div>
+            <div class="opt right"><span data-i18n="qb">Turn them on their side</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+            <div class="opt"><span data-i18n="qc">Put something in their mouth</span><svg viewBox="0 0 24 24"></svg></div>
+          </div>
+        </div>
+        <h3 data-i18n="f6t">Caregiver quiz</h3>
+        <p data-i18n="f6d">A quick, friendly quiz for grandparents, sitters and coaches to practice seizure first aid before they ever need it.</p>
+        <p class="try"><b data-i18n="tryLabel">Try asking</b><span data-i18n="f6q">"Quiz our babysitter on seizure first aid."</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 3. TAMPA BAY -->
+<section class="section band" id="local" aria-labelledby="local-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow" data-i18n="localEyebrow">Made for Tampa Bay</p>
+      <h2 id="local-title" data-i18n="localTitle">Built around the families PENS serves</h2>
+    </div>
+    <div class="local-grid">
+      <article class="local reveal" style="--d:0">
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h15v10H9l-4 4v-4H3z" stroke="#0F6E74" fill="#fff"/><path d="M14 14h15v10h-2v4l-4-4h-9z" stroke="#0F6E74" fill="#F6B93B"/></svg></div>
+        <div><h3 data-i18n="l1t">English y Español</h3><p data-i18n="l1d">Every answer, checklist and game works in English and Spanish. Ask in the language that feels most natural, and switch any time.</p></div>
+      </article>
+      <article class="local reveal" style="--d:1">
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke-width="2.4" stroke-linejoin="round"><path d="M16 29c-6-8-9-12-9-17a9 9 0 0 1 18 0c0 5-3 9-9 17z" fill="#0F6E74" stroke="#0F6E74"/><circle cx="16" cy="12" r="3.6" fill="#F6B93B"/></svg></div>
+        <div><h3 data-i18n="l2t">Your South Tampa clinic</h3><p data-i18n="l2d">Answers point you to PENS at 508 S. Habana Ave., Suite 340, with office hours, directions and the right number to call.</p></div>
+      </article>
+      <article class="local reveal" style="--d:0">
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14 16 6l12 8v14H4z" fill="#fff" stroke="#0F6E74"/><path d="M13 28v-7h6v7" stroke="#0F6E74"/><path d="M16 6V2h5v3h-5" stroke="#0F6E74" fill="#F2765A"/></svg></div>
+        <div><h3 data-i18n="l3t">Florida's 2026 school seizure law</h3><p data-i18n="l3d">Florida CS/HB 1201 took effect July 1, 2026. A student's Individualized Seizure Action Plan (ISAP) must be developed and signed by a medical professional, charter schools are included, and school staff who teach or transport the student need seizure training.</p><p class="fine" data-i18n="l3n">A summary for families, not legal advice. Check your school district's policy for details.</p></div>
+      </article>
+      <article class="local reveal" style="--d:1">
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke-width="2.4" stroke-linecap="round"><circle cx="16" cy="16" r="4" fill="#F6B93B" stroke="#0F6E74"/><path d="M16 4c-7 0-11 5-11 9M16 28c7 0 11-5 11-9M5 22c2 3 6 5 11 5M27 10c-2-3-6-5-11-5" stroke="#0F6E74"/></svg></div>
+        <div><h3 data-i18n="l4t">Ready for hurricane season</h3><p data-i18n="l4d">Atlantic hurricane season runs June 1 to November 30. For kids on seizure medicines, plan ahead: keep extra medicine on hand, pack a copy of the seizure action plan and a medicine list in your go-bag, and talk with your pharmacist about refills before a storm.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 4. HOW IT WORKS -->
+<section class="section" id="how" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow" data-i18n="howEyebrow">How it works</p>
+      <h2 id="how-title" data-i18n="howTitle">Three easy steps</h2>
+    </div>
+    <div class="reveal" id="flow-wrap" style="position:relative">
+      <div class="flow-track" aria-hidden="true">
+        <svg viewBox="0 0 600 12" preserveAspectRatio="none"><path class="track-line" pathLength="1" d="M0 6 H600" stroke-width="4" stroke-linecap="round" stroke-dasharray="1" vector-effect="non-scaling-stroke"/></svg>
+        <span class="track-dot" style="position:absolute;left:0;top:-6px;width:16px;height:16px;border-radius:50%;background:var(--sun);border:3px solid #fff;box-shadow:0 0 0 2px var(--teal)"></span>
+      </div>
+      <ol class="flow">
+        <li class="step">
+          <div class="step-vis" aria-hidden="true"><span class="step-num">1</span><span class="switch"></span></div>
+          <h3 data-i18n="s1t">Add PENS</h3>
+          <p data-i18n="s1d">In ChatGPT or Claude, add the PENS app. No PENS account or patient information needed.</p>
+        </li>
+        <li class="step">
+          <div class="step-vis" aria-hidden="true"><span class="step-num">2</span><span class="say"><i></i><i></i><i></i></span></div>
+          <h3 data-i18n="s2t">Ask in plain words</h3>
+          <p data-i18n="s2d">Type the way you'd ask a friend, in English or Spanish: "Mi hijo tiene un EEG el martes. ¿Qué hago?"</p>
+        </li>
+        <li class="step">
+          <div class="step-vis" aria-hidden="true"><span class="step-num">3</span><span class="mini-card"><b></b><s></s><s></s><u></u></span></div>
+          <h3 data-i18n="s3t">Get a card with next steps</h3>
+          <p data-i18n="s3d">PENS replies with a clear card: checklists, first-aid steps, hours and directions, and when to call the office or 911.</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 5. SAFETY -->
+<section class="section band" id="safety" aria-labelledby="safety-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow" data-i18n="safeEyebrow">Safety &amp; privacy</p>
+      <h2 id="safety-title" data-i18n="safeTitle">Careful by design</h2>
+    </div>
+    <div class="safe-grid">
+      <article class="safe reveal" style="--d:0">
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="#0F6E74" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3l9 4v6c0 6-4 10-9 12-5-2-9-6-9-12V7z" fill="#fff"/><path d="M10 14l3 3 5-6"/></svg></div>
+        <h3 data-i18n="p1t">No patient information collected</h3>
+        <p data-i18n="p1d">PENS in ChatGPT and Claude never asks for names, birthdays or medical records. Please don't share them in chat; call the office about your child's care.</p>
+      </article>
+      <article class="safe reveal" style="--d:1">
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="#0F6E74" stroke-width="2.4" stroke-linecap="round"><circle cx="14" cy="14" r="10" fill="#fff"/><path d="M14 13v6M14 9v.5"/></svg></div>
+        <h3 data-i18n="p2t">General information, not medical advice</h3>
+        <p data-i18n="p2d">Answers are general education. They don't replace a visit with your child's care team or their own care plan.</p>
+      </article>
+      <article class="safe urgent reveal" style="--d:2">
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="#B83A26" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h4l2 5-3 2a12 12 0 0 0 7 7l2-3 5 2v4a2 2 0 0 1-2 2C11 23 5 17 5 6a2 2 0 0 1 2-2z" fill="#fff"/></svg></div>
+        <h3 data-i18n="p3t">Emergencies: call 911</h3>
+        <p data-i18n="p3d">If a seizure lasts 5 minutes or longer, or your child has trouble breathing, call 911 right away. Don't wait for a chat reply.</p>
+      </article>
+      <article class="safe reveal" style="--d:3">
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="#0F6E74" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v7a5 5 0 0 0 10 0V3"/><path d="M12 15v3a5 5 0 0 0 10 0v-2"/><circle cx="22" cy="13" r="2.6" fill="#F6B93B"/></svg></div>
+        <h3 data-i18n="p4t">Reviewed by PENS clinicians</h3>
+        <p data-i18n="p4d">Every clinical answer is reviewed by PENS clinicians before launch, so it reflects how the PENS team cares for kids.</p>
+      </article>
+    </div>
+    <p class="emergency reveal" role="note"><strong data-i18n="emT">In an emergency, call 911.</strong> <span data-i18n="emD">For questions about your child's care, call PENS at <a href="tel:+18138737367">(813) 873-7367</a>.</span></p>
+  </div>
+</section>
+
+<!-- 6. PROS -->
+<section class="section" id="pros" aria-labelledby="pros-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow" data-i18n="proEyebrow">For pediatricians &amp; schools</p>
+      <h2 id="pros-title" data-i18n="proTitle">Help for the people around the child</h2>
+    </div>
+    <div class="pro-grid">
+      <article class="pro reveal" style="--d:0">
+        <span class="tag" data-i18n="proT1">Pediatricians</span>
+        <h3 data-i18n="proH1">Referring a patient to PENS</h3>
+        <p data-i18n="proD1">Ask PENS what to include and get a ready-to-use referral checklist:</p>
+        <ul>
+          <li data-i18n="ref1">Referral order with reason and diagnosis code</li>
+          <li data-i18n="ref2">Recent office notes, plus EEG and MRI/CT reports</li>
+          <li data-i18n="ref3">Current medicines and allergies</li>
+          <li data-i18n="ref4">Insurance details and parent contact information</li>
+        </ul>
+        <p class="note" data-i18n="proN1">Send referrals by fax at (813) 875-9722 or by phone, never through chat. Emergencies belong in the emergency department.</p>
+      </article>
+      <article class="pro reveal" style="--d:1">
+        <span class="tag" data-i18n="proT2">Schools</span>
+        <h3 data-i18n="proH2">Getting seizure-ready at school</h3>
+        <p data-i18n="proD2">School nurses, teachers and families can use the Seizure-Ready Circle to understand:</p>
+        <ul>
+          <li data-i18n="sch1">What an Individualized Seizure Action Plan (ISAP) is</li>
+          <li data-i18n="sch2">Who should have a copy: teachers, bus drivers, coaches</li>
+          <li data-i18n="sch3">How families request a signed plan from PENS</li>
+          <li data-i18n="sch4">Where to find seizure training for staff</li>
+        </ul>
+        <p class="note" data-i18n="proN2">Free staff training is available from the <a href="https://www.epilepsy.com/programs/training-education" rel="noopener">Epilepsy Foundation</a>.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 7. GET STARTED -->
+<section class="section band" id="get-started" aria-labelledby="start-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow" data-i18n="startEyebrow">Get started</p>
+      <h2 id="start-title" data-i18n="startTitle">Bring PENS into your favorite AI app</h2>
+    </div>
+    <div class="start-grid">
+      <article class="install reveal" style="--d:0">
+        <h3 data-i18n="gsC">In ChatGPT</h3>
+        <ol>
+          <li data-i18n="gsC1">Open ChatGPT on the web or in the app.</li>
+          <li data-i18n="gsC2">Find PENS in Apps and connect it.</li>
+          <li data-i18n="gsC3">Ask your first question in English or Spanish.</li>
+        </ol>
+        <!-- TODO: live ChatGPT app link -->
+        <a class="btn btn-primary" href="#get-started" data-i18n="ctaChatGPT2">Open in ChatGPT</a>
+        <p class="soon" data-i18n="soon">The direct link goes live at launch.</p>
+      </article>
+      <article class="install reveal" style="--d:1">
+        <h3 data-i18n="gsA">In Claude</h3>
+        <ol>
+          <li data-i18n="gsA1">Open Claude on the web or in the app.</li>
+          <li data-i18n="gsA2">Add the PENS connector from Settings, then Connectors.</li>
+          <li data-i18n="gsA3">Ask your first question in English or Spanish.</li>
+        </ol>
+        <!-- TODO: live Claude connector link -->
+        <a class="btn btn-accent" href="#get-started" data-i18n="ctaClaude2">Add to Claude</a>
+        <p class="soon" data-i18n="soon">The direct link goes live at launch.</p>
+      </article>
+      <article class="contact reveal" style="--d:2">
+        <h3 data-i18n="ctT">Contact PENS</h3>
+        <dl>
+          <div><dt data-i18n="ctPhone">Phone</dt><dd><a class="phone" href="tel:+18138737367">(813) 873-7367</a></dd></div>
+          <div><dt data-i18n="ctAddr">Address</dt><dd><a class="linkish" href="https://www.google.com/maps/search/?api=1&amp;query=508+S+Habana+Ave+Suite+340+Tampa+FL+33609" rel="noopener">508 S. Habana Ave., Suite 340, Tampa, FL 33609</a></dd></div>
+          <div><dt data-i18n="ctHours">Office hours</dt><dd>
+            <table class="hours"><tbody>
+              <tr><td data-i18n="hMT">Mon–Thu</td><td data-i18n="hMTv">7:30 AM – 5:00 PM</td></tr>
+              <tr><td data-i18n="hF">Fri</td><td data-i18n="hFv">7:30 AM – 4:30 PM</td></tr>
+            </tbody></table>
+          </dd></div>
+          <div><dt data-i18n="ctWeb">Website</dt><dd><a class="linkish" href="https://www.pensoftampabay.com/" rel="noopener">pensoftampabay.com</a></dd></div>
+        </dl>
+        <svg class="contact-pip" viewBox="0 0 200 220" aria-hidden="true"><path d="M100 66 C92 54 110 46 102 34 C96 25 108 18 112 12" fill="none" stroke="#F6B93B" stroke-width="6" stroke-linecap="round"/><circle cx="113" cy="11" r="9" fill="#F2765A"/><circle cx="100" cy="140" r="74" fill="#F6B93B"/><ellipse cx="74" cy="128" rx="13" ry="16" fill="#1D2B36"/><ellipse cx="126" cy="128" rx="13" ry="16" fill="#1D2B36"/><circle cx="78" cy="122" r="4.5" fill="#fff"/><circle cx="130" cy="122" r="4.5" fill="#fff"/><path d="M84 160 Q100 176 116 160" fill="none" stroke="#1D2B36" stroke-width="5" stroke-linecap="round"/></svg>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot">
+      <a class="brand" href="#top" aria-label="PENS home" data-i18n-aria="aHome">
+        <img src="assets/pens-logo.svg" alt="" width="44" height="44">
+        <span class="brand-text"><span class="brand-name">PENS</span><span class="brand-full" style="display:block">Pediatric Epilepsy &amp; Neurology Specialists</span></span>
+      </a>
+      <nav aria-label="Legal and support" data-i18n-aria="aFoot">
+        <ul>
+          <li><a href="/privacy" data-i18n="fPriv">Privacy</a></li>
+          <li><a href="/terms" data-i18n="fTerms">Terms</a></li>
+          <li><a href="/support" data-i18n="fSupport">Support</a></li>
+          <li><a href="/reviewer-demo" data-i18n="fDemo">Reviewer demo</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <strong data-i18n="emT">In an emergency, call 911.</strong>
+      <span data-i18n="fOp">App operated by BinaryBros LLC for PENS.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+  /* ---------- i18n: English is harvested from the HTML; Spanish lives here ---------- */
+  var ES = {
+    skip:'Saltar al contenido principal', preview:'Versión previa',
+    navFeatures:'Qué puede preguntar', navHow:'Cómo funciona', navSafety:'Seguridad', navPros:'Pediatras y escuelas', navStart:'Comenzar',
+    heroEyebrow:'Neurología pediátrica en Tampa Bay',
+    heroTitle:'PENS, ahora en <span class="hl">ChatGPT</span> y <span class="hl">Claude</span>',
+    heroSub:'Haga sus preguntas a Pediatric Epilepsy &amp; Neurology Specialists con sus propias palabras. Reciba respuestas claras y fáciles para niños, listas para sus citas y próximos pasos, dentro de las apps de IA que su familia ya usa.',
+    ctaChatGPT:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>Abrir en ChatGPT',
+    ctaClaude:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Agregar a Claude',
+    trust1:'English y Español', trust2:'Sin información de pacientes', trust3:'De su clínica en South Tampa',
+    chatCap:'Ejemplo: un padre pregunta "¿PENS atiende a niños con TDAH?" y PENS responde con una tarjeta breve: sí, PENS atiende a niños con problemas de atención y ofrece pruebas computarizadas de TDAH, con el próximo paso de solicitar una cita.',
+    chatSub:'Respuestas para familias de Tampa Bay', chatPh:'Pregúntele lo que quiera a PENS…',
+    pauseAnim:'Pausar animaciones', playAnim:'Reanudar animaciones',
+    featEyebrow:'Pregúntele a PENS', featTitle:'Ayuda real para preguntas de la vida real',
+    featSub:'Cada respuesta llega como una tarjeta sencilla con próximos pasos, para que sepa qué hacer y cuándo llamar.',
+    tryLabel:'Pruebe preguntar',
+    f1t:'Encontrar atención', f1d:'Cuente lo que pasa, como dolores de cabeza, episodios de mirada fija, sueño o atención, y vea qué servicios de PENS pueden ayudar y cómo pedir una cita.', f1q:'"Mi hija tiene dolores de cabeza fuertes. ¿PENS puede ayudar?"',
+    c1:'Plan de sueño de PENS', c2:'Cabello limpio y seco', c3:'Ropa cómoda y un compañero para dormir',
+    f2t:'Preparación para la cita', f2d:'Listas paso a paso para citas y EEG, incluido el EEG con privación de sueño, para que no se olvide nada el gran día.', f2q:'"¿Cómo nos preparamos para un EEG con privación de sueño?"',
+    f3t:'Mi día de EEG con Pip', f3d:'Un juego tranquilo y divertido en el que Pip les muestra a los niños qué pasa el día del EEG: el gorro de calcomanías, el rato de calma y el gran final.', f3q:'"Muéstrele a mi hijo cómo es un EEG."',
+    fa1:'Quédese', fa2:'Seguro', fa3:'De lado', call911:'Llame al 911',
+    f4t:'Primeros auxilios para convulsiones', f4d:'Quédese, seguro, de lado: pasos claros y tranquilos que cualquier cuidador puede seguir, con cronómetro. Si una convulsión dura 5 minutos o más, llame al 911.', f4q:'"¿Qué hago si mi hijo tiene una convulsión?"',
+    f5t:'Círculo Listos para Convulsiones', f5d:'Forme el círculo de apoyo de su hijo en la escuela y más allá, y entienda qué significan para su familia las reglas de Florida sobre planes de acción para convulsiones en la escuela.', f5q:'"¿Cómo consigo un plan de acción para convulsiones para la escuela?"',
+    qz:'Durante una convulsión, usted debe…', qa:'Sujetarlo para que no se mueva', qb:'Ponerlo de lado', qc:'Ponerle algo en la boca',
+    f6t:'Prueba para cuidadores', f6d:'Una prueba rápida y amigable para abuelos, niñeras y entrenadores, para practicar primeros auxilios antes de necesitarlos.', f6q:'"Hágale una prueba a nuestra niñera sobre primeros auxilios para convulsiones."',
+    localEyebrow:'Hecho para Tampa Bay', localTitle:'Pensado para las familias que atiende PENS',
+    l1t:'English y Español', l1d:'Cada respuesta, lista y juego funciona en inglés y en español. Pregunte en el idioma que le resulte más natural y cambie cuando quiera.',
+    l2t:'Su clínica en South Tampa', l2d:'Las respuestas lo llevan a PENS en 508 S. Habana Ave., Suite 340, con horario de oficina, cómo llegar y el número correcto para llamar.',
+    l3t:'La ley escolar de convulsiones de Florida de 2026', l3d:'La ley CS/HB 1201 de Florida entró en vigor el 1 de julio de 2026. El Plan de Acción Individualizado para Convulsiones (ISAP) del estudiante debe ser elaborado y firmado por un profesional médico, se incluyen las escuelas chárter, y el personal que enseña o transporta al estudiante necesita capacitación sobre convulsiones.',
+    l3n:'Resumen para familias, no es asesoría legal. Consulte la política de su distrito escolar para más detalles.',
+    l4t:'Listos para la temporada de huracanes', l4d:'La temporada de huracanes del Atlántico va del 1 de junio al 30 de noviembre. Si su hijo toma medicamentos para convulsiones, planifique con tiempo: tenga medicamento extra, guarde una copia del plan de acción y una lista de medicamentos en su bolso de emergencia, y hable con su farmacéutico sobre los resurtidos antes de una tormenta.',
+    howEyebrow:'Cómo funciona', howTitle:'Tres pasos sencillos',
+    s1t:'Agregue PENS', s1d:'En ChatGPT o Claude, agregue la app de PENS. No necesita cuenta de PENS ni información del paciente.',
+    s2t:'Pregunte con sus palabras', s2d:'Escriba como le preguntaría a una amiga, en inglés o en español: "Mi hijo tiene un EEG el martes. ¿Qué hago?"',
+    s3t:'Reciba una tarjeta con próximos pasos', s3d:'PENS responde con una tarjeta clara: listas, pasos de primeros auxilios, horario y cómo llegar, y cuándo llamar a la oficina o al 911.',
+    safeEyebrow:'Seguridad y privacidad', safeTitle:'Cuidadoso desde el diseño',
+    p1t:'No se recopila información de pacientes', p1d:'PENS en ChatGPT y Claude nunca pide nombres, fechas de nacimiento ni expedientes médicos. Por favor no los comparta en el chat; llame a la oficina sobre el cuidado de su hijo.',
+    p2t:'Información general, no consejo médico', p2d:'Las respuestas son educación general. No reemplazan una cita con el equipo de su hijo ni su propio plan de cuidado.',
+    p3t:'Emergencias: llame al 911', p3d:'Si una convulsión dura 5 minutos o más, o su hijo tiene dificultad para respirar, llame al 911 de inmediato. No espere una respuesta del chat.',
+    p4t:'Revisado por clínicos de PENS', p4d:'Cada respuesta clínica es revisada por clínicos de PENS antes del lanzamiento, para que refleje cómo el equipo de PENS cuida a los niños.',
+    emT:'En una emergencia, llame al 911.', emD:'Para preguntas sobre el cuidado de su hijo, llame a PENS al <a href="tel:+18138737367">(813) 873-7367</a>.',
+    proEyebrow:'Para pediatras y escuelas', proTitle:'Ayuda para las personas alrededor del niño',
+    proT1:'Pediatras', proH1:'Referir un paciente a PENS', proD1:'Pregúntele a PENS qué incluir y reciba una lista práctica:',
+    ref1:'Orden de referido con motivo y código de diagnóstico', ref2:'Notas recientes de consulta y reportes de EEG y MRI/CT', ref3:'Medicamentos actuales y alergias', ref4:'Datos del seguro e información de contacto de los padres',
+    proN1:'Envíe los referidos por fax al (813) 875-9722 o por teléfono, nunca por chat. Las emergencias deben ir al departamento de emergencias.',
+    proT2:'Escuelas', proH2:'Preparar la escuela para convulsiones', proD2:'Enfermeras escolares, maestros y familias pueden usar el Círculo Listos para Convulsiones para entender:',
+    sch1:'Qué es un Plan de Acción Individualizado para Convulsiones (ISAP)', sch2:'Quién debe tener una copia: maestros, choferes del autobús, entrenadores', sch3:'Cómo las familias piden a PENS un plan firmado', sch4:'Dónde encontrar capacitación sobre convulsiones para el personal',
+    proN2:'La <a href="https://www.epilepsy.com/programs/training-education" rel="noopener">Epilepsy Foundation</a> ofrece capacitación gratuita para el personal (en inglés).',
+    startEyebrow:'Comenzar', startTitle:'Lleve PENS a su app de IA favorita',
+    gsC:'En ChatGPT', gsC1:'Abra ChatGPT en la web o en la app.', gsC2:'Busque PENS en Apps y conéctelo.', gsC3:'Haga su primera pregunta en inglés o en español.',
+    ctaChatGPT2:'Abrir en ChatGPT', soon:'El enlace directo estará disponible en el lanzamiento.',
+    gsA:'En Claude', gsA1:'Abra Claude en la web o en la app.', gsA2:'Agregue el conector de PENS desde Configuración y luego Conectores.', gsA3:'Haga su primera pregunta en inglés o en español.',
+    ctaClaude2:'Agregar a Claude',
+    ctT:'Contacte a PENS', ctPhone:'Teléfono', ctAddr:'Dirección', ctHours:'Horario de oficina', ctWeb:'Sitio web',
+    hMT:'lun–jue', hMTv:'7:30 a. m. – 5:00 p. m.', hF:'vie', hFv:'7:30 a. m. – 4:30 p. m.',
+    fPriv:'Privacidad', fTerms:'Términos', fSupport:'Soporte', fDemo:'Demo para revisores', fOp:'App operada por BinaryBros LLC para PENS.',
+    aHome:'Inicio de PENS', aNav:'Secciones', aLang:'Idioma', aFoot:'Legal y soporte'
+  };
+  var META = {
+    en:{title:document.title, desc:document.querySelector('meta[name="description"]').content},
+    es:{title:'PENS, ahora en ChatGPT y Claude · Pediatric Epilepsy & Neurology Specialists',
+        desc:'Las familias ya pueden recibir respuestas de PENS, Pediatric Epilepsy & Neurology Specialists en South Tampa, dentro de ChatGPT y Claude. En inglés y en español.'}
+  };
+  var EN = {}, ENA = {};
+  var nodes = document.querySelectorAll('[data-i18n]');
+  var anodes = document.querySelectorAll('[data-i18n-aria]');
+  nodes.forEach(function(n){ EN[n.getAttribute('data-i18n')] = n.innerHTML; });
+  anodes.forEach(function(n){ ENA[n.getAttribute('data-i18n-aria')] = n.getAttribute('aria-label'); });
+  EN.playAnim = 'Play animations';
+
+  var lang = 'en';
+  function t(k){ return (lang === 'es' && ES[k] != null) ? ES[k] : EN[k]; }
+  function setLang(l, persist){
+    lang = (l === 'es') ? 'es' : 'en';
+    root.lang = lang;
+    nodes.forEach(function(n){ var k = n.getAttribute('data-i18n'); var v = t(k); if (v != null && n.innerHTML !== v) n.innerHTML = v; });
+    anodes.forEach(function(n){ var k = n.getAttribute('data-i18n-aria'); n.setAttribute('aria-label', lang === 'es' && ES[k] ? ES[k] : ENA[k]); });
+    document.querySelectorAll('.lang button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
+    document.title = META[lang].title;
+    document.querySelector('meta[name="description"]').content = META[lang].desc;
+    if (persist) { try { localStorage.setItem('pens-lang', lang); } catch (e) {} }
+    updateMotionLabel();
+    chat.restart();
+    faLabels();
+  }
+
+  /* ---------- Pause / play all motion ---------- */
+  var paused = false;
+  var mt = document.getElementById('motion-toggle');
+  function updateMotionLabel(){
+    var s = mt.querySelector('span');
+    s.setAttribute('data-i18n', paused ? 'playAnim' : 'pauseAnim');
+    s.innerHTML = t(paused ? 'playAnim' : 'pauseAnim');
+    mt.setAttribute('aria-pressed', String(paused));
+    mt.querySelector('svg').innerHTML = paused
+      ? '<path d="M7 4.5v15l12-7.5z"/>'
+      : '<rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/>';
+  }
+  mt.addEventListener('click', function(){
+    paused = !paused;
+    root.classList.toggle('paused', paused);
+    updateMotionLabel();
+    if (!paused) { chat.resume(); fa.resume(); }
+  });
+  if (reduce.matches) mt.hidden = true;
+
+  /* ---------- Hero chat demo ---------- */
+  var QA = {
+    en:[
+      {q:'Does PENS see kids with ADHD?', a:function(){ return '<h4>ADHD &amp; attention</h4><p>Yes. PENS sees children with attention, focus and hyperactivity concerns, and offers computerized ADHD testing.</p><span class="next"><b>Next step:</b> Request an appointment and bring any school reports or teacher notes.</span><div class="chips"><span class="chip solid">Call PENS</span><span class="chip">Directions</span></div>'; }},
+      {q:'How do we get ready for a sleep-deprived EEG?', a:function(){ return '<h4>Sleep-deprived EEG checklist</h4><ul><li>'+CHECK+'Follow the exact sleep plan PENS gave you</li><li>'+CHECK+'Clean, dry hair with no conditioner or oils</li><li>'+CHECK+'Comfy clothes and a sleep buddy</li></ul><div class="chips"><span class="chip solid">Play My EEG Day with Pip</span></div>'; }},
+      {q:'What do I do during a seizure?', a:function(){ return '<h4>Seizure first aid</h4><div class="chips" style="margin-bottom:10px"><span class="chip solid">Stay</span><span class="chip solid">Safe</span><span class="chip solid">Side</span></div><p>Stay with your child and time it. Keep them safe and turn them on their side.</p><div class="chips"><span class="chip urgent">5 minutes or longer: call 911</span></div>'; }}
+    ],
+    es:[
+      {q:'¿PENS atiende a niños con TDAH?', a:function(){ return '<h4>TDAH y atención</h4><p>Sí. PENS atiende a niños con problemas de atención, concentración e hiperactividad, y ofrece pruebas computarizadas de TDAH.</p><span class="next"><b>Próximo paso:</b> Solicite una cita y traiga informes escolares o notas de los maestros.</span><div class="chips"><span class="chip solid">Llamar a PENS</span><span class="chip">Cómo llegar</span></div>'; }},
+      {q:'¿Cómo nos preparamos para un EEG con privación de sueño?', a:function(){ return '<h4>Lista para el EEG con privación de sueño</h4><ul><li>'+CHECK+'Siga exactamente el plan de sueño que le dio PENS</li><li>'+CHECK+'Cabello limpio y seco, sin acondicionador ni aceites</li><li>'+CHECK+'Ropa cómoda y un compañero para dormir</li></ul><div class="chips"><span class="chip solid">Jugar Mi día de EEG con Pip</span></div>'; }},
+      {q:'¿Qué hago durante una convulsión?', a:function(){ return '<h4>Primeros auxilios para convulsiones</h4><div class="chips" style="margin-bottom:10px"><span class="chip solid">Quédese</span><span class="chip solid">Seguro</span><span class="chip solid">De lado</span></div><p>Quédese con su hijo y tome el tiempo. Manténgalo seguro y póngalo de lado.</p><div class="chips"><span class="chip urgent">5 minutos o más: llame al 911</span></div>'; }}
+    ]
+  };
+  var chat = (function(){
+    var body = document.getElementById('chat-body');
+    var idx = 0, timer = null, gen = 0, visible = true, pending = null;
+    function from(){ return '<div class="answer-from"><img src="assets/pens-logo.svg" alt="">PENS</div>'; }
+    function renderFinal(i){
+      var item = QA[lang][i];
+      body.innerHTML = '<div class="bubble-user"></div><div class="answer">'+from()+item.a()+'</div>';
+      body.firstChild.textContent = item.q;
+    }
+    function wait(ms, fn, g){
+      timer = setTimeout(function(){
+        if (g !== gen) return;
+        if (paused || !visible || document.hidden) { pending = function(){ wait(ms, fn, g); }; return; }
+        fn();
+      }, ms);
+    }
+    function play(i, g){
+      var item = QA[lang][i];
+      body.innerHTML = '<div class="bubble-user"><span class="txt"></span><span class="caret"></span></div>';
+      var txt = body.querySelector('.txt'), n = 0;
+      (function type(){
+        if (g !== gen) return;
+        n++; txt.textContent = item.q.slice(0, n);
+        if (n < item.q.length) wait(38 + Math.random()*40, type, g);
+        else wait(450, function(){
+          var c = body.querySelector('.caret'); if (c) c.remove();
+          body.insertAdjacentHTML('beforeend', '<div class="typing"><i></i><i></i><i></i></div>');
+          wait(1100, function(){
+            var tp = body.querySelector('.typing'); if (tp) tp.remove();
+            body.insertAdjacentHTML('beforeend', '<div class="answer">'+from()+item.a()+'</div>');
+            wait(5200, function(){ idx = (idx + 1) % QA[lang].length; play(idx, g); }, g);
+          }, g);
+        }, g);
+      })();
+    }
+    function restart(){
+      gen++; clearTimeout(timer); pending = null;
+      if (reduce.matches) { idx = 0; renderFinal(0); return; }
+      body.innerHTML = '';
+      var g = gen; wait(350, function(){ play(idx, g); }, g);
+    }
+    function resume(){ if (pending) { var p = pending; pending = null; p(); } }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ visible = es[0].isIntersecting; if (visible) resume(); }).observe(body);
+    }
+    document.addEventListener('visibilitychange', function(){ if (!document.hidden) resume(); });
+    return {restart:restart, resume:resume};
+  })();
+
+  /* ---------- First-aid timer: sped-up demo, turns brick at 5:00 ---------- */
+  var fa = (function(){
+    var box = document.getElementById('fa-timer'), out = document.getElementById('fa-time');
+    var steps = document.querySelectorAll('.fa-steps span');
+    var running = false, loops = 0, sec = 0, tm = null, pend = false;
+    function show(s){ out.textContent = Math.floor(s/60) + ':' + ('0' + (s%60)).slice(-2); }
+    function final(){ box.classList.remove('running'); box.classList.add('alert'); show(300); steps.forEach(function(s){ s.classList.remove('off'); }); }
+    function tick(){
+      if (paused) { pend = true; return; }
+      sec += 6; show(Math.min(sec, 300));
+      steps.forEach(function(s, i){ s.classList.toggle('off', sec < i * 60); });
+      if (sec >= 300) {
+        final(); loops++;
+        if (loops < 3) tm = setTimeout(function(){ if (paused) { pend = true; return; } start(); }, 2600);
+        else running = false;
+        return;
+      }
+      tm = setTimeout(tick, 100);
+    }
+    function start(){ sec = 0; box.classList.add('running'); box.classList.remove('alert'); show(0); tm = setTimeout(tick, 100); }
+    function begin(){ if (running || reduce.matches) return; running = true; loops = 0; start(); }
+    function resume(){ if (pend) { pend = false; if (sec >= 300) start(); else tick(); } }
+    return {begin:begin, resume:resume, final:final};
+  })();
+  function faLabels(){ /* labels are data-i18n; nothing extra needed */ }
+
+  /* ---------- Scroll reveals ---------- */
+  var reveals = document.querySelectorAll('.reveal');
+  function onIn(el){
+    el.classList.add('in');
+    if (el.querySelector && el.querySelector('#fa-timer')) fa.begin();
+    if (el.id === 'flow-wrap') {
+      var tr = el.querySelector('.flow-track');
+      if (tr) tr.style.setProperty('--tw', (tr.offsetWidth - 16) + 'px');
+    }
+  }
+  if (reduce.matches || !('IntersectionObserver' in window)) {
+    reveals.forEach(onIn);
+  } else {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) { onIn(e.target); io.unobserve(e.target); } });
+    }, {threshold:.15, rootMargin:'0px 0px -6% 0px'});
+    reveals.forEach(function(r){ io.observe(r); });
+  }
+  window.addEventListener('resize', function(){
+    var tr = document.querySelector('#flow-wrap .flow-track'); if (tr) tr.style.setProperty('--tw', (tr.offsetWidth - 16) + 'px');
+  });
+
+  /* ---------- Language boot: ?lang= > saved > browser default stays EN ---------- */
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang'), true); });
+  });
+  var initial = 'en';
+  try { var saved = localStorage.getItem('pens-lang'); if (saved === 'es' || saved === 'en') initial = saved; } catch (e) {}
+  try { var q = new URLSearchParams(location.search).get('lang'); if (q === 'es' || q === 'en') initial = q; } catch (e) {}
+  setLang(initial, false);
+})();
+</script>
+</body>
+</html>

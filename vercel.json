@@ -1,0 +1,18 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build:vercel",
+  "outputDirectory": "static-build",
+  "functions": {
+    "api/index.mjs": {
+      "includeFiles": "{dist,public,site}/**",
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    { "source": "/mcp/submission-d661e169", "destination": "/api/index.mjs" },
+    { "source": "/mcp/submission-d661e169/(.*)", "destination": "/api/index.mjs" },
+    { "source": "/mcp", "destination": "/api/index.mjs" },
+    { "source": "/mcp/(.*)", "destination": "/api/index.mjs" },
+    { "source": "/(.*)", "destination": "/api/index.mjs" }
+  ]
+}

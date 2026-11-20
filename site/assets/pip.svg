@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" role="img" aria-labelledby="t">
+  <title id="t">Pip, the PENS helper</title>
+  <path d="M100 66 C92 54 110 46 102 34 C96 25 108 18 112 12" fill="none" stroke="#0F6E74" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="113" cy="11" r="9" fill="#F2765A"/>
+  <circle cx="100" cy="140" r="74" fill="#F6B93B"/>
+  <ellipse cx="74" cy="128" rx="13" ry="16" fill="#1D2B36"/>
+  <ellipse cx="126" cy="128" rx="13" ry="16" fill="#1D2B36"/>
+  <circle cx="78" cy="122" r="4.5" fill="#FFFFFF"/>
+  <circle cx="130" cy="122" r="4.5" fill="#FFFFFF"/>
+  <ellipse cx="54" cy="156" rx="12" ry="8" fill="#F2765A" opacity=".6"/>
+  <ellipse cx="146" cy="156" rx="12" ry="8" fill="#F2765A" opacity=".6"/>
+  <path d="M84 160 Q100 176 116 160" fill="none" stroke="#1D2B36" stroke-width="5" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,8 @@
+node_modules/
+dist/
+static-build/
+dist-plugin/
+.vercel/
+.deploy-url
+*.log
+.DS_Store

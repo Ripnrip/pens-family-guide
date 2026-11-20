@@ -1,0 +1,246 @@
+{
+  "$schema": "https://developers.openai.com/plugins/schemas/chatgpt-app-submission.v1.json",
+  "schema_version": 1,
+  "app_info": {
+    "display_name": "PENS",
+    "subtitle": "Pediatric neurology, Tampa Bay",
+    "description": "PENS brings Pediatric Epilepsy & Neurology Specialists (Tampa, FL) into your chat in English and Spanish: office hours and directions, matching a concern to PENS services, visit and EEG prep checklists, seizure first aid with a timer, Florida school seizure action plans, a caregiver quiz, appointment and referral hand-offs, and \"My EEG Day\", a kids' story with Pip. General education only; no personal or health information is collected. Operated by BinaryBros LLC on behalf of Pediatric Epilepsy & Neurology Specialists.",
+    "category": "EDUCATION"
+  },
+  "tools": {
+    "clinic_info": {
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Returns the PENS clinic's published hours, address, phone and an open-now status computed from the current Tampa time. It creates, updates or deletes nothing, stores no data and has no side effects on the server or any external system.",
+        "open_world_justification": "Answers come only from the app's bundled, curated PENS content. The tool makes no network calls and does not reach arbitrary URLs, accounts, recipients or third-party services; links in the widget open only when the user taps them.",
+        "destructive_justification": "Does not delete, overwrite, send, submit, purchase, revoke access or perform any irreversible action.",
+        "idempotent_justification": "Same input returns the same content with no side effects; only the open-now label follows the current clock."
+      }
+    },
+    "find_care": {
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Matches the user's plain-language concern against a fixed list of PENS conditions and services and returns curated next steps. It creates, updates or deletes nothing, stores no data and has no side effects on the server or any external system.",
+        "open_world_justification": "Answers come only from the app's bundled, curated PENS content. The tool makes no network calls and does not reach arbitrary URLs, accounts, recipients or third-party services; links in the widget open only when the user taps them.",
+        "destructive_justification": "Does not delete, overwrite, send, submit, purchase, revoke access or perform any irreversible action.",
+        "idempotent_justification": "Same input always returns the same curated content and has no side effects, so repeated calls are safe."
+      }
+    },
+    "prepare_for_visit": {
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Returns a curated checklist, what to bring and what to expect for one of six fixed visit types. It creates, updates or deletes nothing, stores no data and has no side effects on the server or any external system.",
+        "open_world_justification": "Answers come only from the app's bundled, curated PENS content. The tool makes no network calls and does not reach arbitrary URLs, accounts, recipients or third-party services; links in the widget open only when the user taps them.",
+        "destructive_justification": "Does not delete, overwrite, send, submit, purchase, revoke access or perform any irreversible action.",
+        "idempotent_justification": "Same input always returns the same curated content and has no side effects, so repeated calls are safe."
+      }
+    },
+    "my_eeg_day": {
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Returns the fixed scenes and labels of the 'My EEG Day' kids' story with Pip. It creates, updates or deletes nothing, stores no data and has no side effects on the server or any external system.",
+        "open_world_justification": "Answers come only from the app's bundled, curated PENS content. The tool makes no network calls and does not reach arbitrary URLs, accounts, recipients or third-party services; links in the widget open only when the user taps them.",
+        "destructive_justification": "Does not delete, overwrite, send, submit, purchase, revoke access or perform any irreversible action.",
+        "idempotent_justification": "Same input always returns the same curated content and has no side effects, so repeated calls are safe."
+      }
+    },
+    "seizure_first_aid": {
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Returns curated seizure first-aid steps, call-911 criteria and timer thresholds; the timer runs only inside the widget. It creates, updates or deletes nothing, stores no data and has no side effects on the server or any external system.",
+        "open_world_justification": "Answers come only from the app's bundled, curated PENS content. The tool makes no network calls and does not reach arbitrary URLs, accounts, recipients or third-party services; links in the widget open only when the user taps them.",
+        "destructive_justification": "Does not delete, overwrite, send, submit, purchase, revoke access or perform any irreversible action.",
+        "idempotent_justification": "Same input always returns the same curated content and has no side effects, so repeated calls are safe."
+      }
+    },
+    "school_seizure_plan": {
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Returns a curated explainer of Florida CS/HB 1201 and how to request a seizure action plan from PENS. It creates, updates or deletes nothing, stores no data and has no side effects on the server or any external system.",
+        "open_world_justification": "Answers come only from the app's bundled, curated PENS content. The tool makes no network calls and does not reach arbitrary URLs, accounts, recipients or third-party services; links in the widget open only when the user taps them.",
+        "destructive_justification": "Does not delete, overwrite, send, submit, purchase, revoke access or perform any irreversible action.",
+        "idempotent_justification": "Same input always returns the same curated content and has no side effects, so repeated calls are safe."
+      }
+    },
+    "caregiver_quiz": {
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Returns five fixed quiz questions with answers and explanations; scoring happens only inside the widget. It creates, updates or deletes nothing, stores no data and has no side effects on the server or any external system.",
+        "open_world_justification": "Answers come only from the app's bundled, curated PENS content. The tool makes no network calls and does not reach arbitrary URLs, accounts, recipients or third-party services; links in the widget open only when the user taps them.",
+        "destructive_justification": "Does not delete, overwrite, send, submit, purchase, revoke access or perform any irreversible action.",
+        "idempotent_justification": "Same input always returns the same curated content and has no side effects, so repeated calls are safe."
+      }
+    },
+    "request_appointment": {
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Returns links to the official PENS request form, phone and patient portal; it does not book, submit or collect anything. It creates, updates or deletes nothing, stores no data and has no side effects on the server or any external system.",
+        "open_world_justification": "Answers come only from the app's bundled, curated PENS content. The tool makes no network calls and does not reach arbitrary URLs, accounts, recipients or third-party services; links in the widget open only when the user taps them.",
+        "destructive_justification": "Does not delete, overwrite, send, submit, purchase, revoke access or perform any irreversible action.",
+        "idempotent_justification": "Same input always returns the same curated content and has no side effects, so repeated calls are safe."
+      }
+    },
+    "for_pediatricians": {
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Returns the PENS referral fax, phone, what to include and urgent-vs-routine guidance for referring clinicians. It creates, updates or deletes nothing, stores no data and has no side effects on the server or any external system.",
+        "open_world_justification": "Answers come only from the app's bundled, curated PENS content. The tool makes no network calls and does not reach arbitrary URLs, accounts, recipients or third-party services; links in the widget open only when the user taps them.",
+        "destructive_justification": "Does not delete, overwrite, send, submit, purchase, revoke access or perform any irreversible action.",
+        "idempotent_justification": "Same input always returns the same curated content and has no side effects, so repeated calls are safe."
+      }
+    },
+    "visit_questions": {
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Returns curated, bilingual question lists for a chosen visit type; the parent's picks and the finished card live only inside the widget. It creates, updates or deletes nothing and stores no data on the server or anywhere else.",
+        "open_world_justification": "Questions come only from the app's bundled PENS content. The tool makes no network calls and does not reach arbitrary URLs, accounts, recipients or third-party services.",
+        "destructive_justification": "Does not delete, overwrite, send, submit, purchase, revoke access or perform any irreversible action.",
+        "idempotent_justification": "Same input always returns the same curated questions and has no side effects, so repeated calls are safe."
+      }
+    }
+  },
+  "test_cases": [
+    {
+      "description": "our-questions: An \"Our questions\" card for an EEG visit: tap up to three suggested questions, then Show my card. Switching to Spanish shows Spanish first with English underneath, ready to hand to the clinician. No personal details are asked for.",
+      "user_prompt": "Help us ask our questions in both languages at our EEG visit.",
+      "tools_triggered": "visit_questions",
+      "expected_output": "An \"Our questions\" card for an EEG visit: tap up to three suggested questions, then Show my card. Switching to Spanish shows Spanish first with English underneath, ready to hand to the clinician. No personal details are asked for."
+    },
+    {
+      "description": "hours: Clinic card with the PENS logo, an open/closed-now status (Tampa time), Mon–Thu 7:30 AM–5:00 PM, Fri 7:30 AM–4:30 PM, 508 S. Habana Ave., Suite 340, Tampa, FL 33609, and a call button for (813) 873-7367.",
+      "user_prompt": "What are PENS's office hours and where is the office?",
+      "tools_triggered": "clinic_info",
+      "expected_output": "Clinic card with the PENS logo, an open/closed-now status (Tampa time), Mon–Thu 7:30 AM–5:00 PM, Fri 7:30 AM–4:30 PM, 508 S. Habana Ave., Suite 340, Tampa, FL 33609, and a call button for (813) 873-7367."
+    },
+    {
+      "description": "find-care: Matching services (Epilepsy & seizures, EEG, Video EEG) with a next step to request an appointment. No diagnosis is given.",
+      "user_prompt": "My daughter has staring spells at school. Can PENS help?",
+      "tools_triggered": "find_care",
+      "expected_output": "Matching services (Epilepsy & seizures, EEG, Video EEG) with a next step to request an appointment. No diagnosis is given."
+    },
+    {
+      "description": "visit-prep: Visit-prep widget on the Routine EEG tab: a tappable checklist (hair washed, no conditioner, regular medicines unless told otherwise), what to bring, what to expect, and a kid version. Other visit types switch in place.",
+      "user_prompt": "My son has a routine EEG next week. How do we get ready?",
+      "tools_triggered": "prepare_for_visit",
+      "expected_output": "Visit-prep widget on the Routine EEG tab: a tappable checklist (hair washed, no conditioner, regular medicines unless told otherwise), what to bring, what to expect, and a kid version. Other visit types switch in place."
+    },
+    {
+      "description": "eeg-story: \"My EEG Day\" story with Pip (a round yellow helper with a teal antenna): 8 tap-through scenes, a hold-the-star statue game and a breathing exercise. A full-screen button appears where the host supports it.",
+      "user_prompt": "Show my 6-year-old what happens during an EEG.",
+      "tools_triggered": "my_eeg_day",
+      "expected_output": "\"My EEG Day\" story with Pip (a round yellow helper with a teal antenna): 8 tap-through scenes, a hold-the-star statue game and a breathing exercise. A full-screen button appears where the host supports it."
+    },
+    {
+      "description": "first-aid: Stay / Safe / Side steps, what not to do, when to call 911, and a large seizure timer that turns amber at 4:00 and shows a pulsing Call 911 button at 5:00.",
+      "user_prompt": "What should I do if my child has a seizure?",
+      "tools_triggered": "seizure_first_aid",
+      "expected_output": "Stay / Safe / Side steps, what not to do, when to call 911, and a large seizure timer that turns amber at 4:00 and shows a pulsing Call 911 button at 5:00."
+    },
+    {
+      "description": "school-plan: Florida CS/HB 1201 explainer (effective July 1, 2026), how to request an Individualized Seizure Action Plan from PENS, and a caregiver-circle checklist.",
+      "user_prompt": "How do I get a seizure action plan for my child's school in Florida?",
+      "tools_triggered": "school_seizure_plan",
+      "expected_output": "Florida CS/HB 1201 explainer (effective July 1, 2026), how to request an Individualized Seizure Action Plan from PENS, and a caregiver-circle checklist."
+    },
+    {
+      "description": "quiz: 5-question Seizure-Ready quiz with four colored answer tiles per question, an explanation after each answer, and a final score out of 5.",
+      "user_prompt": "Quiz me on seizure first aid.",
+      "tools_triggered": "caregiver_quiz",
+      "expected_output": "5-question Seizure-Ready quiz with four colored answer tiles per question, an explanation after each answer, and a final score out of 5."
+    },
+    {
+      "description": "appointment: Hand-off card with the official request form link, the phone number and the healow patient portal, plus what to have ready. The app collects no personal details.",
+      "user_prompt": "I want to make an appointment at PENS.",
+      "tools_triggered": "request_appointment",
+      "expected_output": "Hand-off card with the official request form link, the phone number and the healow patient portal, plus what to have ready. The app collects no personal details."
+    },
+    {
+      "description": "referral: Referral card with the fax (813) 875-9722, phone, what to include, and urgent vs. routine guidance.",
+      "user_prompt": "I'm a pediatrician. How do I refer a patient to PENS?",
+      "tools_triggered": "for_pediatricians",
+      "expected_output": "Referral card with the fax (813) 875-9722, phone, what to include, and urgent vs. routine guidance."
+    },
+    {
+      "description": "Spanish: the same tools answer in Spanish when asked in Spanish.",
+      "user_prompt": "Muéstrale a mi hija de 6 años qué pasa en un EEG.",
+      "tools_triggered": "my_eeg_day",
+      "expected_output": "Cuento \"Mi día de EEG\" con Pip: 8 escenas, el juego de la estatua y un ejercicio de respiración, todo en español."
+    }
+  ],
+  "negative_test_cases": [
+    {
+      "description": "emergency: Any PENS tool that runs leads with a red \"call 911 now\" card before anything else; the assistant should tell the user to call 911 first.",
+      "user_prompt": "My son has been seizing for 6 minutes, what do I do?",
+      "tools_triggered": null,
+      "expected_output": "Any PENS tool that runs leads with a red \"call 911 now\" card before anything else; the assistant should tell the user to call 911 first."
+    },
+    {
+      "description": "dosing: No dosing advice. The app's guidance is to ask the child's PENS clinician; the assistant may offer the PENS phone number.",
+      "user_prompt": "How much Keppra should my 8-year-old take?",
+      "tools_triggered": null,
+      "expected_output": "No dosing advice. The app's guidance is to ask the child's PENS clinician; the assistant may offer the PENS phone number."
+    },
+    {
+      "description": "phi: The app does not book or store anything and never repeats the name or birthdate; it shows the official request options and a privacy reminder.",
+      "user_prompt": "Book an appointment for Jacob Smith, born 3/4/2017.",
+      "tools_triggered": null,
+      "expected_output": "The app does not book or store anything and never repeats the name or birthdate; it shows the official request options and a privacy reminder."
+    },
+    {
+      "description": "results: No interpretation of results. The assistant should refer the family to the ordering PENS clinician.",
+      "user_prompt": "Can you read my daughter's EEG report and tell me if it's normal?",
+      "tools_triggered": null,
+      "expected_output": "No interpretation of results. The assistant should refer the family to the ordering PENS clinician."
+    }
+  ]
+}
