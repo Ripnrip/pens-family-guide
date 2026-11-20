@@ -1,5 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { connectClient } from "./helpers.js";
+import { PUBLIC_ORIGIN } from "../src/config.js";
 import { TOOLS } from "../src/tools/index.js";
 import { WIDGET_IDS, widgetUri } from "../src/widgets/index.js";
 
@@ -82,10 +83,10 @@ describe("MCP registration", () => {
       const c = res.contents[0] as { mimeType: string; text: string; _meta?: Record<string, unknown> };
       expect(c.mimeType).toBe("text/html;profile=mcp-app");
       const ui = c._meta?.ui as { csp: { connectDomains: string[]; resourceDomains: string[] }; prefersBorder: boolean };
-      expect(ui.csp).toEqual({ connectDomains: [], resourceDomains: [] });
+      expect(ui.csp).toEqual({ connectDomains: [], resourceDomains: [PUBLIC_ORIGIN] });
       expect(ui.prefersBorder).toBe(true);
       expect(c._meta?.["openai/widgetDescription"]).toBeTruthy();
-      expect(c._meta?.["openai/widgetCSP"]).toEqual({ connect_domains: [], resource_domains: [] });
+      expect(c._meta?.["openai/widgetCSP"]).toEqual({ connect_domains: [], resource_domains: [PUBLIC_ORIGIN] });
       expect(c.text).toContain("ui/initialize");
       expect(c.text).toContain("<style>");
       expect(c.text).toContain("PENS.mount(");

@@ -4,7 +4,7 @@ import type { WidgetSource } from "./types.js";
 /**
  * "Meet the team" directory: round faces that pop in as they scroll (spring + halo), filter chips,
  * search, a bottom-sheet profile with a few sparkles, and "Which suite?". Photos are inlined
- * (empty CSP). All motion lives in `team-*` classes/keyframes below and is off under reduced motion.
+ * (no image fetches). All motion lives in `team-*` classes/keyframes below and is off under reduced motion.
  * Neutral by design: no ratings, no review quotes, no ranking; scheduling goes through the office.
  */
 export const teamDirectoryWidget: WidgetSource = {

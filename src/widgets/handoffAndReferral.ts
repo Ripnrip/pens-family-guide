@@ -13,8 +13,9 @@ export const appointmentHandoffWidget: WidgetSource = {
   script: /* js */ `
 PENS.mount(function (root, d, api) {
   var h = PENS.h, L = d.labels;
+  var title = h('h1', { text: L.heading });
   root.appendChild(h('section', { class: 'card' }, [
-    h('h1', { text: L.heading }),
+    title,
     h('div', { class: 'opts', style: 'margin-top:10px' }, d.options.map(function (o, k) {
       return h('div', null, [
         PENS.linkButton(o.label, o.href, k === 0 ? '' : 'secondary', { icon: o.icon }),
@@ -27,6 +28,10 @@ PENS.mount(function (root, d, api) {
     h('details', null, [h('summary', { text: L.hours }), h('div', { class: 'hrs' }, d.hours.map(function (r) { return h('div', null, [h('span', { text: r.days }), h('strong', { text: r.hours })]); }))])
   ]));
   root.appendChild(h('div', { class: 'notice', role: 'note' }, [h('span', { 'aria-hidden': 'true', text: '🔒 ' }), d.privacy]));
+  // Motion: headline types in, cards fade up staggered, option buttons pop in one after another.
+  PENS.typewriter(title, L.heading);
+  PENS.fadeUp(root.querySelectorAll('.card, .notice'), { step: 80 });
+  PENS.fadeUp(root.querySelectorAll('.card li'), { step: 45 });
 });
 `,
 };
@@ -46,10 +51,11 @@ export const referralCardWidget: WidgetSource = {
   script: /* js */ `
 PENS.mount(function (root, d, api) {
   var h = PENS.h, L = d.labels;
+  var title = h('h1', { text: L.heading });
   root.appendChild(h('section', { class: 'card' }, [
-    h('h1', { text: L.heading }),
+    title,
     h('div', { class: 'small muted', text: L.fax }),
-    h('div', { class: 'fax', text: d.fax }),
+    h('div', { class: 'fax pm-popin', text: d.fax }),
     h('div', { class: 'row', style: 'margin-top:8px' }, [PENS.linkButton(L.call + ' ' + d.phone, d.phoneHref, '', { icon: '📞' })]),
     h('p', { class: 'small muted', style: 'margin-top:8px', text: d.address })
   ]));
@@ -60,6 +66,10 @@ PENS.mount(function (root, d, api) {
     h('section', { class: 'card eme' }, [h('h3', { text: L.emergency }), h('p', { class: 'small', text: d.emergencyGuidance })])
   ]));
   root.appendChild(h('div', { class: 'notice', role: 'note' }, [h('span', { 'aria-hidden': 'true', text: '🔒 ' }), d.note]));
+  // Motion: headline types in, cards and the urgent/routine/emergency trio fade up staggered.
+  PENS.typewriter(title, L.heading);
+  PENS.fadeUp(root.querySelectorAll('.card, .notice'), { step: 80 });
+  PENS.fadeUp(root.querySelectorAll('.card li'), { step: 45 });
 });
 `,
 };

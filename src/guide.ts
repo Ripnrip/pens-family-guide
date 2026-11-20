@@ -54,7 +54,8 @@ export function guidePage(langIn: unknown, themeIn: unknown): string {
   const theme = themeIn === "midnight" || themeIn === "dark" ? "midnight" : "light";
   const L = (t: T) => esc(t[lang]);
   const q = (extra?: string) => {
-    const parts = [`lang=${lang}`];
+    // The guide plays its own intro once per visit, so the cards it opens skip theirs.
+    const parts = [`lang=${lang}`, "intro=off"];
     if (theme === "midnight") parts.push("theme=dark");
     if (extra) parts.push(extra);
     return parts.join("&");
@@ -111,9 +112,56 @@ footer{margin-top:22px;font-size:13px;color:var(--muted);line-height:1.6}
 .urgent{color:#B83A26;font-weight:800}
 [data-theme=midnight] .urgent{color:#FFB4A8}
 @media (prefers-reduced-motion:reduce){.card{transition:none}}
+.intro{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:16px;background:var(--bg)}
+.intro[hidden]{display:none}
+.intro .clip{position:relative;width:min(100%,420px);aspect-ratio:540/592;border-radius:24px;overflow:hidden;background:#F6EEE2;box-shadow:0 10px 40px rgba(0,0,0,.18)}
+.intro video{display:block;width:100%;height:100%;object-fit:cover}
+.intro .skip{position:fixed;top:calc(12px + env(safe-area-inset-top));right:12px;min-height:44px;min-width:44px;padding:8px 18px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:800;font-size:15px;cursor:pointer}
+.intro .skip:focus-visible{outline:3px solid #F6B93B;outline-offset:2px}
+@media (prefers-reduced-motion:no-preference){
+.intro{animation:introIn .25s ease both}.intro.out{animation:introOut .28s ease both}
+.wrap.revealed{animation:reveal .55s cubic-bezier(.2,.9,.3,1.2) both;transform-origin:50% 0}}
+@keyframes introIn{from{opacity:0}to{opacity:1}}
+@keyframes introOut{to{opacity:0;transform:scale(1.04)}}
+@keyframes reveal{0%{opacity:0;transform:scale(.92) translateY(12px)}60%{opacity:1;transform:scale(1.015)}100%{opacity:1;transform:none}}
 </style>
 </head>
 <body>
+<div class="intro" id="pens-intro" role="region" aria-label="${lang === "es" ? "Presentación de PENS" : "PENS intro"}" hidden>
+  <div class="clip"><video muted playsinline preload="none" poster="/assets/intro-poster.jpg" aria-hidden="true" disablepictureinpicture>
+    <source src="/assets/intro.webm" type="video/webm"><source src="/assets/intro.mp4" type="video/mp4"></video></div>
+  <button class="skip" type="button">${lang === "es" ? "Saltar" : "Skip"}</button>
+</div>
+<script>
+(function () {
+  // Intro once per visit (sessionStorage); skipped under reduced motion. Content shows after ~4 s if the clip cannot play.
+  var el = document.getElementById('pens-intro');
+  var seen = false, rm = false;
+  try { rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  try { seen = sessionStorage.getItem('pens-guide-intro') === '1'; sessionStorage.setItem('pens-guide-intro', '1'); } catch (e) {}
+  if (rm || seen) { el.remove(); return; }
+  el.hidden = false;
+  var v = el.querySelector('video'), done = false, playing = false;
+  function close() {
+    if (done) return; done = true;
+    el.classList.add('out');
+    setTimeout(function () {
+      el.remove();
+      var w = document.querySelector('.wrap');
+      if (w) { w.classList.add('revealed'); setTimeout(function () { w.classList.remove('revealed'); }, 700); }
+    }, 280);
+  }
+  el.querySelector('.skip').addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  v.muted = true;
+  v.addEventListener('playing', function () { playing = true; });
+  v.addEventListener('ended', close);
+  v.addEventListener('error', close, true);
+  try { var p = v.play(); if (p && p.catch) p.catch(close); } catch (e) { close(); }
+  setTimeout(function () { if (!playing) close(); }, 4000);
+  setTimeout(close, 7000);
+})();
+</script>
 <div class="wrap">
 <header>
   <img src="/assets/pens-blocks-192.png" alt="PENS">

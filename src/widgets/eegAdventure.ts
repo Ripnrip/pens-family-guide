@@ -26,8 +26,36 @@ export const eegAdventureWidget: WidgetSource = {
 .meter { width: min(320px, 90%); height: 18px; background: rgba(0,0,0,.08); border-radius: 999px; overflow: hidden; }
 [data-theme="midnight"] .meter { background: rgba(255,255,255,.15); }
 .meter > div { height: 100%; width: 0; background: linear-gradient(90deg, #F6B93B, #0F6E74); }
-.breath { width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, #FFE7A8 0%, #F6B93B 60%, rgba(246,185,59,.2) 100%); transform: scale(.6); transition: transform 4s ease-in-out; display: grid; place-items: center; font-weight: 900; color: #1D2B36; font-size: 20px; }
-.breath.in { transform: scale(1); }
+.breath { width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, #FFE7A8 0%, #F6B93B 60%, rgba(246,185,59,.2) 100%); transform: scale(.6); display: grid; place-items: center; font-weight: 900; color: #1D2B36; font-size: 20px; will-change: transform; }
+.pip-stage { transform-origin: 50% 92%; }
+.pip-sticker { transform-box: fill-box; transform-origin: center; }
+.star { transition: background-color .2s ease; }
+/* Motion (eeg-*): Pip bounces in, stickers pop on with a squash, breathing orb loops smoothly. Off under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .pip-stage.eeg-bounce { animation: eeg-bounce-in .75s cubic-bezier(.3,.7,.3,1) backwards; }
+  .pip-sticker.eeg-pop { animation: eeg-squash .5s cubic-bezier(.3,.8,.3,1.2) backwards; animation-delay: var(--pm-delay, 0ms); }
+  .breath.idle { animation: eeg-breathe-idle 3.2s ease-in-out infinite; }
+  .breath.go { animation: eeg-breathe 8s ease-in-out infinite; }
+  .star.holding { animation: eeg-hold 1.6s ease-in-out infinite; }
+  .dots span { transition: background-color .3s ease, transform .3s ease; }
+  .dots span.now { transform: scale(1.35); }
+}
+@keyframes eeg-bounce-in {
+  0% { opacity: 0; transform: translateY(-46px) scale(.82, 1.12); }
+  42% { opacity: 1; transform: translateY(0) scale(1.14, .84); }
+  62% { transform: translateY(-12px) scale(.95, 1.06); }
+  80% { transform: translateY(0) scale(1.05, .95); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes eeg-squash {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.4, .62); }
+  75% { transform: scale(.86, 1.14); }
+  100% { transform: scale(1); }
+}
+@keyframes eeg-breathe { 0%, 100% { transform: scale(.6); } 50% { transform: scale(1); } }
+@keyframes eeg-breathe-idle { 0%, 100% { transform: scale(.6); } 50% { transform: scale(.66); } }
+@keyframes eeg-hold { 0%, 100% { box-shadow: 0 0 0 0 rgba(246,185,59,.55); } 50% { box-shadow: 0 0 0 12px rgba(246,185,59,0); } }
 .big { font-size: 20px; font-weight: 800; text-align: center; min-height: 30px; }
 .grown { font-size: 12px; opacity: .85; text-align: center; margin-top: 10px; }
 .fs { position: absolute; top: 10px; right: 10px; min-height: 44px; }
@@ -39,6 +67,19 @@ PENS.mount(function (root, d, api) {
   var saved = api.widgetState() || {};
   var idx = Math.min(saved.scene || 0, scenes.length - 1);
   var timers = [];
+  var shownIdx = -1;
+  // EEG stickers (electrodes) sit on Pip's head from the "sticker hat" scene until the last scene.
+  var stickerFrom = -1, finishAt = scenes.length - 1;
+  scenes.forEach(function (s, k) { if (s.id === 'eeg-stickers') stickerFrom = k; if (s.kind === 'finish') finishAt = k; });
+  var STICKERS = [[46, 64, '#D9412B'], [60, 50, '#2F6DB5'], [77, 44, '#F6B93B'], [99, 50, '#5FB36A'], [113, 64, '#F08A24']];
+  function addStickers(holder, animate) {
+    var g = holder.querySelector('.pip-bob');
+    if (!g) return;
+    STICKERS.forEach(function (s, k) {
+      g.appendChild(PENS.motion.svg('circle', { class: 'pip-sticker' + (animate ? ' eeg-pop' : ''), cx: s[0], cy: s[1], r: 6.5, fill: s[2], stroke: '#FFFFFF', 'stroke-width': 2.5,
+        style: '--pm-delay:' + (450 + k * 140) + 'ms' }));
+    });
+  }
   function clearTimers() { timers.forEach(function (t) { clearTimeout(t); clearInterval(t); }); timers = []; }
 
   function pip(mood) {
@@ -47,6 +88,7 @@ PENS.mount(function (root, d, api) {
     holder.innerHTML = PENS.brand.pip[mood] || PENS.brand.pip.happy;
     var svg = holder.querySelector('svg');
     if (svg) svg.setAttribute('aria-label', d.character);
+    if (stickerFrom !== -1 && idx >= stickerFrom && idx < finishAt) addStickers(holder, idx === stickerFrom && shownIdx !== idx);
     return holder;
   }
 
@@ -84,7 +126,9 @@ PENS.mount(function (root, d, api) {
     function finish() {
       done = true; clearTimeout(raf); star.classList.remove('holding');
       star.textContent = '🌟'; msg.textContent = L.heldIt;
-      play.appendChild(h('div', { class: 'confetti', 'aria-hidden': 'true', text: '✨🎉✨' }));
+      var cf = h('div', { class: 'confetti', 'aria-hidden': 'true', text: '✨🎉✨' });
+      play.appendChild(cf);
+      PENS.springPop(star); PENS.sparkle(star, { count: 8 }); PENS.springPop(cf, { enter: true });
     }
     star.addEventListener('pointerdown', begin);
     star.addEventListener('pointerup', end);
@@ -100,17 +144,23 @@ PENS.mount(function (root, d, api) {
   function breatheGame() {
     var rounds = d.breathRounds || 3;
     var reduced = api.reducedMotion();
-    var orb = h('div', { class: 'breath', 'aria-hidden': 'true' });
+    var orb = h('div', { class: 'breath idle', 'aria-hidden': 'true' });
     var msg = h('div', { class: 'big', role: 'status', 'aria-live': 'polite' });
     var btn = h('button', { class: 'btn accent', type: 'button' }, L.startBreathing);
     btn.addEventListener('click', function () {
       btn.disabled = true;
       var step = 0;
+      // One smooth 8 s CSS scale loop (in 4 s, out 4 s) runs across all rounds instead of per-phase jumps.
+      orb.classList.remove('idle');
+      if (!reduced) { orb.classList.remove('go'); void orb.offsetWidth; orb.classList.add('go'); }
       function phase() {
-        if (step >= rounds * 2) { orb.classList.remove('in'); orb.textContent = '😊'; msg.textContent = L.breathingDone; btn.disabled = false; return; }
+        if (step >= rounds * 2) {
+          orb.classList.remove('go'); orb.classList.add('idle'); orb.textContent = '😊'; msg.textContent = L.breathingDone; btn.disabled = false;
+          PENS.sparkle(orb, { count: 6 });
+          return;
+        }
         var inhale = step % 2 === 0;
         var n = 4;
-        if (!reduced) orb.classList.toggle('in', inhale);
         msg.textContent = (inhale ? L.breatheIn : L.breatheOut);
         orb.textContent = String(n);
         var iv = setInterval(function () { n--; if (n > 0) orb.textContent = String(n); }, 1000);
@@ -130,18 +180,23 @@ PENS.mount(function (root, d, api) {
     if (api.canRequestDisplayMode() && api.displayMode() !== 'fullscreen') {
       kids.push(h('button', { class: 'btn ghost fs', type: 'button', onclick: function () { api.requestDisplayMode('fullscreen'); } }, ['⤢ ', L.fullscreen]));
     }
-    kids.push(h('div', { class: 'dots', 'aria-hidden': 'true' }, scenes.map(function (_, i) { return h('span', { class: i <= idx ? 'on' : '' }); })));
-    var stage = h('div', { class: 'stage', tabindex: sc.kind === 'story' ? '0' : null, 'aria-label': sc.kind === 'story' ? L.next : null }, [pip(sc.mood)]);
+    kids.push(h('div', { class: 'dots', 'aria-hidden': 'true' }, scenes.map(function (_, i) { return h('span', { class: (i <= idx ? 'on' : '') + (i === idx ? ' now' : '') }); })));
+    var pipEl = pip(sc.mood);
+    if (shownIdx !== idx) pipEl.classList.add('eeg-bounce');
+    var stage = h('div', { class: 'stage', tabindex: sc.kind === 'story' ? '0' : null, 'aria-label': sc.kind === 'story' ? L.next : null }, [pipEl]);
     if (sc.kind === 'story') {
       stage.addEventListener('click', function () { go(idx + 1); });
       stage.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(idx + 1); } });
     }
     kids.push(stage);
-    kids.push(h('h2', { tabindex: '-1', text: sc.title }));
-    kids.push(h('p', { class: 'say', text: sc.text }));
+    var title = h('h2', { tabindex: '-1', text: sc.title });
+    var say = h('p', { class: 'say', text: sc.text });
+    kids.push(title);
+    kids.push(say);
     if (sc.kind === 'holdStill') kids.push(holdGame());
     if (sc.kind === 'breathe') kids.push(breatheGame());
-    if (sc.kind === 'finish') kids.push(h('div', { class: 'confetti', 'aria-hidden': 'true', text: '⭐🌟⭐' }));
+    var stars = sc.kind === 'finish' ? h('div', { class: 'confetti', 'aria-hidden': 'true', text: '⭐🌟⭐' }) : null;
+    if (stars) kids.push(stars);
     var nav = h('div', { class: 'nav' }, [
       h('button', { class: 'btn ghost', type: 'button', disabled: idx === 0, onclick: function () { go(idx - 1); } }, ['← ', L.back]),
       h('span', { class: 'sr-only', text: (idx + 1) + ' / ' + scenes.length }),
@@ -152,6 +207,17 @@ PENS.mount(function (root, d, api) {
     kids.push(nav);
     kids.push(h('p', { class: 'grown', text: L.forGrownUps }));
     wrap.replaceChildren.apply(wrap, kids);
+    var fresh = shownIdx !== idx;
+    shownIdx = idx;
+    if (fresh) {
+      // Scene text types in (screen readers get it once); the last scene throws a confetti party.
+      PENS.typewriter(title, sc.title, 30);
+      PENS.typewriter(say, sc.text);
+      if (stars) {
+        PENS.springPop(stars, { enter: true, delay: 300 });
+        setTimeout(function () { PENS.confetti(wrap, { count: 36 }); PENS.sparkle(pipEl, { count: 8 }); }, 350);
+      }
+    }
   }
 
   draw();

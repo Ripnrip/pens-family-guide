@@ -82,7 +82,7 @@ sequenceDiagram
   participant W as Widget iframe
   H->>S: tools/list (tool _meta.ui.resourceUri = ui://pens/<name>.html)
   H->>S: resources/read ui://pens/<name>.html
-  S-->>H: text/html;profile=mcp-app + _meta.ui.csp (empty: nothing external)
+  S-->>H: text/html;profile=mcp-app + _meta.ui.csp (resourceDomains: only PUBLIC_ORIGIN, for the intro clip)
   H->>S: tools/call {name, arguments}
   S->>G: strict schema, then guardInput(args)
   G->>T: cleaned args + lang
@@ -122,7 +122,7 @@ One module, `src/brand/index.ts`, holds the tokens, the Pip drawing and the logo
 | ink | `#1D2B36` | Text |
 | page | `#F4F6F7` | Page background |
 
-Headings use Fredoka and body text uses Nunito when installed, with system fallbacks. Nothing is fetched: widgets have an empty CSP.
+Headings use Fredoka: widgets embed Fredoka SemiBold (600, Basic Latin + Latin-1, ~15 KB WOFF2, ~20 KB as base64) as a data: URI in the shared CSS, because hosts block font fetches. Rebuild it with `scripts/subset-fredoka.sh` (fonttools + brotli); the SIL Open Font License is in `src/brand/fonts/Fredoka-OFL.txt`. Body text uses Nunito when installed, then the system rounded stack.
 
 **Pip** is the PENS helper: a round sunshine-yellow character with a wavy teal antenna tipped with a coral dot, big ink eyes with white highlights, rosy coral cheeks and a smile. It is drawn as inline SVG by `pipSvg()`.
 
@@ -132,7 +132,18 @@ Headings use Fredoka and body text uses Nunito when installed, with system fallb
 2. Regenerate the 512 and 1024 px PNGs: `npm i --prefix /tmp/pens-brand-tools sharp && SHARP_DIR=/tmp/pens-brand-tools npm run brand:png`.
 3. Run `npm test`.
 
-**Motion.** Widgets use gentle entrances, Pip bobs, blinks and sways its antenna, the first-aid timer pulses at 5:00, and quiz tiles give press feedback. All motion is off under `prefers-reduced-motion`.
+**Motion.** `src/widgets/shared.ts` has a small motion kit on `window.PENS` (also `PENS.motion`), in vanilla CSS/JS that runs under the widgets' CSP: `fadeUp(els)` (IntersectionObserver, staggered), `springPop(el, {enter})`, `shake(el)`, `sparkle(el)` (star glints, ~600 ms), `confetti(el)`, `typewriter(el, text, msPerChar)` (capped at ~600 ms; screen readers get the full text once from an sr-only copy, and the untyped rest keeps its space so nothing reflows), `countUp(el, to)`, `ring({...})` (animated circular progress ring after Magic UI's, with a gauge arc, a gapped track arc and a counting center label) and `tickBox()` (a checkbox face whose tick draws itself). Every helper renders the final state at once under `prefers-reduced-motion`, never moves focus and never blocks input.
+
+| Card | Motion |
+|---|---|
+| question-card | Rows fade up staggered; picking pops the box and draws the tick; the picked count counts and pops; "Show my card" springs in with sparkles; pass-the-phone is a 3D flip with the other language fading in underneath |
+| visit-prep | Progress ring fills as items are checked; ticks draw; sparkles and "All set!" when complete |
+| eeg-adventure | Pip bounces in; EEG stickers pop onto Pip's head with a squash (sticker hat until the last scene); scene text types in; the hold-still star sparkles; breathing is one smooth 8 s scale loop; confetti on the last scene |
+| seizure-first-aid | Calm: gentle fade-ups only; a ring sweeps toward 5:00 around the clock (amber at 4:00, brick at 5:00), then a slow brick pulse and the Call 911 button pops in. No sparkles, confetti or typing |
+| caregiver-quiz | Tiles pop in and press-bounce; a right answer pops green with sparkles; a wrong one shakes softly; the explanation types in; the score ring sweeps while the score counts up |
+| find-care, clinic-card, appointment-handoff, referral-card, school-plan | Headline types in; cards and rows fade up staggered; buttons pop as they land. Clinic card: breathing dot on "Open now". School plan: checkmarks pop and "N ready" counts up |
+
+**First-run intro.** The first time someone opens a PENS card (any card but seizure first aid, and never with an emergency card or under reduced motion), a 3.2 s sped-up clip of the blocks tumbling into the PENS logo plays muted and inline with a Skip button, then the card springs in. "Once" is a `pensIntro` flag in widget state plus `localStorage` when allowed, else once per page load; if the clip does not start within ~4 s the card shows anyway. The clip (`public/assets/intro.mp4` H.264 faststart, `intro.webm` VP9, `intro-poster.jpg`) is loaded by absolute URL from `PUBLIC_ORIGIN` (`src/config.ts`, env `PUBLIC_ORIGIN`, default `https://pens-family-guide.vercel.app`), which is the only origin in the widgets' CSP (`resourceDomains` / `resource_domains`). The clinic card footer has "Replay intro". `/guide` plays the same intro once per visit (sessionStorage) and opens cards with `?intro=off`. Pip also bobs, blinks and sways its antenna.
 
 ## Project layout
 

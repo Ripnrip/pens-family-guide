@@ -47,6 +47,8 @@ export const prepareForVisit = defineTool({
           kid: es ? "Para niños" : "For kids",
           grownUp: es ? "Para adultos" : "For grown-ups",
           done: es ? "listo" : "done",
+          allSet: es ? "¡Todo listo!" : "All set!",
+          progress: es ? "Progreso de la lista" : "Checklist progress",
           storyPrompt: es ? "Muéstrame el cuento Mi día de EEG" : "Show me the My EEG Day story",
         },
       },

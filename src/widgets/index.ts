@@ -1,5 +1,6 @@
 import { RESOURCE_MIME_TYPE } from "@modelcontextprotocol/ext-apps/server";
 import { buildWidgetHtml } from "./shared.js";
+import { PUBLIC_ORIGIN } from "../config.js";
 import { WIDGET_IDS, widgetUri, type WidgetId } from "./ids.js";
 import type { WidgetSource } from "./types.js";
 import { clinicCard } from "./clinicCard.js";
@@ -39,21 +40,21 @@ export function widgetHtml(id: WidgetId): string {
   let html = cache.get(id);
   if (!html) {
     const w = WIDGETS[id];
-    html = buildWidgetHtml({ title: w.title, css: w.css, script: w.script });
+    html = buildWidgetHtml({ id, title: w.title, css: w.css, script: w.script });
     cache.set(id, html);
   }
   return html;
 }
 
 /**
- * Resource-level `_meta`: MCP Apps `ui` (empty CSP: widgets load nothing external) plus the
- * ChatGPT Apps SDK compatibility keys.
+ * Resource-level `_meta`: MCP Apps `ui` plus the ChatGPT Apps SDK compatibility keys. The CSP allows
+ * one resource origin, the app's own (PUBLIC_ORIGIN), for the first-run intro clip; no connections.
  */
 export function widgetResourceMeta(id: WidgetId): Record<string, unknown> {
   return {
-    ui: { csp: { connectDomains: [], resourceDomains: [] }, prefersBorder: true },
+    ui: { csp: { connectDomains: [], resourceDomains: [PUBLIC_ORIGIN] }, prefersBorder: true },
     "openai/widgetDescription": WIDGETS[id].description,
     "openai/widgetPrefersBorder": true,
-    "openai/widgetCSP": { connect_domains: [], resource_domains: [] },
+    "openai/widgetCSP": { connect_domains: [], resource_domains: [PUBLIC_ORIGIN] },
   };
 }

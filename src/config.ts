@@ -7,6 +7,19 @@ export const OPERATOR = "BinaryBros LLC";
 export const SUPPORT_EMAIL = "noeticactivity@gmail.com";
 export const PAGES_UPDATED = "2026-11-20";
 
+/**
+ * Deployed origin of this app. Widgets may load only the app's own intro animation from here
+ * (MCP Apps `_meta.ui.csp.resourceDomains` and ChatGPT `openai/widgetCSP.resource_domains`).
+ */
+export const PUBLIC_ORIGIN: string = (process.env.PUBLIC_ORIGIN ?? "https://pens-family-guide.vercel.app").replace(/\/+$/, "");
+
+/** First-run intro animation (sped-up block tumble into the PENS logo), served from public/assets. */
+export const INTRO_ASSETS = {
+  mp4: "/assets/intro.mp4",
+  webm: "/assets/intro.webm",
+  poster: "/assets/intro-poster.jpg",
+} as const;
+
 /** Public MCP endpoint. */
 export const MCP_PATH = "/mcp";
 /**

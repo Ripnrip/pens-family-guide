@@ -110,7 +110,7 @@ export function contrastRatio(a: string, b: string): number {
   return (hi + 0.05) / (lo + 0.05);
 }
 
-/** Font stacks. Fredoka/Nunito are used when installed; nothing is fetched (widgets have an empty CSP). */
+/** Font stacks. Widgets embed Fredoka 600 as a data: URI (shared.ts); Nunito is used when installed. No font is fetched. */
 export const FONT_HEADING = `"Fredoka", "Nunito", ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif`;
 export const FONT_BODY = `"Nunito", ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`;
 

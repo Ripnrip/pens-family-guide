@@ -81,7 +81,7 @@ ${PIP_MOTION_CSS}
  * Privacy Policy, Terms of Use and Support.
  * Each page is English first, then a full Spanish version (#es) with an in-page jump link.
  * Statements here describe the code as built: stateless MCP server, strict tool schemas, PHI scrub
- * (src/safety/phi.ts), emergency detector (src/safety/emergency.ts), empty widget CSP
+ * (src/safety/phi.ts), emergency detector (src/safety/emergency.ts), widget CSP limited to the App's own origin
  * (src/widgets/index.ts), Google Fonts on the splash site and guide pages, and localStorage used
  * only for the splash site's language choice (site/index.html). Keep them in sync with the code.
  * ---------------------------------------------------------------------------------------------- */
@@ -137,7 +137,7 @@ ${legalHeader("en", "Privacy Policy")}
 <ul>
 <li><strong>OpenAI (ChatGPT) and Anthropic (Claude)</strong> are the host apps. Your conversation, including anything you type, is handled by the assistant you use under its own privacy policy and settings. They decide what to send to our tools and may save card state with the conversation.</li>
 <li><strong>Vercel</strong> hosts the App and keeps the standard request logs described above.</li>
-<li><strong>Google Fonts</strong> supplies the typefaces on the splash site and the web guide pages, so Google receives your IP address and browser details when those pages load. The cards shown inside ChatGPT and Claude load no outside scripts, fonts or trackers.</li>
+<li><strong>Google Fonts</strong> supplies the typefaces on the splash site and the web guide pages, so Google receives your IP address and browser details when those pages load. The cards shown inside ChatGPT and Claude load only the App's own short intro animation from the App's own website, and nothing from third parties: no outside scripts, fonts or trackers.</li>
 <li><strong>Linked sites</strong> such as the PENS website, Google Maps (for directions) and the Epilepsy Foundation open only when you choose a link, and have their own policies.</li>
 <li><strong>PENS</strong> does not receive your questions or any data from the App. Contacting PENS happens only if you call or use PENS's request form.</li>
 </ul>
@@ -168,7 +168,7 @@ ${legalHeader("en", "Privacy Policy")}
 <p>The App is provided for a medical practice in Tampa, Florida. We do not sell personal data or use it for targeted advertising, and we keep only the limited technical data described above. If you live in Florida or anywhere else, you can make the requests described in this policy by emailing ${mail}.</p>
 
 <h2>Security</h2>
-<p>We use encrypted HTTPS connections, strict input checks, automatic removal of personal details, cards that run in a sandbox with no outside connections, and no stored user data to protect. No system is perfectly secure. Our providers may process information in the United States or other countries where they operate.</p>
+<p>We use encrypted HTTPS connections, strict input checks, automatic removal of personal details, cards that run in a sandbox and connect only to the App's own website (for the intro animation), and no stored user data to protect. No system is perfectly secure. Our providers may process information in the United States or other countries where they operate.</p>
 
 <h2>Changes to this policy</h2>
 <p>We may update this policy when the App changes. The effective date at the top shows the current version, and important changes will be noted on this page.</p>
@@ -221,7 +221,7 @@ ${legalHeader("es", "Política de privacidad")}
 <ul>
 <li><strong>OpenAI (ChatGPT) y Anthropic (Claude)</strong> son las apps anfitrionas. Su conversación, incluido lo que escriba, la maneja el asistente que usted use según su propia política de privacidad y su configuración. Ellos deciden qué enviar a nuestras herramientas y pueden guardar el estado de las tarjetas con la conversación.</li>
 <li><strong>Vercel</strong> aloja la App y guarda los registros de solicitudes descritos arriba.</li>
-<li><strong>Google Fonts</strong> proporciona las tipografías del sitio de presentación y de las páginas de la guía web, por lo que Google recibe su dirección IP y datos del navegador cuando se cargan esas páginas. Las tarjetas que se muestran dentro de ChatGPT y Claude no cargan scripts, fuentes ni rastreadores externos.</li>
+<li><strong>Google Fonts</strong> proporciona las tipografías del sitio de presentación y de las páginas de la guía web, por lo que Google recibe su dirección IP y datos del navegador cuando se cargan esas páginas. Las tarjetas que se muestran dentro de ChatGPT y Claude solo cargan la breve animación de presentación de la App desde el propio sitio web de la App, y nada de terceros: ni scripts, ni fuentes, ni rastreadores externos.</li>
 <li><strong>Sitios enlazados</strong> como el sitio web de PENS, Google Maps (para indicaciones) y la Epilepsy Foundation se abren solo si usted elige el enlace, y tienen sus propias políticas.</li>
 <li><strong>PENS</strong> no recibe sus preguntas ni ningún dato de la App. Usted se comunica con PENS solo si llama o usa el formulario de solicitud de PENS.</li>
 </ul>
@@ -252,7 +252,7 @@ ${legalHeader("es", "Política de privacidad")}
 <p>La App se ofrece para una práctica médica de Tampa, Florida. No vendemos datos personales ni los usamos para publicidad dirigida, y solo guardamos los datos técnicos limitados descritos arriba. Si vive en Florida o en cualquier otro lugar, puede hacer las solicitudes descritas en esta política escribiendo a ${mail}.</p>
 
 <h2>Seguridad</h2>
-<p>Usamos conexiones HTTPS cifradas, revisiones estrictas de lo que se envía, eliminación automática de datos personales, tarjetas que funcionan aisladas y sin conexiones externas, y no guardamos datos de usuarios. Ningún sistema es perfectamente seguro. Nuestros proveedores pueden procesar información en Estados Unidos o en otros países donde operan.</p>
+<p>Usamos conexiones HTTPS cifradas, revisiones estrictas de lo que se envía, eliminación automática de datos personales, tarjetas que funcionan aisladas y solo se conectan al propio sitio web de la App (para la animación de presentación), y no guardamos datos de usuarios. Ningún sistema es perfectamente seguro. Nuestros proveedores pueden procesar información en Estados Unidos o en otros países donde operan.</p>
 
 <h2>Cambios a esta política</h2>
 <p>Podemos actualizar esta política cuando cambie la App. La fecha de vigencia al inicio indica la versión actual, y los cambios importantes se indicarán en esta página.</p>

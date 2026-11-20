@@ -17,16 +17,17 @@ export const questionCardWidget: WidgetSource = {
 .qopt { display: flex; gap: 12px; align-items: center; width: 100%; min-height: 56px; padding: 10px 12px; text-align: left;
   font: inherit; font-size: 16px; font-weight: 700; line-height: 1.35; color: var(--pens-ink); cursor: pointer;
   background: var(--pens-surface); border: 2px solid var(--pens-border); border-radius: 14px; }
-.qopt .box { width: 26px; height: 26px; border-radius: 8px; border: 2px solid var(--pens-muted); flex: none; display: grid; place-items: center; font-size: 15px; font-weight: 900; color: transparent; }
 .qopt[aria-pressed="true"] { border-color: var(--pens-primary); background: var(--pens-chip); }
-.qopt[aria-pressed="true"] .box { background: var(--pens-primary); border-color: var(--pens-primary); color: var(--pens-primary-ink); }
+.qcount { display: inline-flex; align-items: baseline; gap: 4px; }
+.qcount .num { display: inline-block; min-width: .7em; text-align: right; font-variant-numeric: tabular-nums; }
 .qopt[disabled] { opacity: .5; cursor: not-allowed; }
 .qcount { font-weight: 800; }
 .qcustom { display: flex; gap: 8px; margin-top: 6px; }
 .qcustom input { flex: 1; min-width: 0; min-height: 44px; padding: 8px 12px; font: inherit; color: var(--pens-ink); background: var(--pens-surface); border: 2px solid var(--pens-border); border-radius: 12px; }
 .qactions { position: sticky; bottom: 0; padding: 10px 0 2px; background: linear-gradient(180deg, transparent, var(--pens-bg) 35%); }
 .qactions .btn { width: 100%; font-size: 18px; min-height: 52px; }
-.qflipwrap { perspective: 1400px; }
+.qflipwrap { position: relative; perspective: 1400px; }
+.qcard.q-leaving { position: absolute; top: 0; left: 0; right: 0; z-index: 2; pointer-events: none; }
 .qcard { background: ${BLOCKS.cream}; color: ${TOKENS.ink}; border-radius: 22px; padding: 22px 18px 18px; border: 1px solid #EADFC8; box-shadow: var(--pens-shadow); margin-bottom: var(--pens-gap); transform-style: preserve-3d; backface-visibility: hidden; }
 [data-theme="midnight"] .qcard { border-color: #3A4677; }
 .qcard .qhead { text-align: center; margin-bottom: 14px; }
@@ -49,14 +50,17 @@ export const questionCardWidget: WidgetSource = {
 @media (prefers-reduced-motion: no-preference) {
   .qopt { transition: background-color .18s ease, border-color .18s ease, transform .12s ease; }
   .qopt:active:not([disabled]) { transform: scale(.985); }
-  .qopt .box { transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .2s cubic-bezier(.2,.9,.3,1.4); }
-  .qopt[aria-pressed="true"] .box { transform: scale(1.08); }
-  .qcard.flip-out { animation: q-flip-out .22s ease-in both; }
-  .qcard.flip-in { animation: q-flip-in .3s cubic-bezier(.2,.7,.2,1) both; }
+  .qcard.q-leaving { animation: q-flip-away .5s cubic-bezier(.45,0,.2,1) both; transform-origin: 50% 50%; }
+  .qcard.q-arriving { animation: q-fade-under .5s ease-out both; }
   .shot { animation: pens-rise .3s ease both; }
 }
-@keyframes q-flip-out { from { transform: rotateY(0); opacity: 1; } to { transform: rotateY(88deg); opacity: .2; } }
-@keyframes q-flip-in { from { transform: rotateY(-88deg); opacity: .2; } to { transform: rotateY(0); opacity: 1; } }
+/* Pass-the-phone flip: the card turns away in 3D while the other language fades in underneath. */
+@keyframes q-flip-away {
+  0% { transform: rotateY(0) scale(1); opacity: 1; }
+  60% { opacity: 1; }
+  100% { transform: rotateY(-100deg) scale(.94); opacity: 0; }
+}
+@keyframes q-fade-under { 0% { opacity: 0; transform: scale(.94); } 35% { opacity: .2; } 100% { opacity: 1; transform: none; } }
 `,
   script: /* js */ `
 PENS.mount(function (root, d, api) {
@@ -70,6 +74,7 @@ PENS.mount(function (root, d, api) {
   var view = saved.qView || (sel.length || custom ? 'card' : 'pick');
   var box = h('div');
   root.appendChild(box);
+  var typedHeading = false;
 
   function persist() {
     var s = api.widgetState() || {};
@@ -92,13 +97,22 @@ PENS.mount(function (root, d, api) {
   // ---------- Step 1: pick ----------
   function drawPick() {
     view = 'pick'; persist();
-    var count = h('span', { class: 'qcount', role: 'status' });
+    var countNum = h('span', { class: 'num', 'aria-hidden': 'true' });
+    var countRest = h('span', { 'aria-hidden': 'true' });
+    var countSr = h('span', { class: 'sr-only' });
+    var count = h('span', { class: 'qcount', role: 'status' }, [countNum, countRest, countSr]);
+    var lastTotal = null;
     var show = h('button', { class: 'btn accent', type: 'button', onclick: function () { if (total()) drawCard(true); else api.toast(L.empty); } }, L.show);
     var msg = h('p', { class: 'small', role: 'status', 'aria-live': 'polite' });
     var listEl = h('div', { class: 'qlist' });
 
     function sync() {
-      count.textContent = total() + ' ' + L.of + ' ' + MAX + ' ' + L.picked;
+      var n = total();
+      countSr.textContent = n + ' ' + L.of + ' ' + MAX + ' ' + L.picked;
+      countRest.textContent = L.of + ' ' + MAX + ' ' + L.picked;
+      if (lastTotal === null) countNum.textContent = String(n);
+      else if (n !== lastTotal) { PENS.countUp(countNum, n, { from: lastTotal, dur: 260 }); PENS.springPop(countNum); }
+      lastTotal = n;
       show.disabled = total() === 0;
       var opts = listEl.querySelectorAll('.qopt');
       for (var i = 0; i < opts.length; i++) {
@@ -109,20 +123,23 @@ PENS.mount(function (root, d, api) {
     function drawList() {
       var items = d.sets[type].map(function (q) {
         var on = sel.indexOf(q.id) !== -1;
-        var b = h('button', { class: 'qopt', type: 'button', 'aria-pressed': on ? 'true' : 'false' }, [
-          h('span', { class: 'box', 'aria-hidden': 'true', text: '✓' }), h('span', { text: q[d.lang] })
-        ]);
+        var tick = PENS.tickBox();
+        tick.classList.add('box');
+        var b = h('button', { class: 'qopt', type: 'button', 'aria-pressed': on ? 'true' : 'false' }, [tick, h('span', { text: q[d.lang] })]);
         b.addEventListener('click', function () {
           var i = sel.indexOf(q.id);
           if (i !== -1) sel.splice(i, 1);
           else if (total() < MAX) sel.push(q.id);
           else { api.toast(L.maxReached); return; }
-          b.setAttribute('aria-pressed', sel.indexOf(q.id) !== -1 ? 'true' : 'false');
+          var nowOn = sel.indexOf(q.id) !== -1;
+          b.setAttribute('aria-pressed', nowOn ? 'true' : 'false');
+          if (nowOn) PENS.springPop(tick);
           persist(); sync();
         });
         return b;
       });
-      PENS.swap(listEl, items);
+      listEl.replaceChildren.apply(listEl, items);
+      PENS.fadeUp(items, { step: 45 });
       sync();
     }
     var tabs = h('div', { class: 'tabs', role: 'tablist', 'aria-label': L.visitType });
@@ -166,9 +183,10 @@ PENS.mount(function (root, d, api) {
       );
     }
 
+    var heading = h('h1', { text: L.heading });
     PENS.swap(box, [
       h('section', { class: 'card qpick' }, [
-        h('h1', { text: L.heading }),
+        heading,
         h('p', { class: 'muted', text: L.intro }),
         tabs,
         h('div', { class: 'row', style: 'justify-content:space-between' }, [h('h2', { text: L.suggested, style: 'margin:0' }), count]),
@@ -177,6 +195,7 @@ PENS.mount(function (root, d, api) {
       h('div', { class: 'qactions' }, [show])
     ]);
     drawTabs(); drawList(); drawCustom(); sync();
+    if (!typedHeading) { typedHeading = true; PENS.typewriter(heading, L.heading); }
   }
 
   // ---------- Step 2: the card ----------
@@ -318,29 +337,43 @@ PENS.mount(function (root, d, api) {
 
   function drawCard(enter) {
     view = 'card'; persist();
-    var card = h('section', { class: 'qcard', 'aria-live': 'polite' }, cardBody());
+    var card = h('section', { class: 'qcard' }, cardBody());
+    var flipWrap = h('div', { class: 'qflipwrap', 'aria-live': 'polite' }, [card]);
+    var leaving = null;
     var flipBtn = h('button', { class: 'btn wide', type: 'button' }, [h('span', { 'aria-hidden': 'true', text: '🔄 ' }), h('span')]);
     function flipLabel() { flipBtn.lastChild.textContent = first === d.lang ? L.flip : L.flipBack; }
     flipLabel();
     flipBtn.addEventListener('click', function () {
       first = first === 'en' ? 'es' : 'en';
       persist(); flipLabel();
-      function fill() { card.replaceChildren.apply(card, cardBody()); }
-      if (api.reducedMotion()) { fill(); return; }
-      card.classList.remove('flip-in'); card.classList.add('flip-out');
-      setTimeout(function () {
-        fill(); card.classList.remove('flip-out'); card.classList.add('flip-in');
-      }, 220);
+      var fresh = h('section', { class: 'qcard' }, cardBody());
+      if (leaving) { leaving.remove(); leaving = null; }
+      if (api.reducedMotion()) { flipWrap.replaceChildren(fresh); card = fresh; return; }
+      // The old face turns away on top (aria-hidden) while the new language fades in underneath.
+      var old = card;
+      old.setAttribute('aria-hidden', 'true');
+      old.classList.add('q-leaving');
+      fresh.classList.add('q-arriving');
+      flipWrap.insertBefore(fresh, old);
+      card = fresh;
+      leaving = old;
+      setTimeout(function () { old.remove(); if (leaving === old) leaving = null; fresh.classList.remove('q-arriving'); }, 520);
     });
     var content = [
-      h('div', { class: 'qflipwrap' }, [card]),
+      flipWrap,
       h('div', { class: 'qtools' }, [
         flipBtn,
         h('button', { class: 'btn secondary', type: 'button', onclick: saveImage }, [h('span', { 'aria-hidden': 'true', text: '⬇ ' }), L.save]),
         h('button', { class: 'btn ghost', type: 'button', onclick: function () { drawPick(); } }, [h('span', { 'aria-hidden': 'true', text: '✎ ' }), L.edit])
       ])
     ];
-    if (enter) PENS.swap(box, content); else box.replaceChildren.apply(box, content);
+    box.replaceChildren.apply(box, content);
+    if (enter) {
+      // "Show my card": the card springs in with a sparkle burst, then the tools pop in.
+      PENS.springPop(flipWrap, { enter: true });
+      setTimeout(function () { PENS.sparkle(flipWrap, { count: 8 }); }, 220);
+      PENS.springPop(box.querySelectorAll('.qtools .btn'), { enter: true, delay: 280, step: 70 });
+    }
   }
 
   if (view === 'card' && total()) drawCard(false); else drawPick();

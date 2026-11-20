@@ -111,7 +111,7 @@ describe("team-directory widget", () => {
     const vc = new VirtualConsole();
     vc.on("error", (e) => errors.push(String(e)));
     vc.on("jsdomError", (e) => errors.push(String(e)));
-    const dom = new JSDOM(renderPreview("team-directory", query), { runScripts: "dangerously", pretendToBeVisual: true, virtualConsole: vc });
+    const dom = new JSDOM(renderPreview("team-directory", { intro: "off", ...query }), { runScripts: "dangerously", pretendToBeVisual: true, virtualConsole: vc });
     return { dom, doc: dom.window.document, errors };
   }
 

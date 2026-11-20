@@ -63,7 +63,12 @@ describe("brand", () => {
     expect(html).toContain('"Fredoka"');
     expect(html).toContain('"Nunito"');
     expect(html).toMatch(/system-ui/);
-    expect(html).not.toMatch(/fonts\.(googleapis|gstatic)|@font-face|@import/i);
+    expect(html).not.toMatch(/fonts\.(googleapis|gstatic)|@import/i);
+    // The only @font-face is the embedded Fredoka data: URI (nothing is fetched under the empty CSP).
+    const faces = html.match(/@font-face\s*\{[^}]*\}/g) ?? [];
+    expect(faces).toHaveLength(1);
+    expect(faces[0]).toContain('font-family: "Fredoka"');
+    expect(faces[0]).toMatch(/src: url\(data:font\/woff2;base64,[A-Za-z0-9+/=]+\) format\("woff2"\)/);
     expect(widgetBrand().pip.proud).toContain("<svg");
   });
 

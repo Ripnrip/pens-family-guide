@@ -38,7 +38,7 @@ const PREVIEW_ARGS: Partial<Record<string, Record<string, Record<string, unknown
   prepare_for_visit: { en: { visit_type: "routine_eeg" }, es: { visit_type: "routine_eeg" } },
 };
 
-const PREVIEW_RESERVED = new Set(["theme", "lang", "display"]);
+const PREVIEW_RESERVED = new Set(["theme", "lang", "display", "intro"]);
 
 function jsonForScript(value: unknown): string {
   return JSON.stringify(value)
@@ -61,6 +61,10 @@ export function renderPreview(id: WidgetId, query: Record<string, unknown>): str
     theme,
     locale: lang === "es" ? "es-US" : "en-US",
     displayMode: query.display === "fullscreen" ? "fullscreen" : "inline",
+    // Previews are served from the app's own origin, so the intro clip loads by relative URL.
+    introOrigin: "",
+    // ?intro=off skips the first-run splash (the /guide plays its own once per visit).
+    noIntro: query.intro === "off",
   };
   const q = (o: Record<string, string>) => {
     const p = new URLSearchParams({ ...(Object.fromEntries(Object.entries(extra).map(([k, v]) => [k, String(v)]))), lang, theme, ...o });

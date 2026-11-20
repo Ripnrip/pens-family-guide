@@ -10,11 +10,21 @@
  *   3. `window.__PENS_PREVIEW__` mock data injected by /preview/<widget> in a plain browser.
  */
 import { BLOCKS, FONT_BODY, FONT_HEADING, MIDNIGHT, PIP_MOTION_CSS, TOKENS, widgetBrand } from "../brand/index.js";
+import { FREDOKA_600_WOFF2_BASE64 } from "../brand/fonts/fredoka.js";
+import { INTRO_ASSETS, PUBLIC_ORIGIN } from "../config.js";
 
 /** MCP Apps protocol version this runtime speaks (ext-apps LATEST_PROTOCOL_VERSION). */
 export const MCP_APPS_PROTOCOL_VERSION = "2026-01-26";
 
+/**
+ * Fredoka 600 (Latin + Latin-1 subset, OFL) embedded as a data: URI so headings render in the brand
+ * font inside ChatGPT and Claude, whose widget CSP blocks font fetches. Declared for 600-700 so
+ * 700-weight headings use it without synthetic bold.
+ */
+export const FONT_FACE_CSS = `@font-face { font-family: "Fredoka"; font-style: normal; font-weight: 600 700; font-display: swap; src: url(data:font/woff2;base64,${FREDOKA_600_WOFF2_BASE64}) format("woff2"); }`;
+
 export const BASE_CSS = /* css */ `
+${FONT_FACE_CSS}
 :root {
   --pens-primary: ${TOKENS.teal};
   --pens-primary-ink: #FFFFFF;
@@ -187,10 +197,78 @@ details > summary { cursor: pointer; font-weight: 800; min-height: 44px; display
   .tile.right { animation: pens-pop .38s cubic-bezier(.2,.9,.3,1.4) both; }
   .timer.call { animation: pens-pulse 1.3s ease-in-out infinite; }
 }
+/* Motion kit (pm-*): final states live outside the media query so reduced motion shows them at once. */
+.pm-tw-rest { visibility: hidden; }
+.pm-caret { display: inline-block; width: 2px; height: 1em; margin-right: -2px; vertical-align: -2px; background: currentColor; opacity: .75; }
+.pm-sparks, .pm-confetti { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+.pm-confetti { overflow: hidden; border-radius: inherit; }
+.pm-spark { position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px; color: var(--pens-accent); opacity: 0; }
+.pm-spark.c1 { color: var(--pens-coral); } .pm-spark.c2 { color: var(--pens-primary); }
+.pm-spark svg { display: block; width: 100%; height: 100%; }
+.pm-confetti i { position: absolute; top: -14px; width: 8px; height: 12px; border-radius: 2px; opacity: 0; }
+.pm-confetti i.r { border-radius: 50%; width: 9px; height: 9px; }
+.pm-ring { position: relative; display: inline-grid; place-items: center; flex: none; }
+.pm-ring > svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); overflow: visible; }
+.pm-ring circle { fill: none; stroke-width: var(--pm-sw, 10px); stroke-linecap: round; }
+.pm-ring-trk { stroke: var(--pens-chip); }
+.pm-ring-bar { stroke: var(--pens-primary); }
+.pm-ring.tone-warn .pm-ring-bar { stroke: var(--pens-accent); }
+.pm-ring.tone-urgent .pm-ring-bar { stroke: var(--pens-urgent); }
+.pm-ring.tone-success .pm-ring-bar { stroke: var(--pens-success); }
+.pm-ring-lab { position: relative; font-family: var(--pens-font-heading); font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1; text-align: center; }
+.pm-box { position: relative; width: 26px; height: 26px; flex: none; display: grid; place-items: center; border-radius: 8px;
+  border: 2px solid var(--pens-muted); background: var(--pens-surface); color: var(--pens-primary-ink); }
+.pm-box { pointer-events: none; }
+.pm-box svg { width: 16px; height: 16px; display: block; overflow: visible; }
+.pm-box path { fill: none; stroke: currentColor; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 20; stroke-dashoffset: 20; }
+input:checked + .pm-box, [aria-pressed="true"] > .pm-box, .is-on > .pm-box { background: var(--pens-primary); border-color: var(--pens-primary); }
+input:checked + .pm-box path, [aria-pressed="true"] > .pm-box path, .is-on > .pm-box path { stroke-dashoffset: 0; }
+.check { position: relative; }
+.check input.pm-check-input { position: absolute; left: 4px; top: 8px; width: 26px; height: 26px; margin: 0; opacity: 0; cursor: pointer; }
+.check input.pm-check-input:focus-visible + .pm-box { outline: 3px solid var(--pens-focus); outline-offset: 2px; }
+@media (prefers-reduced-motion: no-preference) {
+  .pm-caret { animation: pm-blink .8s steps(1) infinite; }
+  .pm-fade { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .55s cubic-bezier(.2,.7,.2,1); transition-delay: var(--pm-delay, 0ms); }
+  .pm-fade.is-in { opacity: 1; transform: none; }
+  .pm-fade.is-in .btn, .pm-fade.is-in .pm-popin { animation: pm-pop-in .5s cubic-bezier(.2,.9,.3,1.25) backwards; animation-delay: calc(var(--pm-delay, 0ms) + 160ms); }
+  .pm-pop-in { animation: pm-pop-in .55s cubic-bezier(.2,.9,.3,1.25) backwards; animation-delay: var(--pm-delay, 0ms); }
+  .pm-boing { animation: pm-boing .45s cubic-bezier(.3,.7,.3,1) both; }
+  .pm-shake { animation: pm-shake .42s ease both; }
+  .pm-spark { animation: pm-sparkle .6s ease-out both; animation-delay: var(--pm-delay, 0ms); }
+  .pm-confetti i { animation: pm-fall var(--pm-dur, 1.2s) cubic-bezier(.25,.6,.4,1) both; animation-delay: var(--pm-delay, 0ms); }
+  .pm-ring-bar, .pm-ring-trk { transition: stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1), stroke-dasharray .9s cubic-bezier(.2,.8,.2,1), opacity .3s ease, stroke .35s ease; }
+  .pm-box { transition: background-color .18s ease, border-color .18s ease; }
+  .pm-box path { transition: stroke-dashoffset .32s cubic-bezier(.6,0,.2,1) .05s; }
+}
+@keyframes pm-blink { 50% { opacity: 0; } }
+@keyframes pm-pop-in { 0% { opacity: 0; transform: scale(.6); } 55% { opacity: 1; transform: scale(1.08); } 80% { transform: scale(.98); } 100% { opacity: 1; transform: none; } }
+@keyframes pm-boing { 0% { transform: scale(1); } 35% { transform: scale(1.22); } 65% { transform: scale(.93); } 100% { transform: scale(1); } }
+@keyframes pm-shake { 0%, 100% { transform: none; } 20% { transform: translateX(-6px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
+@keyframes pm-sparkle { 0% { opacity: 0; transform: scale(.2) rotate(0deg); } 40% { opacity: 1; transform: scale(1.15) rotate(70deg); } 100% { opacity: 0; transform: scale(.4) rotate(140deg) translateY(-6px); } }
+@keyframes pm-fall { 0% { opacity: 1; transform: translate3d(0, 0, 0) rotate(0deg); } 85% { opacity: 1; } 100% { opacity: 0; transform: translate3d(var(--pm-dx, 0px), var(--pm-dy, 260px), 0) rotate(var(--pm-rot, 360deg)); } }
 @keyframes pens-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @keyframes pens-pop { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 @keyframes pens-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(184,58,38,.45); } 50% { box-shadow: 0 0 0 10px rgba(184,58,38,0); } }
 ${PIP_MOTION_CSS}
+/* First-run intro splash (once per user; never on seizure first aid, emergencies or reduced motion). */
+#root.pens-splashing { display: none; }
+.pens-splash { position: relative; width: calc(100% - 28px); max-width: 420px; margin: 14px auto; aspect-ratio: 540 / 592; border-radius: 22px; overflow: hidden;
+  background: #F6EEE2; box-shadow: var(--pens-shadow); }
+.pens-splash video, .pens-splash img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.pens-skip { position: absolute; top: 10px; right: 10px; z-index: 2; min-height: 44px; min-width: 44px; padding: 8px 16px; border-radius: 999px;
+  border: 0; background: rgba(255,255,255,.92); color: ${TOKENS.ink}; font: inherit; font-size: 15px; font-weight: 800; cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,.18); }
+.pens-skip:focus-visible { outline: 3px solid var(--pens-focus); outline-offset: 2px; }
+.pens-replay { background: none; border: 0; padding: 10px 0; min-height: 44px; font: inherit; font-size: 12px; font-weight: 800; color: var(--pens-primary);
+  text-decoration: underline; cursor: pointer; }
+@media (prefers-reduced-motion: no-preference) {
+  .pens-splash { animation: pens-splash-in .3s ease both; }
+  .pens-splash.out { animation: pens-splash-out .26s ease both; }
+  #root.pens-revealed { animation: pens-reveal .55s cubic-bezier(.2,.9,.3,1.2) both; transform-origin: 50% 0; }
+}
+@keyframes pens-splash-in { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes pens-splash-out { to { opacity: 0; transform: scale(.94); } }
+@keyframes pens-reveal { 0% { opacity: 0; transform: scale(.9) translateY(10px); } 60% { opacity: 1; transform: scale(1.02); } 100% { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
@@ -204,6 +282,7 @@ export const RUNTIME_JS = (/* js */ `
   var PREVIEW = W.__PENS_PREVIEW__ || null;
   var BRAND = W.__PENS_BRAND__ || { logo: '', pip: {}, name: 'PENS', descriptor: 'Tampa Bay' };
   var memState = null;
+  var introFlag = false;
   var rerender = function () {};
 
   // ---------- MCP Apps bridge (ui/* JSON-RPC over postMessage) ----------
@@ -327,6 +406,8 @@ export const RUNTIME_JS = (/* js */ `
       for (var k in (state || {})) if (Object.prototype.hasOwnProperty.call(state, k)) next[k] = state[k];
       var keep = userTheme || savedTheme();
       if (keep) next.pensTheme = keep;
+      var prev = getGlobal('widgetState');
+      if (introFlag || (prev && prev.pensIntro) || (memState && memState.pensIntro)) next.pensIntro = 1;
       memState = next;
       var o = oa();
       try { if (o && typeof o.setWidgetState === 'function') { o.setWidgetState(next); } } catch (e) {}
@@ -438,7 +519,9 @@ export const RUNTIME_JS = (/* js */ `
       h('div', { class: 'brandline' }, [
         BRAND.logo ? h('img', { src: BRAND.logo, alt: '', width: '18', height: '18' }) : null,
         h('span', { text: BRAND.name + ' · ' + BRAND.descriptor })
-      ])
+      ]),
+      W.__PENS_WIDGET__ === 'clinic-card' ? h('button', { class: 'pens-replay', type: 'button', onclick: function () { splash(true); } },
+        document.documentElement.getAttribute('lang') === 'es' ? 'Ver la presentación otra vez' : 'Replay intro') : null
     ]);
   }
 
@@ -513,12 +596,108 @@ export const RUNTIME_JS = (/* js */ `
     root.appendChild(footer(data));
   }
 
+  // ---------- First-run intro splash ----------
+  // Shown once per user before the card: a muted, inline, sped-up logo clip with Skip. "Once" is kept
+  // in widget state and (when allowed) localStorage, else once per page load. Never on seizure first
+  // aid, never with an emergency card, never under reduced motion; content shows after ~4 s if the
+  // clip cannot play.
+  var INTRO = W.__PENS_INTRO__ || null;
+  var NO_SPLASH = { 'seizure-first-aid': true };
+  var splashShownThisLoad = false;
+  var splashEl = null;
+  var SEEN_KEY = 'pens-intro-seen';
+  function introSeen() {
+    var s = getGlobal('widgetState');
+    if ((s && s.pensIntro) || (memState && memState.pensIntro)) return true;
+    try { if (W.localStorage && W.localStorage.getItem(SEEN_KEY) === '1') return true; } catch (e) {}
+    return false;
+  }
+  function markIntroSeen() {
+    introFlag = true;
+    try { if (W.localStorage) W.localStorage.setItem(SEEN_KEY, '1'); } catch (e) {}
+    var cur = api.widgetState() || {};
+    if (!cur.pensIntro) {
+      var next = {};
+      for (var k in cur) if (Object.prototype.hasOwnProperty.call(cur, k)) next[k] = cur[k];
+      next.pensIntro = 1;
+      api.setWidgetState(next);
+    }
+  }
+  function introUrl(path) {
+    var base = PREVIEW && typeof PREVIEW.introOrigin === 'string' ? PREVIEW.introOrigin : (INTRO ? INTRO.origin : '');
+    return base + path;
+  }
+  function endSplash(reveal) {
+    if (!splashEl) return;
+    var el = splashEl;
+    splashEl = null;
+    clearTimeout(el._pmFail); clearTimeout(el._pmCap);
+    document.removeEventListener('keydown', el._pmKey, true);
+    function finish() {
+      el.remove();
+      if (!root) return;
+      root.classList.remove('pens-splashing');
+      if (reveal && !still()) {
+        root.classList.remove('pens-revealed'); void root.offsetWidth; root.classList.add('pens-revealed');
+        setTimeout(function () { root.classList.remove('pens-revealed'); }, 700);
+      }
+      reportSize();
+    }
+    if (still()) finish();
+    else { el.classList.add('out'); setTimeout(finish, 260); }
+  }
+  /** Show the intro. force = replay from the clinic card (still never under an emergency). */
+  function splash(force) {
+    if (!INTRO || splashEl || !root) return false;
+    var data = api.toolOutput();
+    if (NO_SPLASH[W.__PENS_WIDGET__] || (data && data.emergency) || (PREVIEW && PREVIEW.noIntro && !force)) return false;
+    var reduced = still();
+    if (!force && (reduced || splashShownThisLoad || introSeen())) return false;
+    splashShownThisLoad = true;
+    markIntroSeen();
+    var es = String(document.documentElement.getAttribute('lang') || '').indexOf('es') === 0;
+    var skip = h('button', { class: 'pens-skip', type: 'button', text: es ? 'Saltar' : 'Skip' });
+    var media;
+    if (reduced) media = h('img', { src: introUrl(INTRO.poster), alt: '' });
+    else {
+      media = h('video', { muted: true, autoplay: true, playsinline: true, 'webkit-playsinline': true, preload: 'auto', poster: introUrl(INTRO.poster), 'aria-hidden': 'true', disablepictureinpicture: true }, [
+        h('source', { src: introUrl(INTRO.webm), type: 'video/webm' }),
+        h('source', { src: introUrl(INTRO.mp4), type: 'video/mp4' })
+      ]);
+      media.muted = true;
+    }
+    var el = h('div', { class: 'pens-splash', role: 'region', 'aria-label': es ? 'Presentación de PENS' : 'PENS intro' }, [media, skip]);
+    splashEl = el;
+    skip.addEventListener('click', function () { endSplash(true); });
+    el._pmKey = function (ev) { if (ev.key === 'Escape') endSplash(true); };
+    document.addEventListener('keydown', el._pmKey, true);
+    if (reduced) el._pmCap = setTimeout(function () { endSplash(false); }, 600);
+    else {
+      var playing = false;
+      media.addEventListener('playing', function () { playing = true; });
+      media.addEventListener('ended', function () { endSplash(true); });
+      media.addEventListener('error', function () { endSplash(true); }, true);
+      el._pmFail = setTimeout(function () { if (!playing) endSplash(true); }, 4000);
+      el._pmCap = setTimeout(function () { endSplash(true); }, 7000);
+    }
+    root.classList.add('pens-splashing');
+    root.parentNode.insertBefore(el, root);
+    reportSize();
+    return true;
+  }
+
   function mount(fn) {
     renderFn = fn;
     root = document.getElementById('root');
     rerender = function (contextOnly) { if (contextOnly) { applyTheme(); } render(); };
     W.addEventListener('openai:set_globals', function () { render(); }, { passive: true });
     render();
+    if (api.toolOutput()) splash(false);
+    else {
+      // Host data arrives later (MCP Apps tool-result): decide once the first card is on screen.
+      var wait = rerender;
+      rerender = function (contextOnly) { wait(contextOnly); if (api.toolOutput()) { rerender = wait; splash(false); } };
+    }
     startBridge();
   }
 
@@ -530,7 +709,240 @@ export const RUNTIME_JS = (/* js */ `
     el.classList.add('pens-in');
   }
 
-  W.PENS = { h: h, api: api, mount: mount, linkButton: linkButton, list: list, swap: swap, brand: BRAND };
+  // ---------- Motion kit ----------
+  // Every helper renders the final state at once under prefers-reduced-motion, never blocks input,
+  // and keeps entrances under ~600 ms. Decorative layers are aria-hidden and removed when done.
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var STAR = '<svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z" fill="currentColor"/></svg>';
+  function still() { return reducedMotion(); }
+  function toList(x) {
+    if (!x) return [];
+    if (x.nodeType) return [x];
+    return Array.prototype.slice.call(x).filter(Boolean);
+  }
+  function svgEl(tag, attrs) {
+    var el = document.createElementNS(SVGNS, tag);
+    for (var k in attrs) if (Object.prototype.hasOwnProperty.call(attrs, k)) el.setAttribute(k, String(attrs[k]));
+    return el;
+  }
+  function nextFrame(fn) {
+    if (W.requestAnimationFrame) W.requestAnimationFrame(function () { W.requestAnimationFrame(fn); });
+    else setTimeout(fn, 32);
+  }
+  function relative(el) {
+    try { if (W.getComputedStyle && W.getComputedStyle(el).position === 'static') el.style.position = 'relative'; } catch (e) {}
+  }
+  function later(fn, ms) { setTimeout(fn, ms); }
+
+  /** Restart a one-shot animation class (removed again on animationend). */
+  function replay(el, cls, delay) {
+    if (!el || still()) return;
+    el.classList.remove(cls);
+    void el.offsetWidth;
+    if (delay) el.style.setProperty('--pm-delay', delay + 'ms');
+    el.classList.add(cls);
+    function off(ev) {
+      if (ev.target !== el) return;
+      el.classList.remove(cls);
+      el.removeEventListener('animationend', off);
+    }
+    el.addEventListener('animationend', off);
+  }
+
+  var fadeIO = null;
+  function fadeObserver() {
+    if (fadeIO !== null) return fadeIO;
+    fadeIO = false;
+    try {
+      if (typeof W.IntersectionObserver === 'function') {
+        fadeIO = new W.IntersectionObserver(function (entries) {
+          var k = 0;
+          entries.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            var el = e.target;
+            el.style.setProperty('--pm-delay', Math.min(k * (el._pmStep || 60), 300) + 'ms');
+            k++;
+            el.classList.add('is-in');
+            fadeIO.unobserve(el);
+          });
+        }, { threshold: 0.01 });
+      }
+    } catch (e) { fadeIO = false; }
+    return fadeIO;
+  }
+  /** Fade elements up as they scroll into view, staggered within each batch (max 300 ms of stagger). */
+  function fadeUp(els, opts) {
+    var list = toList(els);
+    if (!list.length || still()) return;
+    var step = (opts && opts.step) || 60;
+    list.forEach(function (el) { el._pmStep = step; el.classList.add('pm-fade'); });
+    var io = fadeObserver();
+    if (io) { list.forEach(function (el) { io.observe(el); }); return; }
+    nextFrame(function () {
+      list.forEach(function (el, i) { el.style.setProperty('--pm-delay', Math.min(i * step, 300) + 'ms'); el.classList.add('is-in'); });
+    });
+  }
+  /** Spring pop: { enter: true } scales in from nothing, otherwise a quick boing on a visible element. */
+  function springPop(el, opts) {
+    toList(el).forEach(function (x, i) {
+      replay(x, opts && opts.enter ? 'pm-pop-in' : 'pm-boing', opts && opts.enter ? ((opts.delay || 0) + i * (opts.step || 70)) : 0);
+    });
+  }
+  function shake(el) { replay(el, 'pm-shake'); }
+  /** A few star glints around an element (~600 ms), then the layer is removed. */
+  function sparkle(el, opts) {
+    if (!el || still()) return;
+    relative(el);
+    var spots = [[-2, 14], [102, 10], [98, 88], [2, 90], [46, -4], [60, 104], [24, -2], [80, 100]];
+    var n = Math.min((opts && opts.count) || 6, spots.length);
+    var tall = (el.offsetHeight || 0) > 260;
+    var layer = h('span', { class: 'pm-sparks', 'aria-hidden': 'true' });
+    for (var k = 0; k < n; k++) {
+      // Tall elements: keep the glints around the top band that is on screen, not spread down the page.
+      var top = tall ? Math.round(spots[k][1] * 1.8) + 'px' : spots[k][1] + '%';
+      var s = h('span', { class: 'pm-spark c' + (k % 3), style: 'left:' + spots[k][0] + '%;top:' + top + ';--pm-delay:' + (k * 35) + 'ms' });
+      s.innerHTML = STAR;
+      layer.appendChild(s);
+    }
+    el.appendChild(layer);
+    later(function () { layer.remove(); }, 900);
+  }
+  /** Brand-colored confetti falling through an element (~1.4 s, decorative). */
+  function confetti(el, opts) {
+    if (!el || still()) return;
+    relative(el);
+    var colors = ['var(--pens-b-red)', 'var(--pens-b-blue)', 'var(--pens-b-yellow)', 'var(--pens-b-green)', 'var(--pens-b-orange)', 'var(--pens-accent)'];
+    var n = (opts && opts.count) || 30;
+    var layer = h('span', { class: 'pm-confetti', 'aria-hidden': 'true' });
+    for (var i = 0; i < n; i++) {
+      var x = (i * 37 + 11) % 100;
+      var dx = ((i * 53) % 80) - 40;
+      var dy = 220 + (i * 41) % 200;
+      var rot = (i % 2 ? 1 : -1) * (220 + (i * 47) % 320);
+      layer.appendChild(h('i', { class: i % 3 === 0 ? 'r' : null, style: 'left:' + x + '%;background:' + colors[i % colors.length] +
+        ';--pm-dx:' + dx + 'px;--pm-dy:' + dy + 'px;--pm-rot:' + rot + 'deg;--pm-delay:' + ((i % 8) * 55) + 'ms;--pm-dur:' + (1000 + (i % 5) * 110) + 'ms' }));
+    }
+    el.appendChild(layer);
+    later(function () { layer.remove(); }, 2000);
+  }
+  /**
+   * Type text into an element. Screen readers get the full text once (sr-only copy); the typed copy is
+   * aria-hidden and the untyped rest keeps its space (no layout shift). Total time is capped at ~600 ms.
+   */
+  function typewriter(el, text, msPerChar) {
+    if (!el) return;
+    text = String(text === undefined || text === null ? el.textContent : text);
+    if (still() || !text) { el.textContent = text; return; }
+    var per = Math.min(msPerChar || 22, 600 / text.length);
+    var typed = h('span');
+    var caret = h('span', { class: 'pm-caret' });
+    var rest = h('span', { class: 'pm-tw-rest', text: text });
+    el.replaceChildren(h('span', { class: 'sr-only', text: text }), h('span', { 'aria-hidden': 'true' }, [typed, caret, rest]));
+    var ticks = 0;
+    function step() {
+      ticks++;
+      var n = Math.min(text.length, Math.ceil(ticks * 16 / per));
+      typed.textContent = text.slice(0, n);
+      rest.textContent = text.slice(n);
+      if (n < text.length && el.isConnected !== false) later(step, 16);
+      else { typed.textContent = text; rest.remove(); later(function () { caret.remove(); }, 700); }
+    }
+    later(step, 16);
+  }
+  /** Count a number up (or down) to a value; fmt(n) formats each frame. */
+  function countUp(el, to, opts) {
+    if (!el) return;
+    opts = opts || {};
+    var fmt = opts.fmt || function (n) { return String(n); };
+    var from = opts.from !== undefined ? opts.from : (el._pmVal !== undefined ? el._pmVal : 0);
+    el._pmVal = to;
+    var token = {};
+    el._pmTok = token;
+    if (still() || from === to || !W.requestAnimationFrame) { el.textContent = fmt(to); return; }
+    var dur = opts.dur || 600, t0 = null;
+    el.textContent = fmt(from);
+    function frame(ts) {
+      if (el._pmTok !== token) return;
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(Math.round(from + (to - from) * e));
+      if (p < 1) W.requestAnimationFrame(frame);
+    }
+    W.requestAnimationFrame(frame);
+  }
+  /**
+   * Animated circular progress ring (gauge arc + secondary track arc with gaps, after Magic UI's
+   * "animated circular progress bar"). Returns { el, set(value), tone(name) }.
+   * opts: size, stroke, max, value, label(v) -> center text (counts), center (element instead of label),
+   * ariaLabel, valueText(v), decorative (aria-hidden), className.
+   */
+  function ring(opts) {
+    var o = opts || {};
+    var size = o.size || 96, sw = o.stroke || 10, max = o.max || 100;
+    var r = (size - sw) / 2, C = 2 * Math.PI * r, mid = size / 2, gap = sw + 4;
+    var svg = svgEl('svg', { viewBox: '0 0 ' + size + ' ' + size, width: size, height: size, 'aria-hidden': 'true', focusable: 'false' });
+    var trk = svgEl('circle', { class: 'pm-ring-trk', cx: mid, cy: mid, r: r });
+    var bar = svgEl('circle', { class: 'pm-ring-bar', cx: mid, cy: mid, r: r });
+    svg.appendChild(trk); svg.appendChild(bar);
+    var lab = o.center || h('span', { class: 'pm-ring-lab', 'aria-hidden': 'true', style: 'font-size:' + Math.round(size * 0.26) + 'px' });
+    var el = h('div', { class: 'pm-ring' + (o.className ? ' ' + o.className : ''), style: 'width:' + size + 'px;height:' + size + 'px;--pm-sw:' + sw + 'px' }, [svg, lab]);
+    if (o.decorative) el.setAttribute('aria-hidden', 'true');
+    else {
+      el.setAttribute('role', 'progressbar');
+      el.setAttribute('aria-valuemin', '0');
+      el.setAttribute('aria-valuemax', String(max));
+      if (o.ariaLabel) el.setAttribute('aria-label', o.ariaLabel);
+    }
+    var cur = 0;
+    function paint(v) {
+      var p = Math.max(0, Math.min(1, v / max)), len = p * C;
+      var g = p > 0 && p < 1 ? gap : 0;
+      var sec = p >= 1 ? 0 : Math.max(0, C - len - 2 * g);
+      bar.style.strokeDasharray = C + ' ' + C;
+      bar.style.strokeDashoffset = String(C - len);
+      bar.style.opacity = p > 0 ? '1' : '0';
+      trk.style.strokeDasharray = sec + ' ' + C;
+      trk.style.strokeDashoffset = String(-(len + g));
+      trk.style.opacity = sec > 0.5 ? '1' : '0';
+    }
+    function set(v, how) {
+      cur = Math.max(0, Math.min(max, v));
+      if (!o.decorative) {
+        el.setAttribute('aria-valuenow', String(cur));
+        if (o.valueText) el.setAttribute('aria-valuetext', o.valueText(cur));
+      }
+      if (!o.center && o.label) countUp(lab, cur, { fmt: o.label, dur: (how && how.dur) || 800 });
+      if (still() || (how && how.now)) paint(cur);
+      else nextFrame(function () { paint(cur); });
+    }
+    function tone(name) {
+      el.className = el.className.replace(/\\s*tone-\\S+/g, '') + (name ? ' tone-' + name : '');
+    }
+    paint(0);
+    if (!o.center && o.label) { lab.textContent = o.label(0); lab._pmVal = 0; }
+    set(o.value || 0);
+    return { el: el, set: set, tone: tone, value: function () { return cur; } };
+  }
+  /** Checkbox face with a tick that draws itself; pair with input.pm-check-input placed just before it. */
+  function tickBox() {
+    var box = h('span', { class: 'pm-box', 'aria-hidden': 'true' });
+    var svg = svgEl('svg', { viewBox: '0 0 16 16', focusable: 'false' });
+    svg.appendChild(svgEl('path', { d: 'M3 8.5l3.5 3.4L13 4.5' }));
+    box.appendChild(svg);
+    return box;
+  }
+
+  var motion = {
+    still: still, fadeUp: fadeUp, springPop: springPop, shake: shake, sparkle: sparkle, confetti: confetti,
+    typewriter: typewriter, countUp: countUp, ring: ring, tickBox: tickBox, svg: svgEl
+  };
+
+  W.PENS = {
+    h: h, api: api, mount: mount, linkButton: linkButton, list: list, swap: swap, brand: BRAND, motion: motion,
+    fadeUp: fadeUp, springPop: springPop, shake: shake, sparkle: sparkle, confetti: confetti,
+    typewriter: typewriter, countUp: countUp, ring: ring, tickBox: tickBox,
+    replayIntro: function () { return splash(true); }
+  };
 })();
 `).replace("__MCP_APPS_PROTOCOL_VERSION__", MCP_APPS_PROTOCOL_VERSION);
 
@@ -538,7 +950,12 @@ function jsonForScript(value: unknown): string {
   return JSON.stringify(value).replace(/</g, "\\u003c").replaceAll("\u2028", "\\u2028").replaceAll("\u2029", "\\u2029");
 }
 
-export function buildWidgetHtml(opts: { title: string; css?: string; script: string }): string {
+/** Absolute URLs of the intro clip on the app's own origin (the only thing widgets load). */
+export function introAssets(): { origin: string; mp4: string; webm: string; poster: string } {
+  return { origin: PUBLIC_ORIGIN, ...INTRO_ASSETS };
+}
+
+export function buildWidgetHtml(opts: { title: string; css?: string; script: string; id?: string }): string {
   return `<!doctype html>
 <html lang="en" data-theme="light">
 <head>
@@ -550,7 +967,7 @@ export function buildWidgetHtml(opts: { title: string; css?: string; script: str
 <body>
 <main id="root" class="inline"></main>
 <div id="pens-toast" class="notice" role="status" hidden style="position:fixed;left:12px;right:12px;bottom:12px;z-index:10"></div>
-<script>window.__PENS_BRAND__ = ${jsonForScript(widgetBrand())};</script>
+<script>window.__PENS_BRAND__ = ${jsonForScript(widgetBrand())}; window.__PENS_INTRO__ = ${jsonForScript(introAssets())}; window.__PENS_WIDGET__ = ${jsonForScript(opts.id ?? "")};</script>
 <script>${RUNTIME_JS}</script>
 <script>${opts.script}</script>
 </body>

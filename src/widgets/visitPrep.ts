@@ -5,8 +5,13 @@ export const visitPrepWidget: WidgetSource = {
   title: "PENS visit checklist",
   description: "Visit-prep checklist with checkboxes (saved in widget state), what to bring, what to expect, and a kid-friendly version.",
   css: /* css */ `
-.progress { height: 10px; background: var(--pens-chip); border-radius: 999px; overflow: hidden; margin: 6px 0 4px; }
-.progress > div { height: 100%; background: var(--pens-primary); transition: width .3s ease; }
+.vp-head { display: flex; gap: 14px; align-items: center; margin-bottom: 8px; }
+.vp-head h2 { margin-bottom: 2px; }
+.vp-head h3 { margin: 0; }
+.vp-allset { display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; padding: 2px 10px; border-radius: 999px; font-size: 13px; font-weight: 800;
+  background: var(--pens-success); color: #FFFFFF; }
+[data-theme="midnight"] .vp-allset { color: #0F1530; }
+.vp-items .check { padding-left: 4px; }
 .toggle { display:flex; gap:6px; margin-bottom: 10px; }
 .kid { font-size: 17px; line-height: 1.6; background: #FFF6E0; color: #1D2B36; border-radius: var(--pens-radius); padding: 16px; border: 2px dashed var(--pens-accent); }
 `,
@@ -57,20 +62,40 @@ PENS.mount(function (root, d, api) {
     var v = current;
     var checked = getChecked(v.type);
     var total = v.checklist.length;
-    var bar = h('div', { style: 'width:' + Math.round(100 * checked.length / total) + '%' });
+    var ring = PENS.ring({
+      size: 88, stroke: 9, max: total, value: checked.length, ariaLabel: L.progress,
+      label: function (n) { return n + '/' + total; },
+      valueText: function (n) { return n + '/' + total + ' ' + L.done; }
+    });
     var count = h('span', { class: 'small muted', text: checked.length + '/' + total + ' ' + L.done });
+    var allSet = h('div', { role: 'status', 'aria-live': 'polite' });
+    var wasComplete = checked.length === total;
+    function syncDone(n, celebrate) {
+      var complete = n === total;
+      ring.tone(complete ? 'success' : null);
+      if (complete && !allSet.firstChild) {
+        var badge = h('span', { class: 'vp-allset' }, [h('span', { 'aria-hidden': 'true', text: '✨' }), L.allSet]);
+        allSet.appendChild(badge);
+        if (celebrate) { PENS.springPop(badge, { enter: true }); PENS.sparkle(ring.el, { count: 8 }); }
+      } else if (!complete) allSet.replaceChildren();
+    }
+    syncDone(checked.length, false);
 
     var items = v.checklist.map(function (c) {
       var isOn = checked.indexOf(c.id) !== -1;
-      var input = h('input', { type: 'checkbox', id: 'chk-' + c.id, checked: isOn });
-      var label = h('label', { class: 'check' + (isOn ? ' done' : ''), for: 'chk-' + c.id }, [input, h('span', { text: c.text })]);
+      var input = h('input', { type: 'checkbox', id: 'chk-' + c.id, class: 'pm-check-input', checked: isOn });
+      var tick = PENS.tickBox();
+      var label = h('label', { class: 'check' + (isOn ? ' done' : ''), for: 'chk-' + c.id }, [input, tick, h('span', { text: c.text })]);
       input.addEventListener('change', function () {
         var cur = getChecked(v.type).filter(function (x) { return x !== c.id; });
         if (input.checked) cur.push(c.id);
         setChecked(v.type, cur);
         label.className = 'check' + (input.checked ? ' done' : '');
-        bar.style.width = Math.round(100 * cur.length / total) + '%';
+        if (input.checked) PENS.springPop(tick);
+        ring.set(cur.length);
         count.textContent = cur.length + '/' + total + ' ' + L.done;
+        syncDone(cur.length, !wasComplete);
+        wasComplete = cur.length === total;
       });
       return label;
     });
@@ -81,19 +106,23 @@ PENS.mount(function (root, d, api) {
     ]);
 
     var content = kidMode
-      ? [h('div', { class: 'kid' }, [h('div', { class: 'icon', 'aria-hidden': 'true', text: v.icon + ' ✨' }), h('p', { text: v.kidVersion })]),
+      ? [h('div', { class: 'kid' }, [h('div', { class: 'icon pm-popin', 'aria-hidden': 'true', text: v.icon + ' ✨' }), h('p', { text: v.kidVersion })]),
          h('button', { class: 'btn secondary', type: 'button', style: 'margin-top:10px', onclick: function () { api.sendFollowUp(L.storyPrompt); } }, L.storyPrompt)]
       : [
           h('section', { class: 'card' }, [
-            h('h2', null, [h('span', { 'aria-hidden': 'true', text: v.icon + ' ' }), v.title]),
-            h('h3', { text: L.checklist }),
-            h('div', { class: 'progress', role: 'presentation' }, [bar]), count,
-            h('div', null, items)
+            h('div', { class: 'vp-head' }, [ring.el, h('div', null, [
+              h('h2', null, [h('span', { 'aria-hidden': 'true', text: v.icon + ' ' }), v.title]),
+              h('h3', { text: L.checklist }), count, allSet
+            ])]),
+            h('div', { class: 'vp-items' }, items)
           ]),
           h('section', { class: 'card' }, [h('details', { open: true }, [h('summary', { text: L.bring }), PENS.list(v.bring)])]),
           h('section', { class: 'card' }, [h('details', null, [h('summary', { text: L.expect }), PENS.list(v.expect)])])
         ];
     panel.replaceChildren.apply(panel, [toggle].concat(content));
+    // Motion: cards and checklist rows fade up staggered; the ring sweeps from 0 to the saved progress.
+    PENS.fadeUp(panel.querySelectorAll('.card, .kid'), { step: 80 });
+    PENS.fadeUp(panel.querySelectorAll('.vp-items .check'), { step: 45 });
   }
 
   var saved = api.widgetState() || {};

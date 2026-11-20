@@ -14,7 +14,8 @@ export const findCareWidget: WidgetSource = {
   script: /* js */ `
 PENS.mount(function (root, d, api) {
   var h = PENS.h, L = d.labels, A = d.actions;
-  root.appendChild(h('h1', { text: L.heading, style: 'margin-bottom:10px' }));
+  var title = h('h1', { text: L.heading, style: 'margin-bottom:10px' });
+  root.appendChild(title);
   if (d.items && d.items.length) {
     root.appendChild(h('div', { class: 'grid' }, d.items.map(function (it) {
       return h('article', { class: 'card svc', 'aria-labelledby': 'svc-' + it.id }, [
@@ -50,6 +51,10 @@ PENS.mount(function (root, d, api) {
     h('p', { class: 'small muted', style: 'margin-top:8px', text: d.ageNote }),
     h('button', { class: 'btn ghost', type: 'button', style: 'margin-top:6px', onclick: function () { api.sendFollowUp(L.prepPrompt); } }, L.prepPrompt)
   ]));
+  // Motion: headline types in, cards fade up staggered (their buttons pop as they land), condition chips follow.
+  PENS.typewriter(title, L.heading);
+  PENS.fadeUp(root.querySelectorAll('.card'), { step: 80 });
+  PENS.springPop(root.querySelectorAll('.conds .chip'), { enter: true, delay: 250, step: 25 });
 });
 `,
 };
