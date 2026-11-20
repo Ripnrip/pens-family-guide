@@ -34,7 +34,6 @@ export const schoolSeizurePlan = defineTool({
         trainingUrl: EPILEPSY_TRAINING_URL,
         phone: CLINIC.phone,
         phoneHref: CLINIC.phoneHref,
-        portalUrl: CLINIC.links.patientPortal,
         labels: {
           law: es ? "Lo que dice la ley" : "What the law says",
           isap: es ? "¿Qué es un ISAP?" : "What is an ISAP?",
@@ -43,7 +42,6 @@ export const schoolSeizurePlan = defineTool({
           circleHint: es ? "Marque a quien ya tiene el plan y la capacitación." : "Check off who has the plan and training.",
           training: es ? "Capacitación gratuita (Epilepsy Foundation)" : "Free training (Epilepsy Foundation)",
           call: UI.callOffice[lang],
-          portal: UI.patientPortal[lang],
           ready: es ? "listos" : "ready",
         },
       },

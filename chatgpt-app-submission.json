@@ -114,7 +114,7 @@
         "openWorldHint": false
       },
       "justifications": {
-        "read_only_justification": "Returns links to the official PENS request form, phone and patient portal; it does not book, submit or collect anything. It creates, updates or deletes nothing, stores no data and has no side effects on the server or any external system.",
+        "read_only_justification": "Returns links to the official PENS request form and phone; it does not book, submit or collect anything. It creates, updates or deletes nothing, stores no data and has no side effects on the server or any external system.",
         "open_world_justification": "Answers come only from the app's bundled, curated PENS content. The tool makes no network calls and does not reach arbitrary URLs, accounts, recipients or third-party services; links in the widget open only when the user taps them.",
         "destructive_justification": "Does not delete, overwrite, send, submit, purchase, revoke access or perform any irreversible action.",
         "idempotent_justification": "Same input always returns the same curated content and has no side effects, so repeated calls are safe."
@@ -213,10 +213,10 @@
       "expected_output": "5-question Seizure-Ready quiz with four colored answer tiles per question, an explanation after each answer, and a final score out of 5."
     },
     {
-      "description": "appointment: Hand-off card with the official request form link, the phone number and the healow patient portal, plus what to have ready. The app collects no personal details.",
+      "description": "appointment: Hand-off card with the official request form link, and the phone number, plus what to have ready. The app collects no personal details.",
       "user_prompt": "I want to make an appointment at PENS.",
       "tools_triggered": "request_appointment",
-      "expected_output": "Hand-off card with the official request form link, the phone number and the healow patient portal, plus what to have ready. The app collects no personal details."
+      "expected_output": "Hand-off card with the official request form link, and the phone number, plus what to have ready. The app collects no personal details."
     },
     {
       "description": "referral: Referral card with the fax (813) 875-9722, phone, what to include, and urgent vs. routine guidance.",

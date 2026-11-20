@@ -35,13 +35,13 @@ export const HB1201: Reviewable & {
   },
   requestSteps: {
     en: [
-      "Call PENS at (813) 873-7367 or send a message through the healow patient portal to request a seizure action plan.",
+      "Call PENS at (813) 873-7367 to request a seizure action plan.",
       "Ask your school for any district form they use, and share it with PENS.",
       "Allow time for the provider to complete and sign it; plan ahead of the school year.",
       "Give the signed plan to the school nurse and update it whenever the treatment changes.",
     ],
     es: [
-      "Llame a PENS al (813) 873-7367 o envíe un mensaje por el portal del paciente healow para solicitar un plan de acción para convulsiones.",
+      "Llame a PENS al (813) 873-7367 para solicitar un plan de acción para convulsiones.",
       "Pida a la escuela el formulario del distrito, si tienen uno, y compártalo con PENS.",
       "Dé tiempo al proveedor para completarlo y firmarlo; planifique antes del año escolar.",
       "Entregue el plan firmado a la enfermera escolar y actualícelo cuando cambie el tratamiento.",

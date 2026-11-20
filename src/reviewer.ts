@@ -87,8 +87,8 @@ export const REVIEWER_CASES: ReviewerCase[] = [
     tool: "request_appointment",
     prompt: { en: "I want to make an appointment at PENS.", es: "Quiero hacer una cita en PENS." },
     expected: {
-      en: "Hand-off card with the official request form link, the phone number and the healow patient portal, plus what to have ready. The app collects no personal details.",
-      es: "Tarjeta con el enlace al formulario oficial, el teléfono y el portal healow, y qué tener a mano. La app no recopila datos personales.",
+      en: "Hand-off card with the official request form link, and the phone number, plus what to have ready. The app collects no personal details.",
+      es: "Tarjeta con el enlace al formulario oficial, y el teléfono, y qué tener a mano. La app no recopila datos personales.",
     },
   },
   {

@@ -3,7 +3,7 @@ import type { WidgetSource } from "./types.js";
 export const appointmentHandoffWidget: WidgetSource = {
   id: "appointment-handoff",
   title: "Request a PENS appointment",
-  description: "Hand-off card with the official request form, phone and patient portal. Collects no data.",
+  description: "Hand-off card with the official request form and phone. Collects no data.",
   css: /* css */ `
 .opts { display: grid; gap: 10px; }
 .opts .btn { justify-content: flex-start; width: 100%; font-size: 16px; }

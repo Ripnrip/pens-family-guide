@@ -48,7 +48,7 @@ export const VISITS: VisitPrep[] = [
     icon: "👋",
     title: { en: "First visit", es: "Primera visita" },
     checklist: [
-      { id: "forms", text: { en: "Fill out new-patient forms ahead of time (Patient Forms page or portal)", es: "Llene los formularios de paciente nuevo con anticipación (página de formularios o portal)" } },
+      { id: "forms", text: { en: "Fill out new-patient forms ahead of time (Patient Forms page)", es: "Llene los formularios de paciente nuevo con anticipación (página de formularios)" } },
       { id: "records", text: { en: "Ask past doctors to send records, imaging (MRI/CT) and EEG reports", es: "Pida a médicos anteriores que envíen expedientes, imágenes (MRI/CT) y reportes de EEG" } },
       { id: "notes", text: { en: "Write down your questions and what you have noticed (when, how often, how long)", es: "Escriba sus preguntas y lo que ha notado (cuándo, con qué frecuencia, cuánto dura)" } },
       { id: "video", text: { en: "If your child has spells, a short phone video of one can help the doctor", es: "Si su hijo tiene episodios, un video corto en el teléfono puede ayudar al médico" } },

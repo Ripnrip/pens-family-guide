@@ -34,7 +34,7 @@ const CARDS: GuideCard[] = [
   { widget: "school-plan", title: { en: "Seizure-Ready Circle", es: "Círculo Preparado" }, blurb: { en: "Florida school seizure plans and who needs training.", es: "Planes escolares de Florida y quién necesita capacitación." }, accent: "#F29A2E" },
   { widget: "caregiver-quiz", title: { en: "Caregiver quiz", es: "Prueba para cuidadores" }, blurb: { en: "Five quick questions for sitters, coaches and grandparents.", es: "Cinco preguntas para niñeras, entrenadores y abuelos." }, accent: "#D8433A" },
   { widget: "clinic-card", title: { en: "Hours and directions", es: "Horario y cómo llegar" }, blurb: { en: "Open now? Address, phone and directions.", es: "¿Abierto ahora? Dirección, teléfono y cómo llegar." }, accent: "#0F6E74" },
-  { widget: "appointment-handoff", title: { en: "Request an appointment", es: "Solicitar una cita" }, blurb: { en: "The official request form, phone and portal.", es: "El formulario oficial, teléfono y portal." }, accent: "#2F7FC9" },
+  { widget: "appointment-handoff", title: { en: "Request an appointment", es: "Solicitar una cita" }, blurb: { en: "The official request form and phone.", es: "El formulario oficial y el teléfono." }, accent: "#2F7FC9" },
   { widget: "referral-card", title: { en: "For pediatricians", es: "Para pediatras" }, blurb: { en: "How to refer a patient to PENS.", es: "Cómo referir a un paciente a PENS." }, accent: "#5BA83B" },
 ];
 

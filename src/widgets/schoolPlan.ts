@@ -20,8 +20,7 @@ PENS.mount(function (root, d, api) {
   root.appendChild(h('section', { class: 'card' }, [
     h('details', { open: true }, [h('summary', { text: L.request }), PENS.list(d.requestSteps, true)]),
     h('div', { class: 'row', style: 'margin-top:10px' }, [
-      PENS.linkButton(L.call + ' ' + d.phone, d.phoneHref, '', { icon: '📞' }),
-      PENS.linkButton(L.portal, d.portalUrl, 'secondary', { icon: '💻' })
+      PENS.linkButton(L.call + ' ' + d.phone, d.phoneHref, '', { icon: '📞' })
     ])
   ]));
 

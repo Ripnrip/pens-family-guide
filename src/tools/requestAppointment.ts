@@ -5,7 +5,7 @@ export const requestAppointment = defineTool({
   name: "request_appointment",
   title: "Request a PENS appointment",
   description:
-    "Hand off to PENS's official ways to request an appointment: the website request form, the office phone, and the healow patient portal, plus what information to have ready. This tool does NOT collect or send any personal information; never ask the user for names, birthdates, or medical details in chat.",
+    "Hand off to PENS's official ways to request an appointment: the website request form and the office phone, plus what information to have ready. This tool does NOT collect or send any personal information; never ask the user for names, birthdates, or medical details in chat.",
   widget: "appointment-handoff",
   invoking: "Getting appointment options… / Buscando opciones de cita…",
   invoked: "How to request an appointment / Cómo solicitar una cita",
@@ -17,13 +17,12 @@ export const requestAppointment = defineTool({
         options: [
           { id: "form", icon: "📝", label: UI.requestAppointment[lang], href: CLINIC.links.requestAppointment, verified: false },
           { id: "phone", icon: "📞", label: `${UI.call[lang]} ${CLINIC.phone}`, href: CLINIC.phoneHref, verified: true },
-          { id: "portal", icon: "💻", label: UI.patientPortal[lang], href: CLINIC.links.patientPortal, verified: false },
         ],
         haveReady: APPOINTMENT_READY[lang],
         hours: HOURS_SUMMARY[lang],
         privacy: es
-          ? "Este chat no programa citas ni guarda información. Comparta los datos de su hijo solo con la oficina, el formulario oficial o el portal."
-          : "This chat doesn't book appointments or store information. Share your child's details only with the office, the official form, or the portal.",
+          ? "Este chat no programa citas ni guarda información. Comparta los datos de su hijo solo con la oficina, o el formulario oficial."
+          : "This chat doesn't book appointments or store information. Share your child's details only with the office or the official form.",
         labels: {
           heading: es ? "Solicitar una cita en PENS" : "Request a PENS appointment",
           haveReady: es ? "Tenga esto a mano" : "Have this ready",
@@ -35,7 +34,6 @@ export const requestAppointment = defineTool({
         es ? "Para solicitar una cita en PENS:" : "To request a PENS appointment:",
         `- ${es ? "Formulario" : "Form"}: ${CLINIC.links.requestAppointment}`,
         `- ${es ? "Teléfono" : "Phone"}: ${CLINIC.phone}`,
-        `- ${es ? "Portal" : "Portal"} (healow): ${CLINIC.links.patientPortal}`,
         `${es ? "Tenga a mano" : "Have ready"}: ${APPOINTMENT_READY[lang].join("; ")}.`,
         es ? "No comparta datos personales en este chat." : "Please don't share personal details in this chat.",
       ].join("\n"),

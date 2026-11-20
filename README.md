@@ -17,7 +17,7 @@ Everything is read-only, bilingual (English and Spanish) and stateless. The app 
 | `seizure_first_aid` | Stay / Safe / Side, what not to do, when to call 911, and a big seizure timer (amber at 4:00, pulsing call-911 at 5:00) | `seizure-first-aid.html` |
 | `school_seizure_plan` | Florida CS/HB 1201 explainer, how to request an ISAP from PENS, caregiver-circle checklist | `school-plan.html` |
 | `caregiver_quiz` | 5-question "Seizure-Ready" quiz with colorful tiles and a score | `caregiver-quiz.html` |
-| `request_appointment` | Hands off to the official form, phone and healow portal. Collects nothing | `appointment-handoff.html` |
+| `request_appointment` | Hands off to the official form and phone. Collects nothing | `appointment-handoff.html` |
 | `for_pediatricians` | Referral fax and phone, what to include, urgent vs. routine guidance | `referral-card.html` |
 | `meet_the_team` | Neutral team directory: round photos of PENS's 18 physicians, nurse practitioners and counselors (search, role and Speaks Spanish filters, profile sheet with focus, languages, suite and year joined) plus "Which suite?" for Suites 340, 240 (EEG) and 140. No ratings or rankings; scheduling goes through the office. Names, photos and bios need PENS approval before public listing (`src/content/team.ts`, all `clinicReview: "pending"`) | `team-directory.html` |
 
