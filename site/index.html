@@ -71,6 +71,34 @@ section{scroll-margin-top:80px}
 .btn-ghost{background:#fff;color:var(--teal);border-color:var(--teal)}
 .btn-ghost:hover{background:var(--sky);color:var(--teal-d)}
 
+
+/* Official listing showcase */
+.listing{display:grid;grid-template-columns:1fr 1.25fr;gap:48px;align-items:center}
+.listing-badge{display:flex;width:fit-content;max-width:100%;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px 8px 8px;box-shadow:var(--shadow);font-weight:700;margin-bottom:18px}
+.listing-badge img{width:36px;height:36px;border-radius:10px}
+.listing-badge .by{color:var(--ink-2);font-weight:600}
+.listing-badge .check{width:20px;height:20px;color:var(--teal)}
+.listing-facts{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:10px}
+.listing-facts li{display:flex;gap:10px;align-items:baseline;color:var(--ink-2)}
+.listing-facts li strong{color:var(--ink);min-width:7.5em}
+.phones{position:relative;display:flex;justify-content:center;align-items:flex-start;padding-bottom:60px}
+.phone{width:min(46%,260px);border-radius:34px;background:#111;padding:9px;box-shadow:var(--shadow-lift);position:relative}
+.phone img{border-radius:26px;width:100%;height:auto}
+.phone.a{transform:rotate(-4deg) translateY(6px);z-index:2}
+.phone.b{transform:rotate(5deg) translate(-18px,46px);z-index:1}
+.phones .spark{position:absolute;width:26px;height:26px;color:var(--sun);z-index:3}
+@media (prefers-reduced-motion:no-preference){
+  .js .phone.reveal{transform:translateY(40px) scale(.94)}
+  .js .phone.a.reveal.in{transform:rotate(-4deg) translateY(6px)}
+  .js .phone.b.reveal.in{transform:rotate(5deg) translate(-18px,46px)}
+  .phone.a.in{animation:floatA 6s ease-in-out 1s infinite}
+  .phones .spark{animation:twinkle 2.4s ease-in-out infinite}
+  .phones .spark.s2{animation-delay:.8s}.phones .spark.s3{animation-delay:1.6s}
+  @keyframes floatA{0%,100%{transform:rotate(-4deg) translateY(6px)}50%{transform:rotate(-4deg) translateY(-6px)}}
+  @keyframes twinkle{0%,100%{opacity:.2;transform:scale(.7) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(20deg)}}
+}
+@media (max-width:860px){.listing{grid-template-columns:1fr}.phones{min-height:0;padding-bottom:50px}}
+
 /* Header */
 .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line)}
 .header-row{display:flex;align-items:center;gap:16px;min-height:72px}
@@ -730,6 +758,32 @@ html.paused .caret{display:none}
   </div>
 </section>
 
+<!-- OFFICIAL LISTING -->
+<section class="section" id="official" aria-labelledby="official-title">
+  <div class="wrap listing">
+    <div class="reveal">
+      <p class="eyebrow" data-i18n="ofEyebrow">Official</p>
+      <div class="listing-badge"><img src="assets/pens-logo.svg" alt="" width="36" height="36"><span><span data-i18n="ofName">PENS Family Guide</span> · <span class="by" data-i18n="ofBy">by Gina Hoyos</span></span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg></div>
+      <h2 id="official-title" data-i18n="ofTitle">Now listed in ChatGPT</h2>
+      <p class="lede" data-i18n="ofLede">Search “PENS” in ChatGPT’s plugin directory and you’ll find us, built by our own Gina Hoyos for the families we care for.</p>
+      <ul class="listing-facts">
+        <li><strong data-i18n="ofDev">Developer</strong><span>Gina Hoyos</span></li>
+        <li><strong data-i18n="ofCat">Category</strong><span data-i18n="ofCatV">Education &amp; Research</span></li>
+        <li><strong data-i18n="ofLang">Languages</strong><span data-i18n="ofLangV">English and Spanish</span></li>
+        <li><strong data-i18n="ofPriv">Privacy</strong><span data-i18n="ofPrivV">No patient information collected</span></li>
+      </ul>
+      <a class="btn btn-primary" href="#get-started" data-i18n="ofCta">Get started</a>
+    </div>
+    <div class="phones">
+      <span class="spark s1" style="top:2%;left:12%"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span>
+      <span class="spark s2" style="top:40%;right:4%"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span>
+      <span class="spark s3" style="bottom:6%;left:20%"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span>
+      <figure class="phone a reveal" style="--d:1;margin:0"><picture><source srcset="assets/listing-overview.webp" type="image/webp"><img src="assets/listing-overview.jpg" width="860" height="1333" loading="lazy" alt="The PENS Family Guide listing in ChatGPT's plugin directory, by Gina Hoyos, with example questions in English and Spanish" data-i18n-alt="ofAlt1"></picture></figure>
+      <figure class="phone b reveal" style="--d:3;margin:0"><picture><source srcset="assets/listing-details.webp" type="image/webp"><img src="assets/listing-details.jpg" width="860" height="1073" loading="lazy" alt="Listing details: developer Gina Hoyos, category Education and Research, version 1.0.0" data-i18n-alt="ofAlt2"></picture></figure>
+    </div>
+  </div>
+</section>
+
 <!-- 7. GET STARTED -->
 <section class="section band" id="get-started" aria-labelledby="start-title">
   <div class="wrap">
@@ -859,6 +913,7 @@ html.paused .caret{display:none}
     proT2:'Escuelas', proH2:'Preparar la escuela para convulsiones', proD2:'Enfermeras escolares, maestros y familias pueden usar el Círculo Listos para Convulsiones para entender:',
     sch1:'Qué es un Plan de Acción Individualizado para Convulsiones (ISAP)', sch2:'Quién debe tener una copia: maestros, choferes del autobús, entrenadores', sch3:'Cómo las familias piden a PENS un plan firmado', sch4:'Dónde encontrar capacitación sobre convulsiones para el personal',
     proN2:'La <a href="https://www.epilepsy.com/programs/training-education" rel="noopener">Epilepsy Foundation</a> ofrece capacitación gratuita para el personal (en inglés).',
+    ofEyebrow:'Oficial', ofName:'PENS Family Guide', ofBy:'por Gina Hoyos', ofTitle:'Ya disponible en ChatGPT', ofLede:'Busque “PENS” en el directorio de plugins de ChatGPT y nos encontrará, creado por nuestra propia Gina Hoyos para las familias que atendemos.', ofDev:'Desarrolladora', ofCat:'Categoría', ofCatV:'Educación e investigación', ofLang:'Idiomas', ofLangV:'Inglés y español', ofPriv:'Privacidad', ofPrivV:'No se recopila información de pacientes', ofCta:'Comenzar', ofAlt1:'La página de PENS Family Guide en el directorio de plugins de ChatGPT, por Gina Hoyos, con preguntas de ejemplo en inglés y español', ofAlt2:'Detalles: desarrolladora Gina Hoyos, categoría Educación e investigación, versión 1.0.0',
     startEyebrow:'Comenzar', startTitle:'Lleve PENS a su app de IA favorita',
     gsC:'En ChatGPT', gsC1:'Abra ChatGPT en la web o en la app.', gsC2:'Busque PENS en Apps y conéctelo.', gsC3:'Haga su primera pregunta en inglés o en español.',
     ctaChatGPT2:'Abrir en ChatGPT', soon:'El enlace directo estará disponible en el lanzamiento.',
@@ -879,6 +934,8 @@ html.paused .caret{display:none}
   var anodes = document.querySelectorAll('[data-i18n-aria]');
   nodes.forEach(function(n){ EN[n.getAttribute('data-i18n')] = n.innerHTML; });
   anodes.forEach(function(n){ ENA[n.getAttribute('data-i18n-aria')] = n.getAttribute('aria-label'); });
+  var altnodes = document.querySelectorAll('[data-i18n-alt]'), ENALT = {};
+  altnodes.forEach(function(n){ ENALT[n.getAttribute('data-i18n-alt')] = n.getAttribute('alt'); });
   EN.playAnim = 'Play animations';
 
   var lang = 'en';
@@ -888,6 +945,7 @@ html.paused .caret{display:none}
     root.lang = lang;
     nodes.forEach(function(n){ var k = n.getAttribute('data-i18n'); var v = t(k); if (v != null && n.innerHTML !== v) n.innerHTML = v; });
     anodes.forEach(function(n){ var k = n.getAttribute('data-i18n-aria'); n.setAttribute('aria-label', lang === 'es' && ES[k] ? ES[k] : ENA[k]); });
+    altnodes.forEach(function(n){ var k = n.getAttribute('data-i18n-alt'); n.setAttribute('alt', lang === 'es' && ES[k] ? ES[k] : ENALT[k]); });
     document.querySelectorAll('.lang button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
     document.title = META[lang].title;
     document.querySelector('meta[name="description"]').content = META[lang].desc;
