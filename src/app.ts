@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs";
-import { guideManifest, guidePage, originOf, qrSvg, waitingRoomPage } from "./guide.js";
+import { guideManifest, guidePage, originOf, qrSvg, tryPage, waitingRoomPage } from "./guide.js";
 import path from "node:path";
 import express, { type Request, type Response, type NextFunction } from "express";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
@@ -152,6 +152,13 @@ export function createApp(opts: AppOptions = {}) {
   app.get(["/guide", "/guide/"], (req: Request, res: Response) => void res.type("html").send(guidePage(req.query.lang, req.query.theme)));
   app.get("/guide/manifest.webmanifest", (_req: Request, res: Response) => void res.type("application/manifest+json").send(JSON.stringify(guideManifest())));
   app.get("/qr.svg", async (req: Request, res: Response) => void res.type("image/svg+xml").send(await qrSvg(`${originOf(req)}/guide`)));
+  app.get("/try", (req: Request, res: Response) => void res.type("html").send(tryPage(originOf(req), req.query.lang)));
+  app.get("/widget", (req: Request, res: Response) => void res.type("html").send(renderPreview("question-card", { visit_type: "routine_eeg", ...(req.query as Record<string, unknown>) })));
+  app.get("/widget/:widget", (req: Request, res: Response) => {
+    const id = String(req.params.widget) as WidgetId;
+    if (!WIDGET_IDS.includes(id)) { res.status(404).type("text").send(`Unknown widget. Try: ${WIDGET_IDS.join(", ")}`); return; }
+    res.type("html").send(renderPreview(id, req.query as Record<string, unknown>));
+  });
   app.get("/waiting-room", async (req: Request, res: Response) => void res.type("html").send(await waitingRoomPage(originOf(req))));
 
   // --- Pages ---

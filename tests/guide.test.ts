@@ -30,3 +30,19 @@ describe("Family Guide", () => {
     expect(poster.text).toContain("Escanee");
   });
 });
+
+describe("try and widget pages", () => {
+  it("serves /try with the live studio, MCP URL and Spanish", async () => {
+    const r = await request(app).get("/try").set("Host", "pens.example");
+    expect(r.status).toBe(200);
+    expect(r.text).toContain("pens.example/mcp");
+    expect(r.text).toContain('/preview/question-card?lang=en');
+    const es = await request(app).get("/try?lang=es");
+    expect(es.text).toContain("Nuestras preguntas");
+  });
+  it("serves the standalone studio at /widget and /widget/:id", async () => {
+    expect((await request(app).get("/widget")).status).toBe(200);
+    expect((await request(app).get("/widget/eeg-adventure")).status).toBe(200);
+    expect((await request(app).get("/widget/nope")).status).toBe(404);
+  });
+});

@@ -210,3 +210,89 @@ ul{list-style:none;padding:0;margin:24px auto 0;max-width:5.6in;text-align:left;
 </body>
 </html>`;
 }
+
+/** /try: in-chat style live demo plus the ways to share while the directory listing is pending. */
+export function tryPage(origin: string, langIn: unknown): string {
+  const lang: Lang = langIn === "es" ? "es" : "en";
+  const es = lang === "es";
+  const demos: { label: T; widget: string; query?: string; ask: T }[] = [
+    { label: { en: "Our questions", es: "Nuestras preguntas" }, widget: "question-card", query: "visit_type=routine_eeg", ask: { en: "Help us ask our questions in both languages at our EEG visit.", es: "Ayúdenos a preparar nuestras preguntas en los dos idiomas para el EEG." } },
+    { label: { en: "Find care", es: "Encontrar atención" }, widget: "find-care", query: "concern=ADHD", ask: { en: "Does PENS see kids with ADHD?", es: "¿PENS atiende a niños con TDAH?" } },
+    { label: { en: "EEG prep", es: "Preparar EEG" }, widget: "visit-prep", query: "visit_type=sleep_deprived_eeg", ask: { en: "My daughter has a sleep-deprived EEG Thursday. How do we get ready?", es: "Mi hija tiene un EEG con privación de sueño el jueves. ¿Cómo nos preparamos?" } },
+    { label: { en: "Pip's EEG game", es: "Juego de Pip" }, widget: "eeg-adventure", ask: { en: "Can you show my 6-year-old what happens at an EEG?", es: "¿Puede mostrarle a mi hijo de 6 años qué pasa en un EEG?" } },
+    { label: { en: "Seizure first aid", es: "Primeros auxilios" }, widget: "seizure-first-aid", ask: { en: "What do I do if he has a seizure?", es: "¿Qué hago si tiene una convulsión?" } },
+    { label: { en: "Caregiver quiz", es: "Prueba para cuidadores" }, widget: "caregiver-quiz", ask: { en: "Grandma is babysitting. Can we practice together?", es: "La abuela lo cuida hoy. ¿Podemos practicar juntos?" } },
+  ];
+  const src = (d: (typeof demos)[number]) => `/preview/${d.widget}?lang=${lang}${d.query ? "&" + d.query : ""}`;
+  const buttons = demos
+    .map((d, i) => `<button type="button" class="chip${i === 0 ? " on" : ""}" data-src="${esc(src(d))}" data-ask="${esc(d.ask[lang])}">${esc(d.label[lang])}</button>`)
+    .join("");
+  const mcp = `${origin}/mcp`;
+  return `<!doctype html>
+<html lang="${lang}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${es ? "Pruebe PENS · estudio en vivo" : "Try PENS · live studio"}</title>
+<meta name="description" content="${es ? "Pruebe la app de PENS para ChatGPT y Claude con las mismas herramientas del plugin." : "Try the PENS app for ChatGPT and Claude with the same tools the plugin uses."}">
+<link rel="icon" href="/assets/pens-icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F6F7;--ink:#1D2B36;--muted:#4A5A66;--line:#DCE3E6;--teal:#0F6E74;--sky:#E8F4F6}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:${FONT_STACK}}
+a{color:var(--teal)}
+header{max-width:1100px;margin:0 auto;padding:16px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+header img{width:44px;height:44px}header b{font-family:${HEAD_STACK};font-size:20px}
+header .status{font-size:13px;color:var(--muted)}header nav{margin-left:auto;display:flex;gap:16px;flex-wrap:wrap;font-weight:700;font-size:14px}
+main{max-width:1100px;margin:0 auto;padding:0 20px 40px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:24px}
+@media (max-width:860px){main{grid-template-columns:1fr}}
+.chat{background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;display:flex;flex-direction:column}
+.bar{padding:12px 18px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.ask{align-self:flex-end;max-width:85%;margin:16px 18px 8px;background:#E2E8EB;padding:10px 16px;border-radius:18px;font-size:15px}
+iframe{border:0;width:100%;height:680px;background:var(--bg)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;padding:12px 18px;border-top:1px solid var(--line)}
+.chip{min-height:44px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:#fff;font:700 14px ${FONT_STACK};color:var(--ink);cursor:pointer}
+.chip.on{background:var(--teal);border-color:var(--teal);color:#fff}
+h1{font-family:${HEAD_STACK};font-size:30px;line-height:1.15;margin:8px 0}
+h2{font-family:${HEAD_STACK};font-size:20px;margin:22px 0 8px}
+.sub{color:var(--muted);font-size:15px;line-height:1.5}
+ol{padding-left:20px;line-height:1.6;font-size:15px}
+code{background:var(--sky);padding:2px 6px;border-radius:6px;font-size:13px;word-break:break-all}
+.box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-top:12px}
+.urgent{color:#B83A26;font-weight:800}
+</style>
+</head>
+<body>
+<header>
+  <img src="/assets/pens-blocks-192.png" alt="PENS">
+  <div><b>PENS</b><div class="status">${es ? "Versión para desarrolladores · vista previa" : "Developer preview · live dogfood"}</div></div>
+  <nav><a href="/">${es ? "Sitio" : "Site"}</a><a href="/guide?lang=${lang}">${es ? "Guía Familiar" : "Family Guide"}</a><a href="/widget">${es ? "Solo el estudio ↗" : "Studio only ↗"}</a><a href="/try?lang=${es ? "en" : "es"}">${es ? "English" : "Español"}</a></nav>
+</header>
+<main>
+  <section class="chat" aria-label="${es ? "Vista previa en el chat" : "In-chat preview"}">
+    <div class="bar">${es ? "Vista previa en el chat · las mismas herramientas del plugin" : "In-chat preview · same tools the plugin uses"}</div>
+    <div class="ask" id="ask">${esc(demos[0].ask[lang])}</div>
+    <iframe id="studio" title="PENS" src="${esc(src(demos[0]))}"></iframe>
+    <div class="chips" role="group" aria-label="${es ? "Pruebe una pregunta" : "Try a prompt"}">${buttons}</div>
+  </section>
+  <section>
+    <h1>${es ? "Compártalo mientras llega al directorio" : "Share it while the directory listing is pending"}</h1>
+    <p class="sub">${es ? "Cuatro formas de usar PENS hoy:" : "Four ways to use PENS today:"}</p>
+    <div class="box"><b>1. ${es ? "Esta página" : "This page"}</b><br>${es ? "El estudio en vivo con preguntas de ejemplo." : "The live studio with sample prompts."}</div>
+    <div class="box"><b>2. ${es ? "Guía Familiar en el teléfono" : "Family Guide on a phone"}</b><br><a href="/guide?lang=${lang}">${esc(origin)}/guide</a> · ${es ? "agréguela a la pantalla de inicio" : "add it to the home screen"} · <a href="/waiting-room">${es ? "póster con QR" : "QR poster"}</a></div>
+    <div class="box"><b>3. ChatGPT (${es ? "modo desarrollador" : "developer mode"})</b>
+      <ol><li>${es ? "Configuración → Apps y conectores → Avanzado → Modo desarrollador" : "Settings → Apps & Connectors → Advanced → Developer mode"}</li><li>${es ? "Crear → URL del servidor MCP:" : "Create → MCP server URL:"} <code>${esc(mcp)}</code></li><li>${es ? "Autenticación: ninguna. Luego use las preguntas de la izquierda." : "Authentication: none. Then use the prompts on the left."}</li></ol></div>
+    <div class="box"><b>4. Claude (${es ? "conector personalizado" : "custom connector"})</b>
+      <ol><li>${es ? "Configuración → Conectores → Agregar conector personalizado" : "Settings → Connectors → Add custom connector"}</li><li>URL: <code>${esc(mcp)}</code></li></ol></div>
+    <p class="sub" style="margin-top:18px">${es ? "Información general, no consejo médico. No se recopila información de pacientes." : "General information, not medical advice. No patient information is collected."} <span class="urgent">${es ? "En una emergencia, llame al 911." : "In an emergency, call 911."}</span></p>
+    <p class="sub"><a href="/privacy">${es ? "Privacidad" : "Privacy"}</a> · <a href="/terms">${es ? "Términos" : "Terms"}</a> · <a href="/support">${es ? "Ayuda" : "Support"}</a> · <a href="/reviewer-demo">Reviewer demo</a></p>
+  </section>
+</main>
+<script>
+(function(){var f=document.getElementById('studio'),a=document.getElementById('ask');
+document.querySelectorAll('.chip').forEach(function(b){b.addEventListener('click',function(){
+document.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on')});b.classList.add('on');f.src=b.dataset.src;a.textContent=b.dataset.ask;});});})();
+</script>
+</body>
+</html>`;
+}
