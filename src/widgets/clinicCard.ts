@@ -17,6 +17,11 @@ export const clinicCard: WidgetSource = {
 .brand { display:flex; gap:12px; align-items:center; margin-bottom:10px; }
 .logo { width:48px; height:48px; border-radius:12px; flex:none; display:block; }
 .status .dot { position: relative; }
+
+.faces { display: flex; align-items: center; margin: 10px 0 12px; }
+.faces img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 3px solid var(--card, #fff); margin-left: -10px; box-shadow: 0 2px 6px rgba(0,0,0,.15); }
+.faces img:first-child { margin-left: 0; }
+.faces .more { margin-left: 8px; font-weight: 600; }
 @media (prefers-reduced-motion: no-preference) {
   .status.open .dot { animation: clinic-breathe 2.4s ease-in-out infinite; }
   .hours tr { transition: background-color .2s ease; }
@@ -56,6 +61,18 @@ PENS.mount(function (root, d, api) {
     ])
   ]));
 
+  var tp = d.teamPreview;
+  if (tp) {
+    root.appendChild(h('section', { class: 'card team-peek' }, [
+      h('h2', { text: tp.title }),
+      h('div', { class: 'faces', 'aria-hidden': 'true' }, tp.faces.map(function (f) {
+        return h('img', { src: f.photo, alt: '', width: '44', height: '44' });
+      }).concat(tp.count > tp.faces.length ? [h('span', { class: 'more muted small', text: '+' + (tp.count - tp.faces.length) })] : [])),
+      h('p', { class: 'small', text: tp.blurb }),
+      h('button', { class: 'btn secondary', type: 'button', style: 'margin-top:8px', onclick: function () { api.sendFollowUp(tp.prompt); } }, tp.cta)
+    ]));
+  }
+
   root.appendChild(h('section', { class: 'card' }, [
     h('details', null, [
       h('summary', { text: L.arrival }),
@@ -69,6 +86,7 @@ PENS.mount(function (root, d, api) {
   PENS.typewriter(root.querySelector('#pens-name'), c.name);
   PENS.fadeUp(root.querySelectorAll('.card'), { step: 80 });
   PENS.fadeUp(root.querySelectorAll('.hours tr'), { step: 40 });
+  if (PENS.springPop) PENS.springPop(root.querySelectorAll('.faces img'), { enter: true, delay: 300, step: 70 });
 });
 `,
 };

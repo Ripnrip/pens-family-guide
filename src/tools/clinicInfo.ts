@@ -1,4 +1,6 @@
 import { ARRIVAL_TIPS, CLINIC, HOURS_SUMMARY, UI } from "../content/index.js";
+import { TEAM } from "../content/team.js";
+import { TEAM_PHOTOS } from "../content/teamPhotos.js";
 import { describeStatus, getOpenStatus } from "../lib/hours.js";
 import { defineTool, langParam } from "./types.js";
 
@@ -37,6 +39,17 @@ export const clinicInfo = defineTool({
         status: { state: status.state, label: desc.label, detail: desc.detail, localTime: status.localTime, timeZone: CLINIC.timeZone },
         hours,
         arrivalTips: tips,
+        teamPreview: {
+          count: TEAM.length,
+          spanishCount: TEAM.filter((m) => m.spanish === "yes").length,
+          faces: TEAM.slice(0, 6).map((m) => ({ name: m.name, photo: TEAM_PHOTOS[m.photo] ?? "" })).filter((f) => f.photo),
+          title: es ? "Conozca al equipo" : "Meet the team",
+          blurb: es
+            ? `${TEAM.length} médicos, enfermeros practicantes y consejeros, varios hablan español.`
+            : `${TEAM.length} doctors, nurse practitioners and counselors, several who speak Spanish.`,
+          cta: es ? "Ver el equipo" : "Meet the team",
+          prompt: es ? "Muéstrame el equipo de PENS" : "Show me the PENS team",
+        },
         labels: {
           hours: es ? "Horario" : "Hours",
           address: es ? "Dirección" : "Address",
