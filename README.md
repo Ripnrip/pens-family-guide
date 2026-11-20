@@ -19,6 +19,7 @@ Everything is read-only, bilingual (English and Spanish) and stateless. The app 
 | `caregiver_quiz` | 5-question "Seizure-Ready" quiz with colorful tiles and a score | `caregiver-quiz.html` |
 | `request_appointment` | Hands off to the official form, phone and healow portal. Collects nothing | `appointment-handoff.html` |
 | `for_pediatricians` | Referral fax and phone, what to include, urgent vs. routine guidance | `referral-card.html` |
+| `meet_the_team` | Neutral team directory: round photos of PENS's 18 physicians, nurse practitioners and counselors (search, role and Speaks Spanish filters, profile sheet with focus, languages, suite and year joined) plus "Which suite?" for Suites 340, 240 (EEG) and 140. No ratings or rankings; scheduling goes through the office. Names, photos and bios need PENS approval before public listing (`src/content/team.ts`, all `clinicReview: "pending"`) | `team-directory.html` |
 
 Every tool declares all four annotation hints as explicit booleans: `readOnlyHint: true`, `idempotentHint: true`, `destructiveHint: false`, `openWorldHint: false`. The written justifications are in [`chatgpt-app-submission.json`](chatgpt-app-submission.json). Every tool accepts an optional `lang` (`en` | `es`); without it the language comes from Spanish free text, then the host locale, then English.
 
@@ -52,7 +53,7 @@ flowchart LR
     REG["createPensServer()<br/>ext-apps registerAppTool / registerAppResource"]
     EXEC["executeTool()<br/>src/tools/index.ts"]
     SAFE["Safety layer<br/>PHI scrub · emergency detector · disclaimer"]
-    TOOLS["9 tool handlers"]
+    TOOLS["11 tool handlers"]
     CONTENT[("Knowledge module<br/>EN + ES, clinicReview flags")]
     WID["Widgets<br/>text/html;profile=mcp-app<br/>inline CSS/JS"]
     BRAND["src/brand/<br/>tokens · Pip · logo"]
@@ -138,7 +139,7 @@ Headings use Fredoka and body text uses Nunito when installed, with system fallb
 | Path | Contents |
 |---|---|
 | `src/app.ts` | Express app: MCP endpoints, previews, pages, splash site and assets |
-| `src/server.ts` | `createPensServer()`: 9 tools + 9 UI resources via ext-apps |
+| `src/server.ts` | `createPensServer()`: 11 tools + 11 UI resources via ext-apps |
 | `src/config.ts` | App name, operator, support email, `SUBMISSION_PATH`, clinic contact |
 | `src/brand/` | Tokens, fonts, Pip SVG, logo loader |
 | `src/pages.ts` | Privacy, terms, support, reviewer demo, fallback home |
@@ -147,7 +148,7 @@ Headings use Fredoka and body text uses Nunito when installed, with system fallb
 | `src/safety/` | Emergency detector, PHI scrubber, safety envelope |
 | `src/tools/` | One file per tool; `index.ts` holds `executeTool`, annotations and `_meta` |
 | `src/widgets/` | `shared.ts` (CSS + runtime bridge) and one file per widget |
-| `public/assets/` | `pens-logo.svg` (swappable) and its 512/1024 PNGs |
+| `public/assets/` | `pens-logo.svg` (swappable) and its 512/1024 PNGs; `team/*.jpg` full-size provider photos (inlined into the widget as 160 px WebP by `npm run team:photos`, which writes `src/content/teamPhotos.ts`; needs sharp via `SHARP_DIR`) |
 | `scripts/render-logo.mjs` | Renders the logo PNGs with sharp (installed outside the project) |
 | `scripts/prepare-static.mjs` | Builds `static-build/` for Vercel from `site/index.html`, `site/assets/` and `public/assets/` |
 | `site/` | Splash site, owned by a separate build. This repo never writes there |

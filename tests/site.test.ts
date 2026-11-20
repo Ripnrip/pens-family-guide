@@ -47,7 +47,7 @@ describe("splash site serving (Express)", () => {
     for (const p of ["/mcp", SUBMISSION_PATH]) {
       const r = await request(app).post(p).set(MCP_HEADERS).send({ jsonrpc: "2.0", id: 1, method: "tools/list", params: {} });
       expect(r.status, p).toBe(200);
-      expect(r.body.result.tools).toHaveLength(10);
+      expect(r.body.result.tools).toHaveLength(11);
     }
     // The canonical brand logo wins over a same-named file in site/assets.
     const logo = await request(app).get("/assets/pens-logo.svg");

@@ -19,12 +19,14 @@ interface GuideCard {
 
 const PROMPTS: { text: T; widget: string; query?: string }[] = [
   { text: { en: "Help us ask our questions in both languages", es: "Ayúdenos a preparar nuestras preguntas en los dos idiomas" }, widget: "question-card", query: "visit_type=routine_eeg" },
+  { text: { en: "Who will we see? Meet the team", es: "¿A quién veremos? Conozca al equipo" }, widget: "team-directory" },
   { text: { en: "Can my kid try the EEG stickers?", es: "¿Mi hijo puede probar las pegatinas del EEG?" }, widget: "eeg-adventure" },
   { text: { en: "Grandma is babysitting. Can we practice together?", es: "La abuela lo cuida hoy. ¿Podemos practicar juntos?" }, widget: "caregiver-quiz" },
 ];
 
 const CARDS: GuideCard[] = [
   { widget: "question-card", title: { en: "Our questions", es: "Nuestras preguntas" }, blurb: { en: "Pick questions, then pass the phone in English or Spanish.", es: "Elija preguntas y pase el teléfono en español o inglés." }, accent: "#2F7FC9" },
+  { widget: "team-directory", title: { en: "Meet the team", es: "Conozca al equipo" }, blurb: { en: "Faces, languages and which suite to go to.", es: "Caras, idiomas y a qué suite ir." }, accent: "#F6B93B" },
   { widget: "find-care", title: { en: "Find care", es: "Encontrar atención" }, blurb: { en: "Does PENS see kids for this? See services and next steps.", es: "¿PENS atiende esto? Vea servicios y próximos pasos." }, accent: "#0F6E74" },
   { widget: "visit-prep", query: "visit_type=sleep_deprived_eeg", title: { en: "Visit prep", es: "Preparar la visita" }, blurb: { en: "Checklists for EEGs, ADHD testing and first visits.", es: "Listas para EEG, pruebas de TDAH y primeras visitas." }, accent: "#5BA83B" },
   { widget: "eeg-adventure", title: { en: "My EEG Day with Pip", es: "Mi día de EEG con Pip" }, blurb: { en: "A short game that walks kids through an EEG.", es: "Un juego corto que explica el EEG a los niños." }, accent: "#F2C230" },
@@ -217,6 +219,7 @@ export function tryPage(origin: string, langIn: unknown): string {
   const es = lang === "es";
   const demos: { label: T; widget: string; query?: string; ask: T }[] = [
     { label: { en: "Our questions", es: "Nuestras preguntas" }, widget: "question-card", query: "visit_type=routine_eeg", ask: { en: "Help us ask our questions in both languages at our EEG visit.", es: "Ayúdenos a preparar nuestras preguntas en los dos idiomas para el EEG." } },
+    { label: { en: "Meet the team", es: "El equipo" }, widget: "team-directory", ask: { en: "Who will we see at PENS? Show me the team and who speaks Spanish.", es: "¿A quién veremos en PENS? Muéstreme el equipo y quién habla español." } },
     { label: { en: "Find care", es: "Encontrar atención" }, widget: "find-care", query: "concern=ADHD", ask: { en: "Does PENS see kids with ADHD?", es: "¿PENS atiende a niños con TDAH?" } },
     { label: { en: "EEG prep", es: "Preparar EEG" }, widget: "visit-prep", query: "visit_type=sleep_deprived_eeg", ask: { en: "My daughter has a sleep-deprived EEG Thursday. How do we get ready?", es: "Mi hija tiene un EEG con privación de sueño el jueves. ¿Cómo nos preparamos?" } },
     { label: { en: "Pip's EEG game", es: "Juego de Pip" }, widget: "eeg-adventure", ask: { en: "Can you show my 6-year-old what happens at an EEG?", es: "¿Puede mostrarle a mi hijo de 6 años qué pasa en un EEG?" } },

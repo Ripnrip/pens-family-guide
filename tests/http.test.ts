@@ -19,7 +19,7 @@ describe("HTTP server", () => {
 
     const list = await request(app).post("/mcp").set(MCP_HEADERS).send({ jsonrpc: "2.0", id: 2, method: "tools/list", params: {} });
     expect(list.status).toBe(200);
-    expect(list.body.result.tools).toHaveLength(10);
+    expect(list.body.result.tools).toHaveLength(11);
   });
 
   it("calls a tool over HTTP", async () => {

@@ -14,6 +14,7 @@ import { caregiverQuiz } from "./caregiverQuiz.js";
 import { requestAppointment } from "./requestAppointment.js";
 import { forPediatricians } from "./forPediatricians.js";
 import { visitQuestions } from "./visitQuestions.js";
+import { meetTheTeam } from "./meetTheTeam.js";
 
 export const TOOLS: AnyToolDef[] = [
   visitQuestions,
@@ -26,6 +27,7 @@ export const TOOLS: AnyToolDef[] = [
   caregiverQuiz,
   requestAppointment,
   forPediatricians,
+  meetTheTeam,
 ];
 
 export function getTool(name: string): AnyToolDef | undefined {

@@ -14,6 +14,7 @@
     "build:static": "node scripts/prepare-static.mjs",
     "build:vercel": "npm run build && npm run build:static",
     "brand:png": "node scripts/render-logo.mjs",
+    "team:photos": "node scripts/team-photos.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",

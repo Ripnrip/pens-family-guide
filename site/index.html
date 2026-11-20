@@ -356,6 +356,24 @@ section{scroll-margin-top:80px}
   .lang button{min-width:44px}
 }
 
+
+/* Meet the team: faces pop in on scroll (spring + halo) */
+.team-row{list-style:none;margin:0 0 28px;padding:0;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:18px}
+.tface{position:relative;aspect-ratio:1;margin:0}
+.tface img{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:50%;border:4px solid #fff;box-shadow:var(--shadow);background:var(--sky)}
+.tring{position:absolute;inset:-7px;border-radius:50%;border:3px solid var(--sun);opacity:0;pointer-events:none}
+.team-cta{display:flex;justify-content:center}
+@media (max-width:900px){.team-row{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}}
+@media (prefers-reduced-motion:no-preference){
+  .js .tface{opacity:0}
+  .js .team-row.in .tface{animation:team-face-pop .72s cubic-bezier(.2,.9,.2,1) both;animation-delay:calc(var(--i,0) * 70ms)}
+  .js .team-row.in .tring{animation:team-face-halo .9s ease-out both;animation-delay:calc(var(--i,0) * 70ms + 120ms)}
+}
+html.paused.js .tface{opacity:1;animation:none!important}
+html.paused.js .tring{animation:none!important;opacity:0}
+@keyframes team-face-pop{0%{opacity:0;transform:translateY(22px) scale(.62) rotate(-8deg)}55%{opacity:1;transform:translateY(-6px) scale(1.08) rotate(3deg)}100%{opacity:1;transform:none}}
+@keyframes team-face-halo{0%{opacity:0;transform:scale(.7)}35%{opacity:.85}100%{opacity:0;transform:scale(1.45)}}
+
 /* Reduced motion + paused: final states, no movement */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -557,6 +575,28 @@ html.paused .caret{display:none}
         <p class="try"><b data-i18n="tryLabel">Try asking</b><span data-i18n="f6q">"Quiz our babysitter on seizure first aid."</span></p>
       </article>
     </div>
+  </div>
+</section>
+
+<!-- 2b. MEET THE TEAM -->
+<section class="section team" id="team" aria-labelledby="team-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow" data-i18n="teamEyebrow">Meet the team</p>
+      <h2 id="team-title" data-i18n="teamTitle">Friendly faces in South Tampa</h2>
+      <p class="lede" data-i18n="teamLine">18 physicians, nurse practitioners and counselors in South Tampa</p>
+    </div>
+    <ul class="team-row reveal" id="team-row" aria-label="PENS clinicians" data-i18n-aria="teamRowAria">
+      <li class="tface" style="--i:0"><span class="tring" aria-hidden="true"></span><img src="/assets/team/jose.jpg" alt="" width="112" height="112" loading="lazy" decoding="async"></li>
+      <li class="tface" style="--i:1"><span class="tring" aria-hidden="true"></span><img src="/assets/team/carmen.jpg" alt="" width="112" height="112" loading="lazy" decoding="async"></li>
+      <li class="tface" style="--i:2"><span class="tring" aria-hidden="true"></span><img src="/assets/team/katharine.jpg" alt="" width="112" height="112" loading="lazy" decoding="async"></li>
+      <li class="tface" style="--i:3"><span class="tring" aria-hidden="true"></span><img src="/assets/team/lizbeth.jpg" alt="" width="112" height="112" loading="lazy" decoding="async"></li>
+      <li class="tface" style="--i:4"><span class="tring" aria-hidden="true"></span><img src="/assets/team/michael.jpg" alt="" width="112" height="112" loading="lazy" decoding="async"></li>
+      <li class="tface" style="--i:5"><span class="tring" aria-hidden="true"></span><img src="/assets/team/felicia.jpg" alt="" width="112" height="112" loading="lazy" decoding="async"></li>
+      <li class="tface" style="--i:6"><span class="tring" aria-hidden="true"></span><img src="/assets/team/kristin.jpg" alt="" width="112" height="112" loading="lazy" decoding="async"></li>
+      <li class="tface" style="--i:7"><span class="tring" aria-hidden="true"></span><img src="/assets/team/yaribel.jpg" alt="" width="112" height="112" loading="lazy" decoding="async"></li>
+    </ul>
+    <div class="team-cta reveal"><a class="btn btn-primary" href="/guide" data-i18n="teamCta">Meet the team in the Family Guide</a></div>
   </div>
 </section>
 
@@ -773,6 +813,7 @@ html.paused .caret{display:none}
   /* ---------- i18n: English is harvested from the HTML; Spanish lives here ---------- */
   var ES = {
     skip:'Saltar al contenido principal', preview:'Versión previa',
+    teamEyebrow:'Conozca al equipo', teamTitle:'Caras amables en South Tampa', teamLine:'18 médicos, enfermeros practicantes y consejeras en South Tampa', teamCta:'Conozca al equipo en la Guía Familiar', teamRowAria:'Clínicos de PENS',
     navFeatures:'Qué puede preguntar', navHow:'Cómo funciona', navSafety:'Seguridad', navPros:'Pediatras y escuelas', navStart:'Comenzar',
     heroEyebrow:'Neurología pediátrica en Tampa Bay',
     heroTitle:'PENS, ahora en <span class="hl">ChatGPT</span> y <span class="hl">Claude</span>',

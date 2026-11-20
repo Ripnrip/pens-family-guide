@@ -4,7 +4,7 @@
   "app_info": {
     "display_name": "PENS",
     "subtitle": "Pediatric neurology, Tampa Bay",
-    "description": "PENS brings Pediatric Epilepsy & Neurology Specialists (Tampa, FL) into your chat in English and Spanish: office hours and directions, matching a concern to PENS services, visit and EEG prep checklists, seizure first aid with a timer, Florida school seizure action plans, a caregiver quiz, appointment and referral hand-offs, and \"My EEG Day\", a kids' story with Pip. General education only; no personal or health information is collected. Operated by BinaryBros LLC on behalf of Pediatric Epilepsy & Neurology Specialists.",
+    "description": "PENS brings Pediatric Epilepsy & Neurology Specialists (Tampa, FL) into your chat in English and Spanish: office hours and directions, matching a concern to PENS services, visit and EEG prep checklists, seizure first aid with a timer, Florida school seizure action plans, a caregiver quiz, appointment and referral hand-offs, a meet-the-team directory with a suite guide, and \"My EEG Day\", a kids' story with Pip. General education only; no personal or health information is collected. Operated by BinaryBros LLC on behalf of Pediatric Epilepsy & Neurology Specialists.",
     "category": "EDUCATION"
   },
   "tools": {
@@ -147,6 +147,20 @@
         "destructive_justification": "Does not delete, overwrite, send, submit, purchase, revoke access or perform any irreversible action.",
         "idempotent_justification": "Same input always returns the same curated questions and has no side effects, so repeated calls are safe."
       }
+    },
+    "meet_the_team": {
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Returns PENS's bundled team directory (published names, titles, focus areas, languages, suites and photos) and the suite guide, optionally filtered by role or a clinician-name search. It creates, updates or deletes nothing and stores no data on the server or anywhere else.",
+        "open_world_justification": "The directory and photos come only from the app's bundled PENS content and are inlined in the widget. The tool makes no network calls and does not reach arbitrary URLs, accounts, recipients or third-party services; the widget's Google reviews and PENS links open only when the user taps them.",
+        "destructive_justification": "Does not delete, overwrite, send, submit, schedule, purchase, revoke access or perform any irreversible action.",
+        "idempotent_justification": "Same filter and search always return the same directory and have no side effects, so repeated calls are safe."
+      }
     }
   },
   "test_cases": [
@@ -209,6 +223,12 @@
       "user_prompt": "I'm a pediatrician. How do I refer a patient to PENS?",
       "tools_triggered": "for_pediatricians",
       "expected_output": "Referral card with the fax (813) 875-9722, phone, what to include, and urgent vs. routine guidance."
+    },
+    {
+      "description": "meet-the-team: Team directory with round photos of PENS's 18 physicians, nurse practitioners and counselors; the Speaks Spanish filter narrows the grid, tapping a face opens a profile (title, focus, languages, suite, year joined), and a Which suite? section explains Suites 340, 240 (EEG) and 140. No ratings or rankings; scheduling goes through the office.",
+      "user_prompt": "Who will we see at PENS? Show me the team and who speaks Spanish.",
+      "tools_triggered": "meet_the_team",
+      "expected_output": "Team directory with round photos of PENS's 18 physicians, nurse practitioners and counselors; the Speaks Spanish filter narrows the grid, tapping a face opens a profile (title, focus, languages, suite, year joined), and a Which suite? section explains Suites 340, 240 (EEG) and 140. No ratings or rankings; scheduling goes through the office."
     },
     {
       "description": "Spanish: the same tools answer in Spanish when asked in Spanish.",

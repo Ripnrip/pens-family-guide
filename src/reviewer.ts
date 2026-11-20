@@ -100,6 +100,15 @@ export const REVIEWER_CASES: ReviewerCase[] = [
       es: "Tarjeta de referidos con el fax (813) 875-9722, el teléfono, qué incluir y la guía urgente vs. rutina.",
     },
   },
+  {
+    id: "meet-the-team",
+    tool: "meet_the_team",
+    prompt: { en: "Who will we see at PENS? Show me the team and who speaks Spanish.", es: "¿A quién veremos en PENS? Muéstreme el equipo y quién habla español." },
+    expected: {
+      en: "Team directory with round photos of PENS's 18 physicians, nurse practitioners and counselors; the Speaks Spanish filter narrows the grid, tapping a face opens a profile (title, focus, languages, suite, year joined), and a Which suite? section explains Suites 340, 240 (EEG) and 140. No ratings or rankings; scheduling goes through the office.",
+      es: "Directorio del equipo con fotos redondas de los 18 médicos, enfermeros practicantes y consejeras de PENS; el filtro Habla español reduce la cuadrícula, al tocar una cara se abre un perfil (título, enfoque, idiomas, suite, año) y la sección ¿Qué suite? explica las Suites 340, 240 (EEG) y 140. Sin calificaciones ni clasificaciones; las citas se piden al consultorio.",
+    },
+  },
 ];
 
 export const NEGATIVE_CASES: ReviewerCase[] = [

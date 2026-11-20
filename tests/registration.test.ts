@@ -14,6 +14,7 @@ const EXPECTED = [
   "request_appointment",
   "for_pediatricians",
   "visit_questions",
+  "meet_the_team",
 ];
 
 describe("MCP registration", () => {
@@ -21,7 +22,7 @@ describe("MCP registration", () => {
   beforeAll(async () => { ctx = await connectClient(); });
   afterAll(async () => { await ctx.close(); });
 
-  it("registers exactly the ten PENS tools", async () => {
+  it("registers exactly the eleven PENS tools", async () => {
     const { tools } = await ctx.client.listTools();
     expect(tools.map((t) => t.name).sort()).toEqual([...EXPECTED].sort());
   });

@@ -9,6 +9,7 @@ export const WIDGET_IDS = [
   "caregiver-quiz",
   "appointment-handoff",
   "referral-card",
+  "team-directory",
 ] as const;
 
 export type WidgetId = (typeof WIDGET_IDS)[number];

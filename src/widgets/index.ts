@@ -10,6 +10,7 @@ import { seizureFirstAidWidget } from "./seizureFirstAid.js";
 import { schoolPlanWidget } from "./schoolPlan.js";
 import { caregiverQuizWidget } from "./caregiverQuiz.js";
 import { questionCardWidget } from "./questionCard.js";
+import { teamDirectoryWidget } from "./teamDirectory.js";
 import { appointmentHandoffWidget, referralCardWidget } from "./handoffAndReferral.js";
 
 export { WIDGET_IDS, widgetUri, type WidgetId };
@@ -25,6 +26,7 @@ export const WIDGETS: Record<WidgetId, WidgetSource> = {
   "caregiver-quiz": caregiverQuizWidget,
   "appointment-handoff": appointmentHandoffWidget,
   "referral-card": referralCardWidget,
+  "team-directory": teamDirectoryWidget,
 };
 
 /** MCP Apps standard mime type: "text/html;profile=mcp-app" (rendered by ChatGPT, Claude and other MCP Apps hosts). */

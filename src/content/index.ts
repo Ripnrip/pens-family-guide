@@ -12,6 +12,7 @@ export * from "./quiz.js";
 export * from "./eegStory.js";
 export * from "./referral.js";
 export * from "./questions.js";
+export * from "./team.js";
 
 import type { Reviewable } from "./types.js";
 import { ALL_CARE } from "./services.js";
@@ -22,6 +23,7 @@ import { QUIZ } from "./quiz.js";
 import { SCENES } from "./eegStory.js";
 import { REFERRAL } from "./referral.js";
 import { QUESTION_SETS } from "./questions.js";
+import { SUITES, TEAM } from "./team.js";
 
 /** Every clinical item that needs PENS clinician sign-off before launch. */
 export function clinicalItems(): Reviewable[] {
@@ -36,6 +38,8 @@ export function clinicalItems(): Reviewable[] {
     ...SCENES,
     REFERRAL,
     ...QUESTION_SETS,
+    ...TEAM,
+    ...SUITES,
   ];
 }
 
